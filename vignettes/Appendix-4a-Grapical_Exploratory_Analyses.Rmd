@@ -1,0 +1,586 @@
+---
+title: "Appendix 4a: Graphical Exploratory Analysis"
+author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Preliminaries
+
+### Load packages
+
+```{r}
+library(dplyr)  # for exploratory analyses
+library(ggpubr) # plotting using ggplto2
+library(cowplot)
+library(lme4)
+library(arm)
+library(stringr) 
+library(bbmle)
+library(plotrix) ##std.error function for SE
+library(psych)
+library(here)
+```
+
+
+
+### Load data
+
+(Note: original files is called "skibiel_mammalsmilk.csv" within the mammalsmilk package.  The data has been duplicated here to make this a stand-alone analysis compendium)
+
+
+#### Load data in R
+
+
+```{r}
+list.files(here("/inst/extdata"))
+file. <- "Appendix-2-Analysis-Data_mammalsmilkRA.csv"
+path. <- here("/inst/extdata",file.)
+
+milk <- read.csv(path., skip = 3)
+```
+
+
+#### Check input
+
+```{r}
+head(milk)
+tail(milk)
+summary(milk)
+```
+
+
+
+Still some cleaning to do?
+
+
+
+
+## Graphical Exploratory Analsyes
+
+
+I follow the protocol outlined by Zuur et al 2010 A protocol for data exploration to avoid common statistical problems.  Methods in Ecology & Evolution 1:3-14.
+
+### Data exploration 1: Outlier exploration 
+
+#### Data exploration 1a: Outlier exploration with boxplots
+
+In this analysis my main variables are 
+
+1. Predictor (x): Body mass of mothers (mass.fem)
+1. Response (y): % milk fat of milk (fat)
+
+I will look at each one with a boxplot.  If I am not plotting by a grouping variable I don't need an 'x = ' in ggboxplot().
+
+I will make each plot and store it in an R object, then make a side by side plot using cowplot::plot_grid()
+
+1st, make the graphs
+```{r}
+gg.mass <- ggboxplot(data = milk,
+          y = "mass.fem",
+          main = "Boxplot of female\nmass (x)")
+
+gg.fat <- ggboxplot(data = milk,
+          y = "fat",
+          main = "Boxplot of milk\nfat (y)")
+```
+
+Then plot them
+
+```{r}
+plot_grid(gg.mass, gg.fat)
+```
+
+There appear to be outliers in material mass.  I will see if log transformation helps with this.
+
+```{r}
+milk$fat.log10 <- log10(milk$fat)
+milk$mass.fem.log10 <- log10(milk$mass.fem)
+milk$fat.logit <- arm::logit(milk$fat/100)
+```
+
+
+Make log plot
+```{r}
+gg.mass.log <- ggboxplot(data = milk,
+          y = "mass.fem.log10",
+          main = "Boxplot of log female\nmass (x)")
+
+```
+
+Plot log(mass) and fat
+```{r}
+plot_grid(gg.mass.log, gg.fat)
+```
+
+#### Data exploration 1b: Outlier exploration with dotplots
+
+The (Cleveland) dotplot (or dotchart) can refer to several things.  For data exploration and diagnostics purposes, a Cleveland dotplot plots a numeric value (x or y) against an index value.  The index value can be 
+
+* the order the observation falls in the data (1 = 1st observation)
+* the rank of the observation within the data (1 = smallest observation)
+
+In ggpubr, the ggdotchart() function takes the numeric value of interest as the y variable.  For the x variable , ggdotchart can take a numeric variable or a categorical variable.  ggdotchart() then sorts the y-variable from the smallest to the largest value and plots it against the x-axis, which is treated as a categorical variable (even if its numeric).  This is somewhat different that what the base R dotchart() function does which is featured in the Zuur et al 2010 paper.
+
+For the x variable, what I think works well is to give ggdotchart() either
+
+1. A categorical variable with many levels 
+1. A index of the order of
+
+
+Make an index
+```{r}
+milk$index <- 1:nrow(milk)
+```
+
+#### Dot plot for response variable (y)
+Plot the dot chart based on index value.  ggpubr allows us to color code by biome, which is nice.  Overall what we are looking for is a big jump between data points, indicating an unusual observation the could be due to a **data entry error.**
+```{r}
+ggdotchart(data = milk,
+          y = "fat",
+          x = "index",
+          color = "biome")
+```
+
+
+We can also facet by diet
+```{r}
+ggdotchart(data = milk,
+          y = "fat",
+          x = "index",
+          color = "biome",
+          facet.by = "diet")
+```
+
+
+Plot the dot chart based on species.  This is ugly because the species names are so long.
+```{r}
+ggdotchart(data = milk,
+          y = "fat",
+          x = "spp",
+          color = "biome")
+```
+
+There are multiple species per family; this makes for an interesting perspective on how size correlates with family because there are now multiple values along the y axis for each value along the x axis.
+```{r}
+ggdotchart(data = milk,
+          y = "fat",
+          x = "fam",
+          color = "biome")
+```
+
+
+Similar for family, except more dots.  Note that Carnivore now stands out as have a relatively large amount of variation 
+```{r}
+ggdotchart(data = milk,
+          y = "fat",
+          x = "ord",
+          color = "biome")
+```
+
+#### Dotplot for predictor variable (x)
+
+In my carnivores there are data points which stick out a lot.  This could be concerning.  However, two things
+
+1.There is a smooth swoop up; that is, highest point is part of an increasing trend.  
+1. I know these data are the masses of mammals, which vary from mice to whales.
+
+
+
+```{r}
+ggdotchart(data = milk,
+          y = "mass.fem",
+          x = "index",
+          color = "biome",
+          facet.by = "diet")
+```
+
+So, this dotplot isn't concerning, but I should double check the high values anyway.  It wouldn't hurt to log transform and check again after that.
+
+
+### Data exploration 2: Homogeneity of Y using Conditional boxplot
+
+A conditional boxplot is a boxplot of the data split apart by relevant groups.  The distribution of the data (the box plot) is therefore conditional on or dependent on the grouping variable.  In mathy terms we might write "distribution(y | group)"  where "|" means "depends on." (this isn't a real thing, just supposed to be evocative of probability statement like Pr(Ho|data)).
+
+The homogeneity of the y variable is an assumption of linear models - and an important one.  (Recall that "homogeneity" refers to homogeneity of variance aka homoskedasticity)  In contrast, linear models don't assume anything about the distribution of the x variable.  Its a good idea to make boxplots of your x (predictor) variables too, though, just to make sure you are familiar with the data and to make sure there isn't anything goofy.
+
+When things are not homogeneous (= heterskedastic) transformation can help fix things.  In what follows I will explore the x and y variables with boxplot and try out a log transformation to fix things.
+
+#### Untransformed milk fat data conditional boxplot
+
+Data is not skewed, but:
+
+1. Variance appears to different between groups
+1. Percentage data is necessarily bounded between 0 and 100% making it inherently non-normal
+
+```{r}
+ggboxplot(data = milk,
+          y = "fat",
+          x = "diet",
+          fill = "biome",
+          xlab = "Biome or habitat",
+          ylab = "Milk fat (%)",
+          title = "Distribution of raw milk fat data by biome & diet")
+```
+
+#### Transformed data conditional boxplot
+
+Transformation stabilizes variance.
+
+```{r}
+
+ggboxplot(data = milk,
+          y = "fat.log10",
+          x = "diet",
+          fill = "biome",
+          xlab = "Biome or habitat",
+          ylab = "Milk fat (%)",
+          title = "Transormed Distribution of raw milk fat data by biome & diet")
+```
+
+
+#### X variable exploration: Female size conditional boxplots
+
+We don't assume that the X variable is homogenous, but its good to explore the data using conditional boxplots also.
+
+##### Untransformed size data
+
+Data is highly skewed, which will create influential data points due to high leverage.
+```{r}
+ggboxplot(data = milk,
+          y = "mass.fem",
+          x = "diet",
+          fill = "biome",
+          xlab = "Biome or habitat",
+          ylab = "Milk fat (%)",
+          title = "Distribution of raw milk fat data by biome & diet")
+```
+
+
+
+##### Transformed size data
+
+
+```{r}
+milk$mass.fem.log10 <- log10(milk$mass.fem)
+
+ggboxplot(data = milk,
+          y = "mass.fem.log10",
+          x = "diet",
+          fill = "biome",
+          xlab = "Biome or habitat",
+          ylab = "Milk fat (%)",
+          title = "Distribution of raw milk fat data by biome & diet")
+```
+
+
+### Data exploration 3: Normality
+
+> "In linear regression, we actually assume normality of all the replicate observations at a particular covriate value ... However, normality of the raw data implies normality of the residuals" (Zuur et al 2010)
+
+The normality assumption is generally best dealt with after fitting a model.  However, you can start to get a sense for it by plotting histograms (And to some extent boxplot) of the data split up by major grouping variables ("conditional boxplots" using Zuur's nomenclature). This conditioning can be done by using ggplot's faceting ability.
+
+If you are doing a t-test or ANOVA, these histograms of the raw data conditional by group will be equivalent to plots of the residuals after fitting the model.  For ANCOVA and multiple regression, however, you need to actually fit the model.
+
+Note that normality applies to the y variable.  It never hurts to explore the x variables too, though.
+
+I already know that a log transformation is needed, so I'll skip with the raw data and just look at the log10 values
+
+I will be doing regression and so I need to fit a model.  However, I do have major categorical variables to consider, so I'll make a histogram to see what it looks like.
+
+```{r}
+gghistogram(data = milk, 
+            x = "mass.fem.log10",
+            facet.by = "diet")
+```
+
+Even after a log transformation the data aren't super normal.  However, further conditioning on biome could make this better; also, as I've already said, I need to actually fit my regression model and look at the residuals to really pass judgement.  Moreover, I don't get hung up on normality unless things are really really skewed.
+
+I could add biome in indirectly by making a combined variable I"ll call group"
+
+```{r}
+milk$group <- paste(milk$biome, milk$diet)
+gghistogram(data = milk, 
+            x = "mass.fem.log10",
+            facet.by = "group",
+            fill = "diet")
+```
+
+This reveals that terrestrial carnivores are kinda skewed.  However, with few data points its hard to tell.  Overall these data are that normal, but see the caveats above as to why I am not in the least concerned at this stage.
+
+
+
+### Data exploration with Scatter plots
+
+A scatter plot of predictors versus response variables is also key to data exploration, as well as final data presentation
+
+#### Scatter plot of raw data
+
+I already know that log transformation are probably key to working with this data, but its interesting to look at the raw data.  We can see how the far right data point exerts leverage on the regression line.
+
+```{r}
+ggscatter(data = milk,
+          y = "fat",
+          x = "mass.fem",
+          add = "reg.line",
+          color = "diet")
+```
+
+#### Scatter plot of transormed  data
+
+Log transformation deals with high leverage values (extreme x axis values due to large size of the animals), pulls in potential y axis outliers, improves normality, and stabilizes variance within groups.  Awesome!
+
+One problem remains.  This scatter plot indicates that the variance within each major group appears to increase as size increase.  This occurs even in the log-transformed data.  This is major issue that can only be addressed through the use of generalized least squares (GLS) and/or random effects.  See the following paper for more details
+
+Cleasby & Nakagawa.  2011.  Neglected biological patterns in the residuals.  [Behavioral Ecology and Sociobiology.](https://link.springer.com/article/10.1007/s00265-011-1254-7) 
+
+```{r}
+ggscatter(data = milk,
+          y = "fat.log10",
+          x = "mass.fem.log10",
+          add = "reg.line",
+          color = "diet",
+          facet.by = "biome")
+```
+
+
+
+#### Other Scatter plot elements
+
+##### Rugs
+Add a "rug" to help with visualizing the data distributions.
+
+```{r}
+ggscatter(data = milk,
+          y = "fat.log10",
+          x = "mass.fem.log10",
+          add = "reg.line",
+          color = "diet",
+          facet.by = "biome",
+          rug = TRUE)
+```
+
+##### Add mean point and scatter plot ellipse
+
+Add a point for the bi-variate mean of the data (joint mean along both axes).  Note how it falls on the regression line.  
+
+Also add a "data ellipse"
+
+> "The data ellipse is typically used to add a visual summary to a scatterplot, indicating the means, standard deviations, correlation and slope of the regression line for two variables." (Friendly et al 2013 Elliptical Insights: Understanding Statistical Methods through Elliptical Geometry)
+
+The ellipse is joint 95% confidence interval in both dimensions.  You could calculate the mean of the x variable and calculate a confidence interval around, then calculate the mean of the y variable and a 95% CI.  The ellipse basically simultaneously merges these two things.
+
+```{r}
+ggscatter(data = milk,
+          y = "fat.log10",
+          x = "mass.fem.log10",
+          add = "reg.line",
+          color = "diet",
+          facet.by = "group",
+          mean.point = TRUE,
+          ellipse = TRUE,
+          ellipse.border.remove = TRUE)
+```
+
+
+```{r, echo = F, eval = F}
+# compare different ellipse
+# syntaxes
+car::dataEllipse(milk$mass.fem.log10,
+            milk$fat.log10,
+            levels=c(0.95),
+            xlim = c(0,9),
+            ylim = c(-1,2))
+e1 <- ggscatter(data = milk,
+          y = "fat.log10",
+          x = "mass.fem.log10") +
+  stat_ellipse()
+
+e2 <- ggscatter(data = milk,
+          y = "fat.log10",
+          x = "mass.fem.log10",
+          ellipse = TRUE) 
+
+plot_grid(e1,e2)
+```
+
+### Data exploration 4: Excess zeros
+
+When you have count data you frequently use Poisson regression.  Like linear regression, Poisson regression makes assumptions about the distribution of the data.  Count data with lots of zeros violates these assumptions.
+
+### Data exploration: Collinearity
+
+When predictor variables are highly correlated with each other this causes problems with estimating and making inference with regression.
+
+My analysis focuses just on female mass as a numeric predictor.  The original analysis considered a number of other predictors, but did not explicitly discuss collinearity issues.  
+
+
+#### Table of correlations
+
+One way of getting a sense for collinearity is to look at a table of correlation coefficients for you predictors.  I'll also include the response variable fat.
+
+
+
+```{r}
+milk$mass.litter.log10 <- log10(milk$mass.litter)
+variables. <- c("mass.fem.log10", "gest.mo", "lac.mo", "mass.litter.log10", "repro.output", "fat.log10")
+
+
+
+correlation.table <- cor(milk[,variables.])
+
+# a little trick to remove the lower part
+correlation.table[lower.tri(correlation.table)] <- NA
+
+
+round(correlation.table,3)
+```
+
+
+You can get p-value for you correlations using corr.test from the psych package
+```{r}
+psych::corr.test(milk[,variables.])
+```
+
+Note that variables are perfectly correlated with each other, so the diagonal elements are all 1.  High positive or negative values indicate values that are highly correlated and which will pose problems if both included in regression.  Collinearity can be subtle, though, so full diagnostics using variance inflation factors need to be use once the model is fit.
+
+We can get a visual representation of this with GGally::ggpairs, which gives us a **sactterplot matrix**, histograms for each variable, and the correlation coeffeictions.
+
+```{r}
+GGally::ggpairs(milk[,variables.])
+```
+
+GGally::ggpairs is pretty slow; old fashioned pairs() is faster.
+
+```{r}
+pairs(milk[,variables.])
+```
+
+
+You can add correlations and histograms if you add some functions.  See the help file ?pairs for details.
+
+```{r}
+#function form help file for hist
+panel.hist <- function(x, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(usr[1:2], 0, 1.5) )
+    h <- hist(x, plot = FALSE)
+    breaks <- h$breaks; nB <- length(breaks)
+    y <- h$counts; y <- y/max(y)
+    rect(breaks[-nB], 0, breaks[-1], y, col = "cyan", ...)
+}
+
+#function form help file for correlation
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- paste0(prefix, txt)
+    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+
+
+# plot it
+pairs(milk[,variables.],
+      diag.panel = panel.hist,
+      lower.panel = panel.smooth,
+      upper.panel = panel.cor)
+```
+
+
+For information on variance inflation factors see:
+Graham 2003.  Confronting multicollinearity in ecological multiple regression.  Ecology.
+
+
+For more on collienarity see:
+Freckleton.  2011. Dealing with collinearity in behavioral and ecological data: model averaging and the problems of measurement error.  Behavioral Ecology and Sociobiology.  https://link.springer.com/article/10.1007/s00265-010-1045-6
+
+
+### Data exploration 6: Relationship between y & x
+
+We've already looked a scatterplot of the x versus y variable and scatterplot matrix.
+
+One thing that hasn't been emphasized is that ggscatter() non-linear "smoothers" using add = "loess".  This can be useful for see if there non-linear relationships.  
+
+```{r}
+milk$lacat.mo.log10 <- log10(milk$lacat.mo)
+ggscatter(data = milk,
+          y = "fat.log10",
+          x = "lacat.mo.log10",
+          add = "loess")
+```
+
+
+### Data exploration 7: Should we consider interactions?
+
+When interactions occur, relationships between two variables depend on a third.  For example, scatterplots coded by color and/or faceted used above indicate that the slope of fat vs body size is positive for aquatic carnivores but negative for other groups.
+
+### Data exploration 8: Are observations of the response variable independent?
+
+When data are collected as part of a time series, repeated measures on the same thing, or from adjacent fixed points in space there is the potential for autocorrelation patterns.  This is not applicable for the mammals milk dataset.
+
+The data do have issues with phylogenetic structure.  This would be best dealt with using phylogenetic reression methods; I don't have the phylogeny handy so I will use the coarse-level clustering by Order, Family and Genus to approximate this.
+
+
+
+## Numeric data summaries
+
+It can be very useful to generate numeric data summaries to help you and readers understand the data.  This is not emphasized by Zuur
+
+### Table of means & SDs
+
+#### Mass by diet group
+
+```{r}
+milk %>% 
+  group_by(diet) %>%
+  summarize(mass.mean = mean(mass.fem),
+            mass.sd = sd(mass.fem),
+            mass.n = n()
+            )
+```
+
+#### Milk fat by diet group
+
+These data appear in Figure 2a of the original publication
+
+```{r}
+milk %>% 
+  group_by(diet) %>%
+  summarize(fat.mean = mean(fat),
+            fat.sd = sd(fat),
+            fat.SE = plotrix::std.error(fat),
+            fat.n = n())
+```
+
+
+
+
+
+### Data exploration summary
+
+These data require transformation to meet the assumptions of linear regression.  The response (fat) appears to have heterogeneous variances between major groups (eg diet categories) and also since its a percentage is inherently non-normal.  Log transformation, as done in the original paper, improves the variance and normality.  A logit transformation might be more appropriate because it it percentage data.
+
+The major x variable, female body size, has several outliers due to the broad ranges of body sizes of the organisms.  Log transformation improves this.
+
+
+
+
+

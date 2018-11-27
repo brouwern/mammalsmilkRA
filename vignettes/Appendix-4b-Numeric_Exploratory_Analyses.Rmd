@@ -1,0 +1,110 @@
+---
+title: "Appendix 4b: Numerical Summaries & Exploratory Analysis"
+author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r}
+library(dplyr)  # for exploratory analyses
+library(ggpubr) # plotting using ggplto2
+library(cowplot)
+library(lme4)
+library(arm)
+library(stringr) 
+library(bbmle)
+library(plotrix) ##std.error function for SE
+library(psych)
+library(here)
+```
+
+
+
+## Load data
+
+Note: original files is called "skibiel_mammalsmilk.csv" within the mammalsmilk package
+
+
+### Load data in R
+```{r}
+file. <- "Appendix-2-Analysis-Data_mammalsmilkRA.csv"
+path. <- here("/inst/extdata/",file.)
+
+milk <- read.csv(path., skip = 3)
+```
+
+
+### Check input
+
+```{r}
+head(milk)
+tail(milk)
+summary(milk)
+```
+
+
+
+
+
+## Numeric data summaries
+
+It can be very useful to generate numeric data summaries to help you and readers understand the data.  This can also allow readers to extract information that is of interest to them but no necesssarily to you.  For example modelers and meta-analysts might want or need a bit of information which was not highlighted in your original anlaysis.  Providing them the information upfront makes it more likely that they will cite you!  It also saves them the trouble of asking for it if they really need it, and you the trouble of project files up and working up what they want.
+
+This is not emphasized by Zuur et al, but is emphasized by Gerstner et al 2017.  
+
+Gerstner et al 2017.  Will your paper be used in a meta-analysis?  Making the reach of your research broader and longer lasting.  [Methods in Ecology & Evolution.](https://doi.org/10.1111/2041-210X.12758 )
+
+
+### Correlation table
+
+Correlation tables are excellent summaries of the response and predictor variables.  This was discussed previously with regrads to investigation of collinearity, along with scatter plot matrices.
+
+
+### Table of means & SDs
+
+#### Mass by diet group
+
+```{r}
+milk %>% 
+  group_by(diet) %>%
+  summarize(mass.mean = mean(mass.fem),
+            mass.sd = sd(mass.fem),
+            mass.n = n()
+            )
+```
+
+#### Milk fat by diet group
+
+These data appear in Figure 2a of the original publication
+
+```{r}
+milk %>% 
+  group_by(diet) %>%
+  summarize(fat.mean = mean(fat),
+            fat.sd = sd(fat),
+            fat.SE = plotrix::std.error(fat),
+            fat.n = n())
+```
+
+
+
+
+
+
+
+
+

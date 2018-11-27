@@ -1,0 +1,61 @@
+---
+title: "Appendix 6b: Model diagnostics"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Preliminaries
+
+```{r}
+library(dplyr)  # for exploratory analyses
+library(ggpubr) # plotting using ggplto2
+library(cowplot)
+library(lme4)
+library(arm)
+library(stringr) 
+library(bbmle)
+library(plotrix) ##std.error function for SE
+library(psych)
+library(here)
+```
+
+
+
+
+### Load data in R
+```{r}
+file. <- "Appendix-2-Analysis-Data_mammalsmilkRA.csv"
+path. <- here("/inst/extdata/",file.)
+
+milk <- read.csv(path., skip = 3)
+
+
+genus_spp_subspp_mat <- milk$spp %>% str_split_fixed(" ", n = 3)
+
+milk$genus <- genus_spp_subspp_mat[,1]
+```
+
+
+### Check input
+
+```{r}
+head(milk)
+tail(milk)
+summary(milk)
+```
+

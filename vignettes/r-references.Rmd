@@ -1,0 +1,68 @@
+---
+title: "r) References"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Where references go to hang out
+
+
+Gerstner et al 2017.  Will your paper be used in a meta-analysis?  Making the reach of your research broader and longer lasting.  [Methods in Ecology & Evolution.](https://doi.org/10.1111/2041-210X.12758 )
+
+
+
+
+
+
+
+
+Nested by design: model fitting and interpretation in a mixed model era
+H Schielzeth, S Nakagawa - Methods in Ecology and Evolution, 2013
+
+
+Improving basic and translational science by accounting for litter-to-litter variation in animal models SE Lazic, L Essioux - BMC neuroscience, 2013
+
+Four simple ways to increase power without increasing the sample size
+Stanley E Lazic Laboratory Animals
+https://journals.sagepub.com/doi/full/10.1177/0023677218767478
+
+Analyzing clustered data: why and how to account for multiple observations nested within a study participant? EL Moen, CJ Fricano-Kugler, BW Luikart, AJ O'Malley - Plos one, 2016
+
+
+Meta-evaluation of meta-analysis: ten appraisal questions for biologists
+S Nakagawa, DWA Noble, AM Senior… - BMC …, 2017 
+https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-017-0357-7
+
+
+Nonindependence and sensitivity analyses in ecological and evolutionary meta‐analyses …, M Lagisz, RE O'dea, S Nakagawa - Molecular …, 2017
+
+Accounting for multilevel data structures in fisheries data using mixed models
+T Wagner, DB Hayes, MT Bremigan - Fisheries, 2006
+
+
+
+
+The following papers discuss conceptual issues of grouping, clustering etc, but don't have pictures of it.
+
+A solution to dependency: using multilevel analysis to accommodate nested data
+E Aarts, M Verhage, JV Veenvliet, CV Dolan… - … neuroscience, 2014
+
+What exactly is 'N'in cell culture and animal experiments?
+SE Lazic, CJ Clarke-Williams, MR Munafò - PLoS biology, 2018
+
+The problem of pseudoreplication in neuroscientific studies: is it affecting your analysis? SE Lazic - BMC neuroscience, 2010
+
+Using biological insight and pragmatism when thinking about pseudoreplication
+N Colegrave, GD Ruxton - Trends in ecology & evolution, 2017

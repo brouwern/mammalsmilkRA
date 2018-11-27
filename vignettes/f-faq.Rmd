@@ -1,0 +1,63 @@
+---
+title: "f) Frequently asked questions"
+author: "Nathan Brouwer |brouwern@gmail.com |@lowbrowR"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+### I still get turned around loading data into R
+
+The mammalsmilks package has an overview of loading data.
+https://brouwern.github.io/mammalsmilk/articles/b1-data_access.html
+
+Chapters 10 (Loading data from .csv files into RStudio) and 11 (Loading Excel spreadsheets into RStudio) of the class workshop also contains information.
+
+https://brouwern.github.io/BOOK_R_Ecological_Data_Science/loading-data-from-csv-files-into-rstudio.html
+
+https://brouwern.github.io/BOOK_R_Ecological_Data_Science/loading-excel-spreadsheets-into-rstudio.html
+
+
+
+### How do I build a correlation table?
+
+Use the cor() function in base R or psych::corr.test().
+
+```{r}
+cor(iris[,-5])
+psych::corr.test(iris[,-5])
+```
+
+### How do I know if my data are not independent?
+
+Do any of the followings statements apply to your data?  If true, you might have to deal with non-independence.
+
+1. Repeated measures on the same individual (repeated measures / longitudinal data)
+1. Measurements on things that are members of one or more  natural grouping, and several of these groupings occur in the data.  Examples include: students in classes, kids families, species within a genus, patients all treated by the same doctor, businesses all within the same state, states within a country, countries within a continent, analyses all conducted in the same lab, technical replicates of the same blood sample (natural clusters).
+1. Measurements on things that are intentionally or necessarily group, and multiple groups occur.  Examples include: benches in a greenhouse, incubators, 96-well plates, growth chambers, Next-Gen sequence runs (experimental clusters / blocks).
+1. Measurements on things arranged spatially, such as trees in a forest (spatial autocorrelation).
+1. Measurements on things over a long period of time, such as CO2 from Hawaii (time series; temporal autocorrelation).
+
+
+Do any of the followings statements apply to your data?  If true, you might not have.
+
+1. Did you (randomly) assign treatments to pool of individuals?
+1. Did you (randomly) select individuals from an effectively homogenous population?
+
+
+### How do I draw a study diagram?
+
+Citations which contain pictures which illustrate the structure of various studies can be found in "Appendix 5: Study diagrams."  Zuur & Ieno 2016 contain one example (Fig 4).
