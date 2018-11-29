@@ -44,7 +44,7 @@ create_package(path = getwd())
 
 Create a vignette infrastructure and dummy vignette
 ```{r, eval = F}
-usethis::use_vignette("Appendix-5-Study_diagram")
+usethis::use_vignette("Results-model-equation")
 ```
 
 ### Create "readme" and "news" files
