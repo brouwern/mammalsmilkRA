@@ -1,5 +1,5 @@
 ---
-title: "Appendix 5: Study Diagram"
+title: "Appendix 5: Study Diagrams"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -20,19 +20,43 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-A diagrams is often very useful for showing how an experiment was designed, how treatments were allocated, or how there are dependencies in the data.  Below is an example using a graph of the hierarchical phylogenetic relationships.  Zuur & Ieno (2016) emphasize this ("Step 2: Visualize the experimental design" and "Step 4: Identify the dependency structure in the data"; see Figure 4).
+A diagram is often very useful for showing where a study took place, how an experiment was designed, how treatments were allocated, or how there are **dependencies** in the data.  Zuur & Ieno (2016) emphasize this ("Step 2: Visualize the experimental design" and "Step 4: Identify the dependency structure in the data"; see Figure 4).
 
-## Dependency structure in the mammals milk data
+What follows are references to different types of diagrams that you could include in your study.
 
-The dependency structure in the mammals milk data is due to phylogeny.  The original paper presents a phylogenetic tree as a figure.  Similarly,  code below is a first attempt to visualize this based on nominal taxonomic categories (class, order, family, genus, species).  Its not very clean yet.  
 
-## Illustrating dependency in a study 
+Below is also an example using a graph of the hierarchical phylogenetic relationships.  
 
-Papers which discuss or have pictures of study diagrams include
+### Site maps: Where a study took place
 
-Nested by design: model fitting and interpretation in a mixed model era
-H Schielzeth, S Nakagawa - Methods in Ecology and Evolution, 2013
+These papers have examples of site maps for ecological studies; both maps are in the supplemental information.  The focus in more on providing contextual geographic information than the details of the study.
 
+Latta, Brouwer et al.  Avian community characteristics and demographics reveal how conservation value of regenerating tropical dry forest changes with forest age.  PeerJ
+https://peerj.com/articles/5217/#supp-1
+
+Latta, Brouwer et al.  Long-term monitoring reveals an avian species credit in secondary forest patches of Costa Rica.  PeerJ
+https://peerj.com/articles/3539/#supplemental-information
+
+
+### Experimental layout maps
+
+Ecological studies sometimes include maps to show the geometric arrangement of study plots or experimental treatments.
+
+Historic disturbance regimes promote tree diversity only under low browsing regimes in eastern deciduous forest
+T Nuttle, AA Royo, MB Adams… - Ecological Monographs, 2013 - Wiley Online Library
+
+Long-term biological legacies of herbivore density in a landscape‐scale experiment: forest understoreys reflect past deer density treatments for at least 20 years
+T Nuttle, TE Ristau, AA Royo - Journal of Ecology, 2014
+
+Accounting for multilevel data structures in fisheries data using mixed models
+T Wagner, DB Hayes, MT Bremigan - Fisheries, 2006
+
+
+### Dependency structure diagrams
+
+For complex experiments it can be useful to create a diagram that illustrate the hiearchical structure of the data, such as students in class rooms in schools in school districts in counties in states.
+
+#### MCDB / Bio-medicine
 
 Improving basic and translational science by accounting for litter-to-litter variation in animal models SE Lazic, L Essioux - BMC neuroscience, 2013
 
@@ -42,28 +66,51 @@ https://journals.sagepub.com/doi/full/10.1177/0023677218767478
 
 Analyzing clustered data: why and how to account for multiple observations nested within a study participant? EL Moen, CJ Fricano-Kugler, BW Luikart, AJ O'Malley - Plos one, 2016
 
-Historic disturbance regimes promote tree diversity only under low browsing regimes in eastern deciduous forest
-T Nuttle, AA Royo, MB Adams… - Ecological …, 2013 - Wiley Online Library
+#### Ecology
 
-Long‐term biological legacies of herbivore density in a landscape‐scale experiment: forest understoreys reflect past deer density treatments for at least 20 years
-T Nuttle, TE Ristau, AA Royo - Journal of Ecology, 2014
-
-Resolving discrepant findings on ANGPTL8 in β-cell proliferation: a collaborative approach to resolving the betatrophin controversy
-AR Cox, O Barrandon, EP Cai, JS Rios, J Chavez… - PloS one, 2016
+Nested by design: model fitting and interpretation in a mixed model era
+H Schielzeth, S Nakagawa - Methods in Ecology and Evolution, 2013
 
 Meta-evaluation of meta-analysis: ten appraisal questions for biologists
 S Nakagawa, DWA Noble, AM Senior… - BMC …, 2017 
 https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-017-0357-7
 
+Nonindependence and sensitivity analyses in ecological and evolutionary meta-analyses …, M Lagisz, RE O'dea, S Nakagawa - Molecular …, 2017
 
-Nonindependence and sensitivity analyses in ecological and evolutionary meta‐analyses …, M Lagisz, RE O'dea, S Nakagawa - Molecular …, 2017
-
-Accounting for multilevel data structures in fisheries data using mixed models
-T Wagner, DB Hayes, MT Bremigan - Fisheries, 2006
-
+Zuur & Ieno.  2016.  A protocol for conducting and presenting results of regression‐type analyses
+https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12577
 
 
-## Conceptual issues of clustering
+
+
+### Flow charts
+
+
+#### Clinical trial
+
+Clinical trials often have a flow chart showing how an initial patient population was screen and then allocated to the experimental groups.
+
+https://openi.nlm.nih.gov/detailedresult.php?img=PMC2945952_1471-2474-11-205-2&req=4
+
+#### Meta-analyses
+
+Meta-analyses often have flow charts showing how an initial pool of studies was screen for inclusion in the analysis.
+
+https://openi.nlm.nih.gov/detailedresult.php?img=PMC2559819_1471-2261-8-24-1&req=4
+
+
+### Coordinated experiments across labs
+
+Resolving discrepant findings on ANGPTL8 in beta-cell proliferation: a collaborative approach to resolving the betatrophin controversy
+AR Cox, O Barrandon, EP Cai, JS Rios, J Chavez… - PloS one, 2016
+
+
+### Dependency structure due to phylogeny
+
+The dependency structure in the mammals milk data is due to phylogeny.  The original paper presents a phylogenetic tree as a figure.  Similarly,  code below is a first attempt to visualize this based on nominal taxonomic categories (class, order, family, genus, species).  Its not very clean yet.  
+
+
+### Conceptual issues of clustering
 
 The following papers discuss conceptual issues of grouping, clustering etc, but don't have pictures of it.
 
@@ -79,7 +126,7 @@ Using biological insight and pragmatism when thinking about pseudoreplication
 N Colegrave, GD Ruxton - Trends in ecology & evolution, 2017
 
 
-## Visualizing the sturture of the mammals milk data
+## Visualizing the structure of the mammals milk data
 
 ### Preliminaries
 

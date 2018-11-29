@@ -1,5 +1,5 @@
 ---
-title: "Appendix 4b: Numerical Summaries & Exploratory Analysis"
+title: "Appendix 4b: Numeric Summaries & Exploratory Analysis"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
