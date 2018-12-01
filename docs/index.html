@@ -18,7 +18,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-home">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -64,7 +64,7 @@
       <a href="articles/Appendix-6a-Analysis-script.html">Analysis</a>
     </li>
     <li>
-      <a href="articles/Appendix-6b-Model-diagnostics.html">Appendix 6b: Model diagnostics</a>
+      <a href="articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b: Model diagnostics</a>
     </li>
     <li>
       <a href="articles/f-faq.html">f) Frequently asked questions</a>
@@ -97,27 +97,43 @@
 
       
       </header><div class="row">
-  <div class="contents col-md-9">
-    <div id="mammalsmilkra" class="section level1">
+  <div class="col-md-9 contents">
+    
+
+    
+    
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+<div id="mammalsmilkra" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#mammalsmilkra" class="anchor"></a>mammalsmilkRA</h1></div>
-<p>The goal of mammalsmilkRA is to …</p>
+<p>The goal of mammalsmilkRA is to demonstate what the key parts of an analysis compendium for a paper or class project might look like and provide tutorials for how to carry out the relevant tasks.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of mammalsmilkRA from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"mammalsmilkRA"</span>)</code></pre></div>
+<p>Must have the devtools package. You can download if needed using install.packages(“devtools”).</p>
+<p>Note that mammalsmilkRA requires a lot of other packages (has a lot of “dependencies” in R lingo) so you might be prompted to download or update other things, and it might take a little bit of time for R to work through all the download. Don’t be alarmed by any red text.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"brouwern/mammalsmilkRA"</span>)
+
+<span class="kw">library</span>(<span class="st">"mammalsmilkRA"</span>)</code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## basic example code</code></pre></div>
+<p>Raw data as a .csv is included when the package is downloaded; for demonstration the data is also easily accessed as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"milk"</span>)</code></pre></div>
+<p>The fat content of animals in the dataset ranges from new zero to almost 60%</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(milk<span class="op">$</span>fat)</code></pre></div>
+<p>An important point made in the paper is that contary to theoretical expectations, there is not a significant relationship between maternal size.</p>
+<p>This relationship isn’t significant even in a standard regression such as this one.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log10</span>(fat) <span class="op">~</span><span class="st"> </span><span class="kw">log10</span>(mass.fem), <span class="dt">data =</span> milk)</code></pre></div>
+<p>We can plot the relationship using basic graphics like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">log10</span>(fat) <span class="op">~</span><span class="st"> </span><span class="kw">log10</span>(mass.fem), <span class="dt">data =</span> milk)
+<span class="kw">abline</span>(m, <span class="dt">col =</span><span class="dv">2</span>)</code></pre></div>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
@@ -138,7 +154,8 @@
 </ul>
 </div>
 
-  </div>
+      </div>
+
 </div>
 
 

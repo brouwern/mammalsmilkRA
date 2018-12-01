@@ -64,7 +64,7 @@
       <a href="../articles/Appendix-6a-Analysis-script.html">Analysis</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6b-Model-diagnostics.html">Appendix 6b: Model diagnostics</a>
+      <a href="../articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b: Model diagnostics</a>
     </li>
     <li>
       <a href="../articles/f-faq.html">f) Frequently asked questions</a>
@@ -103,7 +103,7 @@
                         <h4 class="author">Nathan Brouwer | <a href="mailto:brouwern@gmail.com">brouwern@gmail.com</a> | <span class="citation">@lobrowR</span>
 </h4>
             
-            <h4 class="date">2018-11-29</h4>
+            <h4 class="date">2018-11-30</h4>
       
       
       <div class="hidden name"><code>Appendix-4a-Grapical_Exploratory_Analyses.Rmd</code></div>
@@ -183,17 +183,22 @@
 <div id="load-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-data" class="anchor"></a>Load data</h3>
-<p>(Note: original files is called “skibiel_mammalsmilk.csv” within the mammalsmilk package. The data has been duplicated here to make this a stand-alone analysis compendium)</p>
+<p>(Note: original files is called “skibiel_mammalsmilk.csv” within the mammalsmilk package. The data has been duplicated here but given a new name (“Appendix-2-Analysis-Data_mammalsmilkRA.csv”) to make this a stand-alone analysis compendium)</p>
 <div id="load-data-in-r" class="section level4">
 <h4 class="hasAnchor">
 <a href="#load-data-in-r" class="anchor"></a>Load data in R</h4>
+<p>If you have installed the mammalsmilkRA package the .csv “Appendix-2-Analysis-Data_mammalsmilkRA.csv” will be saved in the mammalsmilkRA directory R created to store package-related files. You can locate where this file is by searching for the file in your file system (eg “File explorer” in Windows) and then either setting its locations as your working dirctory or saving the file to a more convienent locations.</p>
+<p>Alternatively, you load it directly from the mammalsmilkRA package; most anlyses aren’t packaged into in a package, so this is a unique short cut I’ve set upt.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"milk"</span>)
+<span class="co">#&gt; Warning in data("milk"): data set 'milk' not found</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(<span class="kw">here</span>(<span class="st">"/inst/extdata"</span>))
 <span class="co">#&gt; [1] "_original_files"                                       </span>
-<span class="co">#&gt; [2] "Appendix-1-Raw-Data_Skibiel_et_al_2014_mammalsmilk.csv"</span>
-<span class="co">#&gt; [3] "Appendix-2-Analysis-Data_mammalsmilkRA.csv"            </span>
-<span class="co">#&gt; [4] "Appendix-3-Data-dictionary_mammalsmilkRA.xlsx"</span>
+<span class="co">#&gt; [2] "analysis_comendium"                                    </span>
+<span class="co">#&gt; [3] "Appendix-1-Raw-Data_Skibiel_et_al_2014_mammalsmilk.csv"</span>
+<span class="co">#&gt; [4] "Appendix-2-Analysis-Data_mammalsmilkRA.csv"            </span>
+<span class="co">#&gt; [5] "Appendix-3-Data-dictionary_mammalsmilkRA.xlsx"</span>
 file. &lt;-<span class="st"> "Appendix-2-Analysis-Data_mammalsmilkRA.csv"</span>
-path. &lt;-<span class="st"> </span><span class="kw">here</span>(<span class="st">"/inst/extdata"</span>,file.)
+path. &lt;-<span class="st"> </span>here<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/here/topics/here">here</a></span>(<span class="st">"/inst/extdata"</span>,file.)
 
 milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span class="dt">skip =</span> <span class="dv">3</span>)</code></pre></div>
 </div>
@@ -316,7 +321,7 @@ gg.fat &lt;-<span class="st"> </span><span class="kw">ggboxplot</span>(<span cla
           <span class="dt">main =</span> <span class="st">"Boxplot of milk</span><span class="ch">\n</span><span class="st">fat (y)"</span>)</code></pre></div>
 <p>Then plot them</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_grid</span>(gg.mass, gg.fat)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>There appear to be outliers in material mass. I will see if log transformation helps with this.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milk<span class="op">$</span>fat.log10 &lt;-<span class="st"> </span><span class="kw">log10</span>(milk<span class="op">$</span>fat)
 milk<span class="op">$</span>mass.fem.log10 &lt;-<span class="st"> </span><span class="kw">log10</span>(milk<span class="op">$</span>mass.fem)
@@ -327,7 +332,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">main =</span> <span class="st">"Boxplot of log female</span><span class="ch">\n</span><span class="st">mass (x)"</span>)</code></pre></div>
 <p>Plot log(mass) and fat</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_grid</span>(gg.mass.log, gg.fat)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
 <div id="data-exploration-1b-outlier-exploration-with-dotplots" class="section level4">
 <h4 class="hasAnchor">
@@ -354,32 +359,32 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">y =</span> <span class="st">"fat"</span>,
           <span class="dt">x =</span> <span class="st">"index"</span>,
           <span class="dt">color =</span> <span class="st">"biome"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 <p>We can also facet by diet</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggdotchart</span>(<span class="dt">data =</span> milk,
           <span class="dt">y =</span> <span class="st">"fat"</span>,
           <span class="dt">x =</span> <span class="st">"index"</span>,
           <span class="dt">color =</span> <span class="st">"biome"</span>,
           <span class="dt">facet.by =</span> <span class="st">"diet"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 <p>Plot the dot chart based on species. This is ugly because the species names are so long.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggdotchart</span>(<span class="dt">data =</span> milk,
           <span class="dt">y =</span> <span class="st">"fat"</span>,
           <span class="dt">x =</span> <span class="st">"spp"</span>,
           <span class="dt">color =</span> <span class="st">"biome"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 <p>There are multiple species per family; this makes for an interesting perspective on how size correlates with family because there are now multiple values along the y axis for each value along the x axis.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggdotchart</span>(<span class="dt">data =</span> milk,
           <span class="dt">y =</span> <span class="st">"fat"</span>,
           <span class="dt">x =</span> <span class="st">"fam"</span>,
           <span class="dt">color =</span> <span class="st">"biome"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 <p>Similar for family, except more dots. Note that Carnivore now stands out as have a relatively large amount of variation</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggdotchart</span>(<span class="dt">data =</span> milk,
           <span class="dt">y =</span> <span class="st">"fat"</span>,
           <span class="dt">x =</span> <span class="st">"ord"</span>,
           <span class="dt">color =</span> <span class="st">"biome"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 </div>
 <div id="dotplot-for-predictor-variable-x" class="section level4">
 <h4 class="hasAnchor">
@@ -392,7 +397,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">x =</span> <span class="st">"index"</span>,
           <span class="dt">color =</span> <span class="st">"biome"</span>,
           <span class="dt">facet.by =</span> <span class="st">"diet"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
 <p>So, this dotplot isn’t concerning, but I should double check the high values anyway. It wouldn’t hurt to log transform and check again after that.</p>
 </div>
 </div>
@@ -417,7 +422,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">xlab =</span> <span class="st">"Biome or habitat"</span>,
           <span class="dt">ylab =</span> <span class="st">"Milk fat (%)"</span>,
           <span class="dt">title =</span> <span class="st">"Distribution of raw milk fat data by biome &amp; diet"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
 </div>
 <div id="transformed-data-conditional-boxplot" class="section level4">
 <h4 class="hasAnchor">
@@ -431,7 +436,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">xlab =</span> <span class="st">"Biome or habitat"</span>,
           <span class="dt">ylab =</span> <span class="st">"Milk fat (%)"</span>,
           <span class="dt">title =</span> <span class="st">"Transormed Distribution of raw milk fat data by biome &amp; diet"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
 </div>
 <div id="x-variable-exploration-female-size-conditional-boxplots" class="section level4">
 <h4 class="hasAnchor">
@@ -448,7 +453,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">xlab =</span> <span class="st">"Biome or habitat"</span>,
           <span class="dt">ylab =</span> <span class="st">"Milk fat (%)"</span>,
           <span class="dt">title =</span> <span class="st">"Distribution of raw milk fat data by biome &amp; diet"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
 </div>
 <div id="transformed-size-data" class="section level5">
 <h5 class="hasAnchor">
@@ -462,7 +467,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">xlab =</span> <span class="st">"Biome or habitat"</span>,
           <span class="dt">ylab =</span> <span class="st">"Milk fat (%)"</span>,
           <span class="dt">title =</span> <span class="st">"Distribution of raw milk fat data by biome &amp; diet"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
 </div>
 </div>
 </div>
@@ -482,7 +487,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
             <span class="dt">facet.by =</span> <span class="st">"diet"</span>)
 <span class="co">#&gt; Warning: Using `bins = 30` by default. Pick better value with the argument</span>
 <span class="co">#&gt; `bins`.</span></code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
 <p>Even after a log transformation the data aren’t super normal. However, further conditioning on biome could make this better; also, as I’ve already said, I need to actually fit my regression model and look at the residuals to really pass judgement. Moreover, I don’t get hung up on normality unless things are really really skewed.</p>
 <p>I could add biome in indirectly by making a combined variable I“ll call group”</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milk<span class="op">$</span>group &lt;-<span class="st"> </span><span class="kw">paste</span>(milk<span class="op">$</span>biome, milk<span class="op">$</span>diet)
@@ -492,7 +497,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
             <span class="dt">fill =</span> <span class="st">"diet"</span>)
 <span class="co">#&gt; Warning: Using `bins = 30` by default. Pick better value with the argument</span>
 <span class="co">#&gt; `bins`.</span></code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
 <p>This reveals that terrestrial carnivores are kinda skewed. However, with few data points its hard to tell. Overall these data are that normal, but see the caveats above as to why I am not in the least concerned at this stage.</p>
 </div>
 <div id="data-exploration-with-scatter-plots" class="section level3">
@@ -508,7 +513,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">x =</span> <span class="st">"mass.fem"</span>,
           <span class="dt">add =</span> <span class="st">"reg.line"</span>,
           <span class="dt">color =</span> <span class="st">"diet"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
 </div>
 <div id="scatter-plot-of-transormed-data" class="section level4">
 <h4 class="hasAnchor">
@@ -522,7 +527,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">add =</span> <span class="st">"reg.line"</span>,
           <span class="dt">color =</span> <span class="st">"diet"</span>,
           <span class="dt">facet.by =</span> <span class="st">"biome"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
 </div>
 <div id="other-scatter-plot-elements" class="section level4">
 <h4 class="hasAnchor">
@@ -538,7 +543,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">color =</span> <span class="st">"diet"</span>,
           <span class="dt">facet.by =</span> <span class="st">"biome"</span>,
           <span class="dt">rug =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
 </div>
 <div id="add-mean-point-and-scatter-plot-ellipse" class="section level5">
 <h5 class="hasAnchor">
@@ -558,7 +563,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
           <span class="dt">mean.point =</span> <span class="ot">TRUE</span>,
           <span class="dt">ellipse =</span> <span class="ot">TRUE</span>,
           <span class="dt">ellipse.border.remove =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
 </div>
 </div>
 </div>
@@ -642,10 +647,10 @@ correlation.table[<span class="kw">lower.tri</span>(correlation.table)] &lt;-<sp
 <p>Note that variables are perfectly correlated with each other, so the diagonal elements are all 1. High positive or negative values indicate values that are highly correlated and which will pose problems if both included in regression. Collinearity can be subtle, though, so full diagnostics using variance inflation factors need to be use once the model is fit.</p>
 <p>We can get a visual representation of this with GGally::ggpairs, which gives us a <strong>sactterplot matrix</strong>, histograms for each variable, and the correlation coeffeictions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GGally<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/GGally/topics/ggpairs">ggpairs</a></span>(milk[,variables.])</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-31-1.png" width="700"></p>
 <p>GGally::ggpairs is pretty slow; old fashioned pairs() is faster.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(milk[,variables.])</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-30-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-32-1.png" width="700"></p>
 <p>You can add correlations and histograms if you add some functions. See the help file ?pairs for details.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#function form help file for hist</span>
 panel.hist &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...)
@@ -676,7 +681,7 @@ panel.cor &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, <
       <span class="dt">diag.panel =</span> panel.hist,
       <span class="dt">lower.panel =</span> panel.smooth,
       <span class="dt">upper.panel =</span> panel.cor)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-31-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-33-1.png" width="700"></p>
 <p>For information on variance inflation factors see: Graham 2003. Confronting multicollinearity in ecological multiple regression. Ecology.</p>
 <p>For more on collienarity see: Freckleton. 2011. Dealing with collinearity in behavioral and ecological data: model averaging and the problems of measurement error. Behavioral Ecology and Sociobiology. <a href="https://link.springer.com/article/10.1007/s00265-010-1045-6" class="uri">https://link.springer.com/article/10.1007/s00265-010-1045-6</a></p>
 </div>
@@ -691,7 +696,7 @@ panel.cor &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, <
           <span class="dt">y =</span> <span class="st">"fat.log10"</span>,
           <span class="dt">x =</span> <span class="st">"lacat.mo.log10"</span>,
           <span class="dt">add =</span> <span class="st">"loess"</span>)</code></pre></div>
-<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-32-1.png" width="700"></p>
+<p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-34-1.png" width="700"></p>
 </div>
 <div id="data-exploration-7-should-we-consider-interactions" class="section level3">
 <h3 class="hasAnchor">

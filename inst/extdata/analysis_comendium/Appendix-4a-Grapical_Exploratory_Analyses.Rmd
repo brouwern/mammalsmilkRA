@@ -39,28 +39,16 @@ library(here)
 
 ### Load data
 
-(Note: original files is called "skibiel_mammalsmilk.csv" within the mammalsmilk package.  The data has been duplicated here but given a new name ("Appendix-2-Analysis-Data_mammalsmilkRA.csv") to make this a stand-alone analysis compendium)
+(Note: original files is called "skibiel_mammalsmilk.csv" within the mammalsmilk package.  The data has been duplicated here to make this a stand-alone analysis compendium)
 
 
 #### Load data in R
-
-If you have installed the mammalsmilkRA package the .csv "Appendix-2-Analysis-Data_mammalsmilkRA.csv" will be saved in the mammalsmilkRA directory R created to store package-related files.  You can locate where this file is by searching for the file in your file system (eg "File explorer" in Windows) and then either setting its locations as your working dirctory or saving the file to a more convienent locations.
-
-Alternatively, you load it directly from the mammalsmilkRA package; most anlyses aren't packaged into in a package, so this is a unique short cut I've set upt. 
-```{r}
-data("milk")
-```
-
-```{r, echo = F, eval = F}
-#search whole file system using R
-Rfiles <- list.files("C:/", pattern = "\\.R$", recursive = TRUE, full.names = TRUE)
-```
 
 
 ```{r}
 list.files(here("/inst/extdata"))
 file. <- "Appendix-2-Analysis-Data_mammalsmilkRA.csv"
-path. <- here::here("/inst/extdata",file.)
+path. <- here("/inst/extdata",file.)
 
 milk <- read.csv(path., skip = 3)
 ```

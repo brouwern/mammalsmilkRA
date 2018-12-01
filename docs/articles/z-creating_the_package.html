@@ -69,7 +69,7 @@
       <a href="../articles/Appendix-6a-Analysis-script.html">Analysis</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6b-Model-diagnostics.html">Appendix 6b: Model diagnostics</a>
+      <a href="../articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b: Model diagnostics</a>
     </li>
     <li>
       <a href="../articles/f-faq.html">f) Frequently asked questions</a>
@@ -109,7 +109,7 @@
 </ol></h1>
                         <h4 class="author">Nathan Brouwer</h4>
             
-            <h4 class="date">2018-11-29</h4>
+            <h4 class="date">2018-11-30</h4>
       
       
       <div class="hidden name"><code>z-creating_the_package.Rmd</code></div>
@@ -150,7 +150,7 @@
 <div id="create-readme-and-news-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-readme-and-news-files" class="anchor"></a>Create “readme” and “news” files</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">use_readme_md</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">use_readme_rmd</span>()
 <span class="kw">use_news_md</span>()</code></pre></div>
 </div>
 <div id="create-git-ignore" class="section level3">
@@ -178,7 +178,9 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 
 <span class="kw">use_package</span>(<span class="st">"data.tree"</span>, <span class="st">"Imports"</span>)
 <span class="kw">use_package</span>(<span class="st">"treemap"</span>, <span class="st">"Imports"</span>)
-<span class="kw">use_package</span>(<span class="st">"igraph"</span>, <span class="st">"Imports"</span>)</code></pre></div>
+<span class="kw">use_package</span>(<span class="st">"igraph"</span>, <span class="st">"Imports"</span>)
+
+<span class="kw">use_package</span>(<span class="st">"PRISMAstatement"</span>,<span class="st">"Suggests"</span>)</code></pre></div>
 </div>
 <div id="dont-saveload-user-workspace-between-sessions" class="section level3">
 <h3 class="hasAnchor">

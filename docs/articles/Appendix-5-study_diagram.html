@@ -64,7 +64,7 @@
       <a href="../articles/Appendix-6a-Analysis-script.html">Analysis</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6b-Model-diagnostics.html">Appendix 6b: Model diagnostics</a>
+      <a href="../articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b: Model diagnostics</a>
     </li>
     <li>
       <a href="../articles/f-faq.html">f) Frequently asked questions</a>
@@ -103,7 +103,7 @@
       <h1>Appendix 5: Study Diagrams</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2018-11-29</h4>
+            <h4 class="date">2018-11-30</h4>
       
       
       <div class="hidden name"><code>Appendix-5-study_diagram.Rmd</code></div>
@@ -165,13 +165,27 @@
 <div id="meta-analyses" class="section level4">
 <h4 class="hasAnchor">
 <a href="#meta-analyses" class="anchor"></a>Meta-analyses</h4>
-<p>Meta-analyses often have flow charts showing how an initial pool of studies was screen for inclusion in the analysis.</p>
-<p><a href="https://openi.nlm.nih.gov/detailedresult.php?img=PMC2559819_1471-2261-8-24-1&amp;req=4" class="uri">https://openi.nlm.nih.gov/detailedresult.php?img=PMC2559819_1471-2261-8-24-1&amp;req=4</a></p>
+<p>Meta-analyses often have flow charts showing how an initial pool of studies was screen for inclusion in the analysis. The <a href="http://prisma-statement.org/">PRISMA guidlines</a> (Preferred Reporting Items for Systematic Reviews &amp; Meta-Analyses) recommend a 4-phase flow diagram be included in meta-analyses to describe the process of finding, screening, and extracting data from papers in a meta anlaysis. See <a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000100">Libarati et al 2009</a></p>
+<p>I’ve copied an example using You’ll need to install the package if you want to make it yourself eg run install.packages(“PRISMAstatement”). See the <a href="https://cran.r-project.org/web/packages/PRISMAstatement/vignettes/PRISMA.html%20for%20detaqils">PRISMAstatement package</a> for details</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PRISMAstatement)
+<span class="kw">prisma</span>(<span class="dt">found =</span> <span class="dv">750</span>,
+       <span class="dt">found_other =</span> <span class="dv">123</span>,
+       <span class="dt">no_dupes =</span> <span class="dv">776</span>, 
+       <span class="dt">screened =</span> <span class="dv">776</span>, 
+       <span class="dt">screen_exclusions =</span> <span class="dv">13</span>, 
+       <span class="dt">full_text =</span> <span class="dv">763</span>,
+       <span class="dt">full_text_exclusions =</span> <span class="dv">17</span>, 
+       <span class="dt">qualitative =</span> <span class="dv">746</span>, 
+       <span class="dt">quantitative =</span> <span class="dv">319</span>,
+       <span class="dt">width =</span> <span class="dv">300</span>, <span class="dt">height =</span> <span class="dv">300</span>)</code></pre></div>
+<div id="htmlwidget-02bdb34a9cfe55e2d7b3" style="width:300px;height:300px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-02bdb34a9cfe55e2d7b3">{"x":{"diagram":"digraph prisma {\n    node [shape=\"box\"];\n    graph [splines=ortho, nodesep=1, dpi = 72]\n    a -> nodups;\n    b -> nodups;\n    a [label=\"Records identified through\ndatabase searching\n(n = 750)\"];\n    b [label=\"Additional records identified\nthrough other sources\n(n = 123)\"]\n    nodups -> incex;\n    nodups [label=\"Records after duplicates removed\n(n = 776)\"];\n    incex -> {ex; ft}\n    incex [label=\"Records screened\n(n = 776)\"];\n    ex [label=\"Records excluded\n(n = 13)\"];\n    {rank=same; incex ex}\n    ft -> {qual; ftex};\n    ft [label=\"Full-text articles assessed\nfor eligibility\n(n = 763)\"];\n    {rank=same; ft ftex}\n    ftex [label=\"Full-text articles excluded,\nwith reasons\n(n = 17)\"];\n    qual -> quant\n    qual [label=\"Studies included in qualitative synthesis\n(n = 746)\"];\n    quant [label=\"Studies included in\nquantitative synthesis\n(meta-analysis)\n(n = 319)\"];\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>A real example is at <a href="https://openi.nlm.nih.gov/detailedresult.php?img=PMC2559819_1471-2261-8-24-1&amp;req=4" class="uri">https://openi.nlm.nih.gov/detailedresult.php?img=PMC2559819_1471-2261-8-24-1&amp;req=4</a></p>
 </div>
 </div>
 <div id="coordinated-experiments-across-labs" class="section level3">
 <h3 class="hasAnchor">
 <a href="#coordinated-experiments-across-labs" class="anchor"></a>Coordinated experiments across labs</h3>
+<p>THe paper below has an interesting flow chart about how samples were shared accross three labs to test for biases in lab techniques. The ends result was a retraction of a <a href="https://retractionwatch.com/2016/12/27/harvard-biologist-retracts-diabetes-breakthrough-cell/">Cell paper!</a></p>
 <p>Resolving discrepant findings on ANGPTL8 in beta-cell proliferation: a collaborative approach to resolving the betatrophin controversy AR Cox, O Barrandon, EP Cai, JS Rios, J Chavez… - PloS one, 2016</p>
 </div>
 <div id="dependency-structure-due-to-phylogeny" class="section level3">
@@ -192,6 +206,7 @@
 <div id="visualizing-the-structure-of-the-mammals-milk-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#visualizing-the-structure-of-the-mammals-milk-data" class="anchor"></a>Visualizing the structure of the mammals milk data</h2>
+<p>What follows is a code dump to make a diagram of the mammals milk data set. Its not very clean yet; scroll down a ways to the bottom to see the output.</p>
 <div id="preliminaries" class="section level3">
 <h3 class="hasAnchor">
 <a href="#preliminaries" class="anchor"></a>Preliminaries</h3>
@@ -200,15 +215,6 @@
 <a href="#load-packages" class="anchor"></a>Load packages</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.tree)
 <span class="kw">library</span>(treemap)
-<span class="kw">library</span>(igraph)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'igraph'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     decompose, spectrum</span>
-<span class="co">#&gt; The following object is masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     union</span>
 <span class="kw">library</span>(here)
 <span class="co">#&gt; here() starts at C:/Users/lisanjie/Documents/1_R/git/mammalsmilkRA</span>
 <span class="kw">library</span>(stringr)</code></pre></div>
@@ -220,6 +226,7 @@
 <div id="load-data-in-r" class="section level4">
 <h4 class="hasAnchor">
 <a href="#load-data-in-r" class="anchor"></a>Load data in R</h4>
+<p>This is particular to my computer</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">file. &lt;-<span class="st"> "Appendix-2-Analysis-Data_mammalsmilkRA.csv"</span>
 path. &lt;-<span class="st"> </span><span class="kw">here</span>(<span class="st">"/inst/extdata"</span>,file.)
 
@@ -297,61 +304,55 @@ milk<span class="op">$</span>magnorder[<span class="kw">which</span>(milk<span c
      <span class="kw">table</span>(class, subclass))
 <span class="co">#&gt;           subclass</span>
 <span class="co">#&gt; class      Theriiformes Yinotheria</span>
-<span class="co">#&gt;   Mammalia          128          2</span>
-<span class="kw">with</span>(milk,
-     <span class="kw">table</span>(subclass, cohort))
-<span class="co">#&gt;               cohort</span>
-<span class="co">#&gt; subclass       Australosphenida Marsupialia Placentalia</span>
-<span class="co">#&gt;   Theriiformes                0          14         114</span>
-<span class="co">#&gt;   Yinotheria                  2           0           0</span>
-<span class="kw">with</span>(milk,
-     <span class="kw">table</span>(cohort, magnorder))
-<span class="co">#&gt;                   magnorder</span>
-<span class="co">#&gt; cohort             Ameridelphia Australidelphia Monotremata-magnorder</span>
-<span class="co">#&gt;   Australosphenida            0               0                     2</span>
-<span class="co">#&gt;   Marsupialia                 1              13                     0</span>
-<span class="co">#&gt;   Placentalia                 0               0                     0</span>
-<span class="co">#&gt;                   magnorder</span>
-<span class="co">#&gt; cohort             Xenarthra-or-Epitheria</span>
-<span class="co">#&gt;   Australosphenida                      0</span>
-<span class="co">#&gt;   Marsupialia                           0</span>
-<span class="co">#&gt;   Placentalia                         114</span>
-<span class="kw">with</span>(milk,
-     <span class="kw">table</span>(ord, magnorder))
-<span class="co">#&gt;                  magnorder</span>
-<span class="co">#&gt; ord               Ameridelphia Australidelphia Monotremata-magnorder</span>
-<span class="co">#&gt;   Artiodactyla               0               0                     0</span>
-<span class="co">#&gt;   Carnivora                  0               0                     0</span>
-<span class="co">#&gt;   Cetacea                    0               0                     0</span>
-<span class="co">#&gt;   Chiroptera                 0               0                     0</span>
-<span class="co">#&gt;   Dasyuromorphia             0               1                     0</span>
-<span class="co">#&gt;   Didelphimorphia            1               0                     0</span>
-<span class="co">#&gt;   Diprotodontia              0              10                     0</span>
-<span class="co">#&gt;   Lagomorpha                 0               0                     0</span>
-<span class="co">#&gt;   Monotremata                0               0                     2</span>
-<span class="co">#&gt;   Peramelemorphia            0               2                     0</span>
-<span class="co">#&gt;   Perrissodactyla            0               0                     0</span>
-<span class="co">#&gt;   Primates                   0               0                     0</span>
-<span class="co">#&gt;   Proboscidea                0               0                     0</span>
-<span class="co">#&gt;   Rodentia                   0               0                     0</span>
-<span class="co">#&gt;   Soricomorpha               0               0                     0</span>
-<span class="co">#&gt;                  magnorder</span>
-<span class="co">#&gt; ord               Xenarthra-or-Epitheria</span>
-<span class="co">#&gt;   Artiodactyla                        23</span>
-<span class="co">#&gt;   Carnivora                           23</span>
-<span class="co">#&gt;   Cetacea                              6</span>
-<span class="co">#&gt;   Chiroptera                          10</span>
-<span class="co">#&gt;   Dasyuromorphia                       0</span>
-<span class="co">#&gt;   Didelphimorphia                      0</span>
-<span class="co">#&gt;   Diprotodontia                        0</span>
-<span class="co">#&gt;   Lagomorpha                           3</span>
-<span class="co">#&gt;   Monotremata                          0</span>
-<span class="co">#&gt;   Peramelemorphia                      0</span>
-<span class="co">#&gt;   Perrissodactyla                      7</span>
-<span class="co">#&gt;   Primates                            22</span>
-<span class="co">#&gt;   Proboscidea                          2</span>
-<span class="co">#&gt;   Rodentia                            17</span>
-<span class="co">#&gt;   Soricomorpha                         1</span></code></pre></div>
+<span class="co">#&gt;   Mammalia          128          2</span></code></pre></div>
+<pre><code>#&gt;               cohort
+#&gt; subclass       Australosphenida Marsupialia Placentalia
+#&gt;   Theriiformes                0          14         114
+#&gt;   Yinotheria                  2           0           0
+#&gt;                   magnorder
+#&gt; cohort             Ameridelphia Australidelphia Monotremata-magnorder
+#&gt;   Australosphenida            0               0                     2
+#&gt;   Marsupialia                 1              13                     0
+#&gt;   Placentalia                 0               0                     0
+#&gt;                   magnorder
+#&gt; cohort             Xenarthra-or-Epitheria
+#&gt;   Australosphenida                      0
+#&gt;   Marsupialia                           0
+#&gt;   Placentalia                         114
+#&gt;                  magnorder
+#&gt; ord               Ameridelphia Australidelphia Monotremata-magnorder
+#&gt;   Artiodactyla               0               0                     0
+#&gt;   Carnivora                  0               0                     0
+#&gt;   Cetacea                    0               0                     0
+#&gt;   Chiroptera                 0               0                     0
+#&gt;   Dasyuromorphia             0               1                     0
+#&gt;   Didelphimorphia            1               0                     0
+#&gt;   Diprotodontia              0              10                     0
+#&gt;   Lagomorpha                 0               0                     0
+#&gt;   Monotremata                0               0                     2
+#&gt;   Peramelemorphia            0               2                     0
+#&gt;   Perrissodactyla            0               0                     0
+#&gt;   Primates                   0               0                     0
+#&gt;   Proboscidea                0               0                     0
+#&gt;   Rodentia                   0               0                     0
+#&gt;   Soricomorpha               0               0                     0
+#&gt;                  magnorder
+#&gt; ord               Xenarthra-or-Epitheria
+#&gt;   Artiodactyla                        23
+#&gt;   Carnivora                           23
+#&gt;   Cetacea                              6
+#&gt;   Chiroptera                          10
+#&gt;   Dasyuromorphia                       0
+#&gt;   Didelphimorphia                      0
+#&gt;   Diprotodontia                        0
+#&gt;   Lagomorpha                           3
+#&gt;   Monotremata                          0
+#&gt;   Peramelemorphia                      0
+#&gt;   Perrissodactyla                      7
+#&gt;   Primates                            22
+#&gt;   Proboscidea                          2
+#&gt;   Rodentia                            17
+#&gt;   Soricomorpha                         1</code></pre>
 </div>
 <div id="make-hierachical-graph" class="section level3">
 <h3 class="hasAnchor">
@@ -367,10 +368,6 @@ milk<span class="op">$</span>pathString &lt;-<span class="st"> </span><span clas
                               cohort,
                               magnorder,
                               ord,
-                              <span class="co">#fam,</span>
-                              <span class="co">#genus,</span>
-                              <span class="co">#spp,</span>
-                              <span class="co">#i,</span>
                               <span class="dt">sep =</span> <span class="st">"/"</span>))</code></pre></div>
 <div id="set-up-nodes" class="section level4">
 <h4 class="hasAnchor">
@@ -409,14 +406,14 @@ milk<span class="op">$</span>pathString &lt;-<span class="st"> </span><span clas
 <a href="#plot" class="anchor"></a>Plot</h4>
 <p>Plot branch diagram</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(milk_tree)</code></pre></div>
-<div id="htmlwidget-a23d49c32a4c7923a9ad" style="width:700px;height:432.632880098888px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a23d49c32a4c7923a9ad">{"x":{"diagram":"digraph {\n\n\n\n\n  \"1\" [label = \"Mammalia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"Theriiformes\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"Placentalia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"Xenarthra-or-Epitheria\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"Artiodactyla\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"Carnivora\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"7\" [label = \"Cetacea\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"8\" [label = \"Chiroptera\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"9\" [label = \"Lagomorpha\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"10\" [label = \"Perrissodactyla\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"11\" [label = \"Primates\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"12\" [label = \"Proboscidea\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"13\" [label = \"Rodentia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"14\" [label = \"Soricomorpha\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"15\" [label = \"Marsupialia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"16\" [label = \"Australidelphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"17\" [label = \"Dasyuromorphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"18\" [label = \"Diprotodontia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"19\" [label = \"Peramelemorphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"20\" [label = \"Ameridelphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"21\" [label = \"Didelphimorphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"22\" [label = \"Yinotheria\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"23\" [label = \"Australosphenida\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"24\" [label = \"Monotremata-magnorder\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"25\" [label = \"Monotremata\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"1\"->\"2\" \n  \"1\"->\"22\" \n  \"2\"->\"3\" \n  \"2\"->\"15\" \n  \"22\"->\"23\" \n  \"3\"->\"4\" \n  \"15\"->\"16\" \n  \"15\"->\"20\" \n  \"23\"->\"24\" \n  \"4\"->\"5\" \n  \"4\"->\"6\" \n  \"4\"->\"7\" \n  \"4\"->\"8\" \n  \"4\"->\"9\" \n  \"4\"->\"10\" \n  \"4\"->\"11\" \n  \"4\"->\"12\" \n  \"4\"->\"13\" \n  \"4\"->\"14\" \n  \"16\"->\"17\" \n  \"16\"->\"18\" \n  \"16\"->\"19\" \n  \"20\"->\"21\" \n  \"24\"->\"25\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>Plot dendrogram</p>
+<div id="htmlwidget-225dca383d6d5d2b59e0" style="width:700px;height:432.632880098888px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-225dca383d6d5d2b59e0">{"x":{"diagram":"digraph {\n\n\n\n\n  \"1\" [label = \"Mammalia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"Theriiformes\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"Placentalia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"Xenarthra-or-Epitheria\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"Artiodactyla\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"Carnivora\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"7\" [label = \"Cetacea\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"8\" [label = \"Chiroptera\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"9\" [label = \"Lagomorpha\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"10\" [label = \"Perrissodactyla\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"11\" [label = \"Primates\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"12\" [label = \"Proboscidea\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"13\" [label = \"Rodentia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"14\" [label = \"Soricomorpha\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"15\" [label = \"Marsupialia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"16\" [label = \"Australidelphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"17\" [label = \"Dasyuromorphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"18\" [label = \"Diprotodontia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"19\" [label = \"Peramelemorphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"20\" [label = \"Ameridelphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"21\" [label = \"Didelphimorphia\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"22\" [label = \"Yinotheria\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"23\" [label = \"Australosphenida\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"24\" [label = \"Monotremata-magnorder\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"25\" [label = \"Monotremata\", fillcolor = \"#FFFFFF\", fontcolor = \"#000000\"] \n  \"1\"->\"2\" \n  \"1\"->\"22\" \n  \"2\"->\"3\" \n  \"2\"->\"15\" \n  \"22\"->\"23\" \n  \"3\"->\"4\" \n  \"15\"->\"16\" \n  \"15\"->\"20\" \n  \"23\"->\"24\" \n  \"4\"->\"5\" \n  \"4\"->\"6\" \n  \"4\"->\"7\" \n  \"4\"->\"8\" \n  \"4\"->\"9\" \n  \"4\"->\"10\" \n  \"4\"->\"11\" \n  \"4\"->\"12\" \n  \"4\"->\"13\" \n  \"4\"->\"14\" \n  \"16\"->\"17\" \n  \"16\"->\"18\" \n  \"16\"->\"19\" \n  \"20\"->\"21\" \n  \"24\"->\"25\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>Plot dendrogram</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">as.dendrogram</span>(milk_tree),
      <span class="dt">horiz =</span> T,
      <span class="dt">center =</span> T, 
      <span class="dt">cex =</span> <span class="fl">0.5</span>,
      <span class="dt">nodePar =</span> <span class="dv">1</span>)</code></pre></div>
-<p><img src="Appendix-5-study_diagram_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p><img src="Appendix-5-study_diagram_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 </div>
 </div>
 </div>

@@ -1,0 +1,253 @@
+---
+title: "Analysis"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+## Introduction
+
+This script implements my re-analysis of the Skibiel et al mammals' milk dataset.  Skibiel et al made the unconventional but well supported conclusion that there was not a relationship between body size and nutrional content of milk, including fat content.  The note, however, that some groups might have a relationship, while others might not, but on the whole there was no relationship between body size and fat.  Most variation in nutrional content was therefore due to differences in evolutionary history and not body size senu stricto.
+
+I take a model comparison approach using AICc to compare models similar to what Skibiel concluded best fit the data (fat ~ diet) with one that allows the relationship between fat and body size to vary between groups of organisms.  
+
+Like Skibiel I find a very strong phylogentic signal on fat content of milk.  I use this phyolgeny-only model as my null model.  Allowing fat content to vary differently with body size between different groups fits the data slightly better than the null model, but this difference is only a delta AICc (dAICc) of 1.4.  Surprisingly, a model which includes diet doesn't perform as well as  null model, which contradicts Skibiel et al.  This difference in results is likely due to my use of random effets to represent taxonomic structure (species nested within genera, genera within families, families within orders) rather than a precise phylogeny.   
+
+
+## Preliminaries
+
+### Load packages
+
+```{r}
+library(dplyr)  # for exploratory analyses
+library(ggpubr) # plotting using ggplto2
+library(cowplot)
+library(lme4)
+library(arm)
+library(stringr) 
+library(bbmle)
+library(plotrix) ##std.error function for SE
+library(psych)
+library(here)
+```
+
+
+
+
+### Load data in R
+
+```{r}
+file. <- "Appendix-2-Analysis-Data_mammalsmilkRA.csv"
+path. <- here("/inst/extdata/",file.)
+
+milk <- read.csv(path., skip = 3)
+```
+
+### Check input
+
+```{r}
+head(milk)
+tail(milk)
+summary(milk)
+```
+
+### Data cleaning
+
+```{r}
+genus_spp_subspp_mat <- milk$spp %>% str_split_fixed(" ", n = 3)
+
+milk$genus <- genus_spp_subspp_mat[,1]
+```
+
+
+### Transformation
+
+I generally prefer to make sure all of my transformations are represented in my "analysis data", but I have not yet updated that file yet.
+```{r}
+milk$fat.log10 <- log10(milk$fat)
+milk$mass.fem.log10 <- log10(milk$mass.fem)
+
+```
+
+
+### Create aggregate predictor
+
+All aquatic mammals in the dataset are carnviores
+```{r}
+with(milk, 
+     table(biome, 
+           diet))
+```
+
+I am going to make a new categorical variable with 4 levels which combines the 3 levels of diet with the 2 levels of biome.
+```{r}
+milk$biome.diet <- paste(milk$biome,
+                         milk$diet,
+                         sep = "-")
+
+summary(factor(milk$biome.diet))
+```
+
+
+### Delineate subset for analysis
+
+Summarize order by number of animals in each group
+```{r}
+orders <- milk %>% 
+  group_by(ord) %>% 
+  summarise(order.N = n())
+
+
+```
+
+For the model I want to run, I need at least 3 data points (species) per group (order)
+
+```{r}
+ggdotchart(data = orders,
+           x = "ord",
+           y = "order.N",
+           add = "segment",
+           ylab = "Number of species",
+           xlab = "Taxonomic order") +
+  geom_hline(yintercept = 3)
+```
+
+
+I will code each specis as being a member of an order w/ greater than 2 ("use") or less than 2 species ("drop")
+```{r}
+orders$order.N.3.plus <- ifelse(orders$order.N >2,
+                                "use",
+                                "drop")
+
+```
+
+I'll then merge this summary dataframe orders into the big dataframe
+
+```{r}
+milk2 <- merge(milk,orders)
+dim(milk)
+dim(milk2)
+
+```
+
+Then I'll select just the rows which can be used.
+
+```{r}
+
+i.use <- which(milk2$order.N.3.plus == "use")
+
+milk.working <- milk2[i.use, ]
+```
+
+```{r}
+milk.working[which(milk.working$fat.log10 <0.5), ]
+```
+
+### Visualize data
+
+Not that scales are variable for each panel for both axes
+```{r}
+
+ggscatter(data = milk.working,
+       y = "fat.log10",
+       x = "mass.fem.log10",
+       add = "reg.line",
+       color = "biome") +
+  facet_wrap(.~ord,scales = "free")
+```
+
+
+
+
+## Build model
+
+### Null model
+```{r}
+m.null <- lmer(fat.log10 ~ 1 +
+                 (1|ord) +
+                 (1|fam) +
+                 (1|genus),
+      data = milk.working)
+```
+
+### Mass model
+```{r}
+m.mass <- update(m.null, 
+                 . ~ . + mass.fem.log10)
+```
+
+### Diet model
+```{r}
+m.diet <- update(m.null, 
+                 . ~ . + diet)
+```
+
+
+
+### Diffrent slopes for each order
+
+```{r}
+m.slopes <- lmer(fat.log10 ~ 1 +
+                 (mass.fem.log10|ord) +
+                 (1|fam) +
+                 (1|genus),
+      data = milk.working)
+```
+
+### Diffrent slopes for each order plus diet
+
+```{r}
+m.slopes.diet <- update(m.slopes, 
+                   . ~ . + diet)
+```
+
+
+### Diffrent slopes for each order x diet
+
+```{r}
+m.slopes.x.diet <- update(m.slopes, 
+                   . ~ . + mass.fem.log10*diet)
+```
+
+### Diffrent slopes for each order x biome
+
+```{r}
+m.slopes.x.biome <- update(m.slopes, 
+                   . ~ . + mass.fem.log10*biome)
+```
+
+## Compare models
+
+```{r}
+ICtab(m.null,
+      m.diet,
+       m.mass,
+       m.slopes,
+       m.slopes.diet,
+       m.slopes.x.diet,
+      m.slopes.x.biome,
+       type ="AICc",
+       base = T,
+       logLik = T,
+       weights = T)
+```
+
+
+
+
+

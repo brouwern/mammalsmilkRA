@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Appendix 4b: Numeric Summaries &amp; Exploratory Analysis • mammalsmilkRA</title>
+<title>Appendix 6b: Model diagnostics • mammalsmilkRA</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Appendix 4b: Numeric Summaries &amp; Exploratory Analysis">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Appendix 6b: Model diagnostics">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -99,19 +99,21 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Appendix 4b: Numeric Summaries &amp; Exploratory Analysis</h1>
-                        <h4 class="author">Nathan Brouwer | <a href="mailto:brouwern@gmail.com">brouwern@gmail.com</a> | <span class="citation">@lobrowR</span>
-</h4>
+      <h1>Appendix 6b: Model diagnostics</h1>
+                        <h4 class="author">Vignette Author</h4>
             
             <h4 class="date">2018-11-30</h4>
       
       
-      <div class="hidden name"><code>Appendix-4b-Numeric_Exploratory_Analyses.Rmd</code></div>
+      <div class="hidden name"><code>Appendix-6b-Model-diagnostics-and-outliers.Rmd</code></div>
 
     </div>
 
     
     
+<div id="preliminaries" class="section level2">
+<h2 class="hasAnchor">
+<a href="#preliminaries" class="anchor"></a>Preliminaries</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)  <span class="co"># for exploratory analyses</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
@@ -173,17 +175,18 @@
 <span class="co">#&gt;     %+%, alpha</span>
 <span class="kw">library</span>(here)
 <span class="co">#&gt; here() starts at C:/Users/lisanjie/Documents/1_R/git/mammalsmilkRA</span></code></pre></div>
-<div id="load-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#load-data" class="anchor"></a>Load data</h2>
-<p>Note: original files is called “skibiel_mammalsmilk.csv” within the mammalsmilk package</p>
 <div id="load-data-in-r" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-data-in-r" class="anchor"></a>Load data in R</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">file. &lt;-<span class="st"> "Appendix-2-Analysis-Data_mammalsmilkRA.csv"</span>
 path. &lt;-<span class="st"> </span><span class="kw">here</span>(<span class="st">"/inst/extdata/"</span>,file.)
 
-milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span class="dt">skip =</span> <span class="dv">3</span>)</code></pre></div>
+milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span class="dt">skip =</span> <span class="dv">3</span>)
+
+
+genus_spp_subspp_mat &lt;-<span class="st"> </span>milk<span class="op">$</span>spp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_split_fixed</span>(<span class="st">" "</span>, <span class="dt">n =</span> <span class="dv">3</span>)
+
+milk<span class="op">$</span>genus &lt;-<span class="st"> </span>genus_spp_subspp_mat[,<span class="dv">1</span>]</code></pre></div>
 </div>
 <div id="check-input" class="section level3">
 <h3 class="hasAnchor">
@@ -203,13 +206,13 @@ milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span
 <span class="co">#&gt; 4    7.5       11110         0.06         3 herbivore  yes terrestrial  3</span>
 <span class="co">#&gt; 5    4.0        6500         0.11         3 herbivore  yes terrestrial  4</span>
 <span class="co">#&gt; 6    2.8        1771         0.09         3 herbivore  yes terrestrial 16</span>
-<span class="co">#&gt;    fat gest.month lacat.mo prot sugar energy</span>
-<span class="co">#&gt; 1  7.0       9.02      4.5  6.3   5.2   1.21</span>
-<span class="co">#&gt; 2 12.4       5.60      7.5  5.7    NA     NA</span>
-<span class="co">#&gt; 3  7.5       8.32      8.0  4.1   5.3   1.13</span>
-<span class="co">#&gt; 4  5.5       8.50      7.5  4.3   4.1   0.91</span>
-<span class="co">#&gt; 5  8.6       8.00      4.0  5.6   4.9   1.31</span>
-<span class="co">#&gt; 6  8.8       4.74      2.8  8.8    NA     NA</span>
+<span class="co">#&gt;    fat gest.month lacat.mo prot sugar energy        genus</span>
+<span class="co">#&gt; 1  7.0       9.02      4.5  6.3   5.2   1.21          Bos</span>
+<span class="co">#&gt; 2 12.4       5.60      7.5  5.7    NA     NA        Capra</span>
+<span class="co">#&gt; 3  7.5       8.32      8.0  4.1   5.3   1.13 Connocheates</span>
+<span class="co">#&gt; 4  5.5       8.50      7.5  4.3   4.1   0.91 Connocheates</span>
+<span class="co">#&gt; 5  8.6       8.00      4.0  5.6   4.9   1.31   Damaliscus</span>
+<span class="co">#&gt; 6  8.8       4.74      2.8  8.8    NA     NA      Gazella</span>
 <span class="kw">tail</span>(milk)
 <span class="co">#&gt;                ord          fam                     spp mass.fem gest.mo</span>
 <span class="co">#&gt; 125       Rodentia      Muridae     Pseudomys australis       65    1.02</span>
@@ -225,13 +228,13 @@ milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span
 <span class="co">#&gt; 128    1.5          14         0.26         0  omnivore   no terrestrial</span>
 <span class="co">#&gt; 129    1.0          32         0.08         0 herbivore   no terrestrial</span>
 <span class="co">#&gt; 130    0.8           4         0.29         0 carnivore   no terrestrial</span>
-<span class="co">#&gt;          N  fat gest.month lacat.mo prot sugar energy</span>
-<span class="co">#&gt; 125  7-Jun 12.1       1.02      0.9  6.4   3.6   1.62</span>
-<span class="co">#&gt; 126 18-Mar  8.8       0.71      0.8  8.1   3.8   1.43</span>
-<span class="co">#&gt; 127      7 20.1       2.96      1.2  4.4   2.7   2.20</span>
-<span class="co">#&gt; 128     11 21.7       0.98      1.5  8.1   4.3   2.62</span>
-<span class="co">#&gt; 129     26  9.2       0.84      1.0 10.7   3.4   1.60</span>
-<span class="co">#&gt; 130      3 30.0       0.97      0.8  9.4   3.0   3.40</span>
+<span class="co">#&gt;          N  fat gest.month lacat.mo prot sugar energy       genus</span>
+<span class="co">#&gt; 125  7-Jun 12.1       1.02      0.9  6.4   3.6   1.62   Pseudomys</span>
+<span class="co">#&gt; 126 18-Mar  8.8       0.71      0.8  8.1   3.8   1.43      Rattus</span>
+<span class="co">#&gt; 127      7 20.1       2.96      1.2  4.4   2.7   2.20     Octodon</span>
+<span class="co">#&gt; 128     11 21.7       0.98      1.5  8.1   4.3   2.62      Tamias</span>
+<span class="co">#&gt; 129     26  9.2       0.84      1.0 10.7   3.4   1.60 Urocitellus</span>
+<span class="co">#&gt; 130      3 30.0       0.97      0.8  9.4   3.0   3.40   Crocidura</span>
 <span class="kw">summary</span>(milk)
 <span class="co">#&gt;             ord                  fam                          spp     </span>
 <span class="co">#&gt;  Artiodactyla :23   Bovidae        :13   Acomys cahirinus       :  1  </span>
@@ -272,56 +275,15 @@ milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span
 <span class="co">#&gt;  Mean   : 6.092   Mean   : 6.673   Mean   : 4.94   Mean   :1.680  </span>
 <span class="co">#&gt;  3rd Qu.: 8.225   3rd Qu.: 9.200   3rd Qu.: 6.60   3rd Qu.:2.045  </span>
 <span class="co">#&gt;  Max.   :42.000   Max.   :15.800   Max.   :14.00   Max.   :5.890  </span>
-<span class="co">#&gt;                                    NA's   :16      NA's   :16</span></code></pre></div>
-</div>
-</div>
-<div id="numeric-data-summaries" class="section level2">
-<h2 class="hasAnchor">
-<a href="#numeric-data-summaries" class="anchor"></a>Numeric data summaries</h2>
-<p>It can be very useful to generate numeric data summaries to help you and readers understand the data. This can also allow readers to extract information that is of interest to them but no necesssarily to you. For example modelers and meta-analysts might want or need a bit of information which was not highlighted in your original anlaysis. Providing them the information upfront makes it more likely that they will cite you! It also saves them the trouble of asking for it if they really need it, and you the trouble of project files up and working up what they want.</p>
-<p>This is not emphasized by Zuur et al, but is emphasized by Gerstner et al 2017.</p>
-<p>Gerstner et al 2017. Will your paper be used in a meta-analysis? Making the reach of your research broader and longer lasting. <a href="https://doi.org/10.1111/2041-210X.12758">Methods in Ecology &amp; Evolution.</a></p>
-<div id="correlation-table" class="section level3">
-<h3 class="hasAnchor">
-<a href="#correlation-table" class="anchor"></a>Correlation table</h3>
-<p>Correlation tables are excellent summaries of the response and predictor variables. This was discussed previously with regrads to investigation of collinearity, along with scatter plot matrices.</p>
-</div>
-<div id="table-of-means-sds" class="section level3">
-<h3 class="hasAnchor">
-<a href="#table-of-means-sds" class="anchor"></a>Table of means &amp; SDs</h3>
-<div id="mass-by-diet-group" class="section level4">
-<h4 class="hasAnchor">
-<a href="#mass-by-diet-group" class="anchor"></a>Mass by diet group</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milk <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(diet) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mass.mean =</span> <span class="kw">mean</span>(mass.fem),
-            <span class="dt">mass.sd =</span> <span class="kw">sd</span>(mass.fem),
-            <span class="dt">mass.n =</span> <span class="kw">n</span>()
-            )
-<span class="co">#&gt; # A tibble: 3 x 4</span>
-<span class="co">#&gt;   diet      mass.mean   mass.sd mass.n</span>
-<span class="co">#&gt;   &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;  &lt;int&gt;</span>
-<span class="co">#&gt; 1 carnivore  8646393. 32150168.     32</span>
-<span class="co">#&gt; 2 herbivore   207403.   492666.     61</span>
-<span class="co">#&gt; 3 omnivore     13396.    36423.     37</span></code></pre></div>
-</div>
-<div id="milk-fat-by-diet-group" class="section level4">
-<h4 class="hasAnchor">
-<a href="#milk-fat-by-diet-group" class="anchor"></a>Milk fat by diet group</h4>
-<p>These data appear in Figure 2a of the original publication</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milk <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(diet) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">fat.mean =</span> <span class="kw">mean</span>(fat),
-            <span class="dt">fat.sd =</span> <span class="kw">sd</span>(fat),
-            <span class="dt">fat.SE =</span> plotrix<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/plotrix/topics/std.error">std.error</a></span>(fat),
-            <span class="dt">fat.n =</span> <span class="kw">n</span>())
-<span class="co">#&gt; # A tibble: 3 x 5</span>
-<span class="co">#&gt;   diet      fat.mean fat.sd fat.SE fat.n</span>
-<span class="co">#&gt;   &lt;fct&gt;        &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 carnivore    32.3   16.8   2.96     32</span>
-<span class="co">#&gt; 2 herbivore     8.06   5.19  0.664    61</span>
-<span class="co">#&gt; 3 omnivore      7.90   6.45  1.06     37</span></code></pre></div>
-</div>
+<span class="co">#&gt;                                    NA's   :16      NA's   :16     </span>
+<span class="co">#&gt;     genus          </span>
+<span class="co">#&gt;  Length:130        </span>
+<span class="co">#&gt;  Class :character  </span>
+<span class="co">#&gt;  Mode  :character  </span>
+<span class="co">#&gt;                    </span>
+<span class="co">#&gt;                    </span>
+<span class="co">#&gt;                    </span>
+<span class="co">#&gt; </span></code></pre></div>
 </div>
 </div>
   </div>
@@ -331,8 +293,7 @@ milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#load-data">Load data</a></li>
-      <li><a href="#numeric-data-summaries">Numeric data summaries</a></li>
+<li><a href="#preliminaries">Preliminaries</a></li>
       </ul>
 </div>
       </div>

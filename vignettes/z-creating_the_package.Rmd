@@ -50,7 +50,7 @@ usethis::use_vignette("Results-model-equation")
 ### Create "readme" and "news" files
 
 ```{r, eval = F}
-use_readme_md()
+use_readme_rmd()
 use_news_md()
 ```
 
@@ -85,6 +85,8 @@ use_package("psych", "Imports")
 use_package("data.tree", "Imports")
 use_package("treemap", "Imports")
 use_package("igraph", "Imports")
+
+use_package("PRISMAstatement","Suggests")
 
 
 

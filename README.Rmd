@@ -1,0 +1,59 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+
+# mammalsmilkRA
+
+The goal of mammalsmilkRA is to demonstate what the key parts of an analysis compendium for a paper or class project might look like and provide tutorials for how to carry out the relevant tasks.
+
+## Installation
+
+Must have the devtools package.  You can download if needed using install.packages("devtools").
+
+Note that mammalsmilkRA requires a lot of other packages (has a lot of "dependencies" in R lingo) so you might be prompted to download or update other things, and it might take a little bit of time for R to work through all the download.  Don't be alarmed by any red text.
+
+``` r
+devtools::install_github("brouwern/mammalsmilkRA")
+
+library("mammalsmilkRA")
+```
+
+## Example
+
+Raw data as a .csv is included when the package is downloaded; for demonstration the data is also easily accessed as
+
+
+``` r
+data("milk")
+```
+
+
+The fat content of animals in the dataset ranges from new zero to almost 60%
+``` r
+hist(milk$fat)
+```
+
+An important point made in the paper is that contary to theoretical expectations, there is not a significant relationship between maternal size.
+
+This relationship isn't significant even in a standard regression such as this one.
+``` r
+m <- lm(log10(fat) ~ log10(mass.fem), data = milk)
+```
+
+We can plot the relationship using basic graphics like this:
+``` r
+plot(log10(fat) ~ log10(mass.fem), data = milk)
+abline(m, col =2)
+```
