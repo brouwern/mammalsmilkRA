@@ -79,7 +79,6 @@ pkgdown::build_site()
 
 
 
-
 ## Rcmd.exe
 "Clean and rebuild"
 ==> Rcmd.exe INSTALL --preclean --no-multiarch --with-keep.source mammalsmilk

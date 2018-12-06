@@ -1,5 +1,5 @@
 ---
-title: "Appendix 4a: Graphical Exploratory Analysis"
+title: "Appendix 4a) Graphical Exploratory Analysis (.R)"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -72,6 +72,8 @@ milk <- read.csv(path., skip = 3)
 head(milk)
 tail(milk)
 summary(milk)
+with(milk,
+     table(diet,arid))
 ```
 
 

@@ -2,14 +2,24 @@ pandoc: 1.19.2.1
 pkgdown: 1.1.0
 pkgdown_sha: ~
 articles:
+  Appendix-0-README: Appendix-0-README.html
+  Appendix-1-raw_data: Appendix-1-raw_data.html
+  Appendix-2-data_cleaning: Appendix-2-data_cleaning.html
+  Appendix-3-Analysis_data: Appendix-3-Analysis_data.html
   Appendix-4a-Grapical_Exploratory_Analyses: Appendix-4a-Grapical_Exploratory_Analyses.html
   Appendix-4b-Numeric_Exploratory_Analyses: Appendix-4b-Numeric_Exploratory_Analyses.html
   Appendix-5-study_diagram: Appendix-5-study_diagram.html
   Appendix-6a-Analysis-script: Appendix-6a-Analysis-script.html
   Appendix-6b-Model-diagnostics-and-outliers: Appendix-6b-Model-diagnostics-and-outliers.html
-  f-faq: f-faq.html
-  r-references: r-references.html
-  results-model-equation: results-model-equation.html
-  y-build_and_rebuild_package: y-build_and_rebuild_package.html
-  z-creating_the_package: z-creating_the_package.html
+  Appendix-6c-Primary_figure: Appendix-6c-Primary_figure.html
+  Appendix-7-Robustness_check: Appendix-7-Robustness_check.html
+  MS-1-Introduction: MS-1-Introduction.html
+  MS-2-Methods: MS-2-Methods.html
+  MS-3a-Results-written: MS-3a-Results-written.html
+  MS-3b-Results_model_equation: MS-3b-Results_model_equation.html
+  MS-3c-Results-key_figure: MS-3c-Results-key_figure.html
+  v-FAQ: v-FAQ.html
+  w-references: w-references.html
+  y-creating_the_package: y-creating_the_package.html
+  z-build_and_rebuild_package: z-build_and_rebuild_package.html
 

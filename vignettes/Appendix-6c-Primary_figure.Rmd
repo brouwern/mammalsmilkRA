@@ -1,5 +1,5 @@
 ---
-title: "Appendix 6b) Model diagnostics (.R)"
+title: "Appendix 6c) Primary Figure code (.R)"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

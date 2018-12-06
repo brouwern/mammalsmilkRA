@@ -1,0 +1,254 @@
+---
+title: "Appendix 7) Robustness check (.R)"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+The results of analyses can frequently depend at least to some extent on the exact format of the data and analyses performed.  Outlier removal and transformation frequently change p-values, as can running one type of test versus another, such as a Welch's test versus a standard t-test on log-transformed data. 
+
+Manipulating your data to yield the results you want or picking an analysis the gives you the lowest p-value is a form of p-hacking.  The flip size of p-hacking are **sensitivity analyses** and **robustness checks**.  The most common type of sensitivty analysis is to report the results of an analysis with and without outliers or influential points to demonstrate that the results are not changed substantially by any changes.  You can similarly report the results of multiple similar models, subsets of the data, etc to demonstrate the the results are not sensitivty to the details (or conversly are robust to these changes).
+
+The term **robustness check** comes from economics and is fairly common there.  As I understand it, stats-intentive economics papers frequently include presentation of alternative modeling approachs to demonstate that the main results are robust to the finer points of the modeling.   As far as I know most other fields, including biology, do not use these terms nor regularly report on robustness; the only exception might be for outliers, and it seems usually this is just done informally using a parenthetical statement along the lines "results were qualitatively similar after removal of outliers" or something like that.
+
+I personally think sensitivity/robustness should be emphasized more while both reporting analyses and also learnign stats.  It can be very surpising how much p-values can changed depending on what exactly you do - and it can be comforting to see how things *don't* change despite any monkeying with your model.
+
+In 2018 I would like students whose primary analysis is just a t-test to perform at least one alternative analysis to examine the robustness of their results.  This should be done in a seperate appendix so its obvious to me where its done.  You can chose to compare
+
+1. Welch's t-test to a non-parametric Wilcoxon Rank-sum test
+1. Welch's t-test to a linear model using "generalized least squares" (gls) to explicitly model the different variances in your groups
+1. If you are doing multiple t-tests carry out an experiment-wise multiple comparisons correction using at least two different correction methods
+
+
+These differen approaches are demonstrated below.  For your project you just need to write functioning annotated code to carry out the tasks.
+
+
+
+
+## Preliminaries
+
+```{r}
+library(ggpubr) # plotting using ggplto2
+library(cowplot)
+library(bbmle)
+library(nlme)
+library(here)
+```
+
+
+
+
+### Load data in R
+```{r}
+file. <- "Appendix-2-Analysis-Data_mammalsmilkRA.csv"
+path. <- here("/inst/extdata/",file.)
+
+milk <- read.csv(path., skip = 3)
+
+
+genus_spp_subspp_mat <- milk$spp %>% str_split_fixed(" ", n = 3)
+
+milk$genus <- genus_spp_subspp_mat[,1]
+```
+
+Set lot
+```{r}
+milk$fat.log <- log(milk$fat)
+```
+
+
+### Plot data
+
+Data is non-normal and variacnes not equal between arid-dwelling and non-arid aniamls
+```{r}
+ggpubr::ggboxplot(data = milk,
+                  y = "fat",
+                  x = "arid")
+```
+
+The difference is significant judging by confidence interval coverage, but we know p-values are sensitive to heterogenity of variacnes.
+```{r}
+ggpubr::ggerrorplot(data = milk,
+                  y = "fat",
+                  x = "arid",
+                  desc_stat = "mean_ci")
+```
+
+
+## Model Arid vs. non-arid
+
+Select the rows of data we want
+```{r}
+i.no <- which(milk$arid == "no")
+i.yes <- which(milk$arid == "yes")
+
+i.use <- c(i.no, i.yes)
+```
+
+
+
+### Regular t-test
+
+A regular t-test with no correction for heterogenous variances.  Not recommended; just for comparison.
+```{r}
+t.test(fat ~ arid, 
+       data = milk[i.use,],
+       var.equal = TRUE)
+```
+
+
+### Welch's t-test
+
+The default t-test
+
+```{r}
+t.test(fat ~ arid, 
+       data = milk[i.use,])
+```
+
+### log(fat) w/ regular  t-test
+
+Log transformation typically improves normality and equalizes variances.
+
+```{r}
+t.test(log(fat) ~ arid, 
+       data = milk[i.use,],
+       var.equal = TRUE)
+```
+
+
+### log Welch's t-test
+
+Welch's test deals with variance, and log can perhaps help with normality.
+```{r}
+t.test(log(fat) ~ arid, 
+       data = milk[i.use,])
+```
+
+
+### Rank-based Wilcox test 
+
+When faced with non-normality the default approach was to use a non-parametric rank-based method.  This has less power to detect differences because it throws away information
+
+```{r}
+wilcox.test(fat ~ arid, 
+       data = milk[i.use,])
+```
+
+
+### linear model 
+
+Should be same as equal variance t-test
+
+```{r}
+m.lm <- lm(fat ~ arid, 
+       data = milk[i.use,])
+
+coef(summary(m.lm))
+```
+
+
+### generalized least squares (gls)
+
+The gls() function in the nlme package allows you to directly model heterogenity in variances.  Instead of 
+
+1. Assuming variances in arid and non-arid mammals is equals, or (standard t-test; linear model)
+1. Applying a black-box correction factor (Welch)
+
+You can incorporate the observed variances into the model.  NOte the line 
+
+* weights = varIdent(form = ~1 | arid)
+
+This is a function varIdent(), which has a form inside it ("form") that says "allow the variance to be different between the two arid and non-arid groups"
+
+```{r}
+m.gls.var <- gls(fat ~ arid, 
+       data = milk[i.use,],
+       weights = varIdent(form = ~1 | arid))
+
+coef(summary(m.gls.var))
+```
+
+Removing the varIdent bit will give you the same results as lm()
+```{r}
+m.gls.no.var <- nlme::gls(fat ~ arid, 
+       data = milk[i.use,])
+
+```
+
+
+We can compare the fit of these models using AIC.  dAIC is >28, indicating that the model which incorporates heterogenous variance is much better.
+```{r}
+AICtab(m.gls.var,
+       m.gls.no.var)
+```
+
+
+
+## Experiment-wide p-value corrections
+
+The data set has reponse (x) variables of fat, protein, sugar, and total energy.  What if we did t-test on all of these?
+
+```{r}
+p.fat <- t.test(fat ~ arid, 
+       data = milk[i.use,])$p.value
+
+p.protein <- t.test(prot ~ arid, 
+       data = milk[i.use,])$p.value
+
+p.sugar <- t.test(sugar ~ arid, 
+       data = milk[i.use,])$p.value
+
+p.energy <- t.test(energy ~ arid, 
+       data = milk[i.use,])$p.value
+```
+
+
+These p-values vary a lot
+```{r}
+p.fat
+p.protein
+p.sugar
+p.energy
+```
+
+The arguement could be made that you should correct for multiple comparions (I wouldn't necessarily argue for it myself).  Things like Tukey's-HSD correct for the **family-wise** error rate for related hypothesis tests within the same model.  If we wanted to correct our five p-values above we'd we doing more of an **experiment-wise** error correction, though the application of these terms might vary.  
+
+Regardless of what you call it, you want to correct p-values originating from different models.  You can do this using **p.adjust()**
+
+```{r}
+the.ps <- c(p.fat,p.protein,p.sugar,p.energy)
+```
+
+A Bonfoerroni correction is a conservation approach which actually has too stiff of a penalty; it leaves jsut on value "significant" (but 0.074 is pretty close)
+```{r}
+p.adjust(the.ps,method = "bonferroni")
+```
+
+the Holm method is Rs default for p.adjust and other functions which use p.adjust.  It is less conservative than Bonferronni and does a better job of keeping alpha at the desired level.  THe math is similar to Bonferonni but has some extra steps so I think many people use Bonf instead if they are doing calculations by hand.
+
+The Holm method moves the last p-value in the list closer to 0.05 (of course, you shouldn't get hung up on 0.05, but many people do.)
+```{r}
+p.adjust(the.ps,method = "holm")
+```
+
+
+The **false discovery rate** is becoming popular in some fields.  It takes a different goal for what frequency of errors to let occur and is generally less stringent the Bonferroni, Holm, and related methods  The last p-value is now 0.037.  (Again, a little above 0.05 and a little below 0.05 shouldn't be treated definitely as anythign)
+```{r}
+p.adjust(the.ps,method = "fdr")
+```
+

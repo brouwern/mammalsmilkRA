@@ -1,5 +1,5 @@
 ---
-title: "Appendix 5: Study Diagrams"
+title: "Appendix 5) Study Diagrams (.pptx)"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
