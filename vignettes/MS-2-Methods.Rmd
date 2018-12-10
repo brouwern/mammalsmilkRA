@@ -21,3 +21,10 @@ knitr::opts_chunk$set(
 The original methods-related assignment stated:
 
 "Identify the statistical model(s) (aka statistical test) or approach you think will be most useful answering your question. Indicate wether you think your data will likely have to be transformed or if other issues will need to be accounted for such as blocking.  Revise your previous methods section describing the experiment and data to update anything else you know & add an outline of the steps invovled in your statistical analysis."
+
+The methods only have to cover experimental or sampling methods; does not have to contain specification of statistical model. 
+
+```{r, eval = F, each = F}
+# The Methods should contain enough detail so that another biologist could re-do the study if they wanted. For example, they should be able to re-locate the general area where the study was conducted or purchase the materials used, carry out the study, and measure things in the same manner. 
+```
+

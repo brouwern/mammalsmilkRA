@@ -77,60 +77,66 @@ Each bullet point is a file.  After the file name is indication of whether it is
 Basic information about the file is contained in the sub-bullets.  See the actual file for more information.
 
 * **Appendix-0-README.Rmd** (optional document file)
-  + The file your are currently reading, with background information on the entire directory and a list of files it contains.
-  + Optional in 2018; in a real analysis compendium it can be good to contain a master README which describes the while directory, as this file does.
+    + The file your are currently reading, with background information on the entire directory and a list of files it contains.
+    + Optional in 2018; in a real analysis compendium it can be good to contain a master README which describes the while directory, as this file does.
 * **Appendix-1-raw_data-README.Rmd** (optional document file 2018)
-  + Written description of raw data file 
+    + Written description of raw data file 
 * **Appendix-1-raw_data-DAT** (REQUIRED .xlsx, .csv, or other file type)
-  + raw data or placeholder for raw data
+    + raw data or placeholder for raw data
 * **Appendix-2-data_cleaning-SCRIPT.Rmd**: (optional script 2018)
-  + Code and/or description of data cleaning process to produce analysis data 
+    + Code and/or description of data cleaning process to produce analysis data 
 * **Appendix-3a-analyis_data-README.Rmd** (background)
-  + Background information on how your analysis data should be set up 
+    + Background information on how your analysis data should be set up 
 * **Appendix-3b-analyis_data-DAT.csv** (REQUIRED; .csv)
-  + cleaned data ready for analysis
+    + cleaned data ready for analysis
 * **Appendix-4-data_dictionary.Rmd** (REQUIRED; .xlsx or .docx)
-  + spreadsheet containing descriptions of all columns found in analysis data.  
-  + See **Broman & Woo. 2018.**
+    + spreadsheet containing descriptions of all columns found in analysis data.  
+    + See **Broman & Woo. 2018.**
 * **Appendix-4a-graphical_exploratory_analyses-SCRIPT.Rmd** (REQUIRED)
-  + Script carrying out graphical exploration of the data using boxplots, histograms etc.
-  + follows general format of **Zuur et al 2010**.  
-  + *This file contains extensive examples using the mammalsmilk data.*  
-  + See also the ["Data exploration for regression analysis"](https://brouwern.github.io/mammalsmilk/articles/d-data_exploration.html) vignette in the [mammalsmilk](https://brouwern.github.io/mammalsmilk/index.html) package.
+    + Script carrying out graphical exploration of the data using boxplots, histograms etc.
+    + follows general format of **Zuur et al 2010**.  
+    + *This file contains extensive examples using the mammalsmilk data.*  
+    + See also the ["Data exploration for regression analysis"](https://brouwern.github.io/mammalsmilk/articles/d-data_exploration.html) vignette in the [mammalsmilk](https://brouwern.github.io/mammalsmilk/index.html) package.
 * **Appendix-4b-numeric_exploratory_analyses-SCRIPT.Rmd** (REQUIRED)
-  + Numeric summaries of data, including group means and correlations.  
-  + Follows recommendations found in **Zuur et al 2010** (eg checking correlations to understand collinearity) & **Gerstner et al 2017** (presenting summary info to facilitate meta-analysis.)
-  + *This file contains extensive examples using the mammalsmilk data.*
+    + Numeric summaries of data, including group means and correlations.  
+    + Follows recommendations found in **Zuur et al 2010** (eg checking correlations to understand collinearity) & **Gerstner et al 2017** (presenting summary info to facilitate meta-analysis.)
+    + *This file contains extensive examples using the mammalsmilk data.*
 * **Appendix-5a-study_design-README.Rmd** (Background)
-  + Description of study design and/or code to create study diagram.  
-  + Follows recommendations of **Zuur & Ieno 2016** and **Gerstner et al 2017**
+    + Description of study design and/or code to create study diagram.  
+    + Follows recommendations of **Zuur & Ieno 2016** and **Gerstner et al 2017**
 * **Appendix-5b-study_diagram** (REQUIRED; .pptx, image, etc): 
-  + Diagram of study site, experimental design, visual protocol, etc.
+    + Diagram of study site, experimental design, visual protocol, etc.
 * **Appendix-6a-analysis-SCRIPT.Rmd** (REQUIRED)
-  + Script to replicate all analyses
-  + *This file contains a partially outlined example*
+    + Script to replicate all analyses
+    + *This file contains a partially outlined example*
 * **Appendix-6c-model_diagnostics_and_outliers-SCRIPT.Rmd** (REQUIRED)
-  + script to carry out relevant diagnostics for models 
-  + Can be part of main analysis script
+   + script to carry out relevant diagnostics for models 
+    + Can be part of main analysis script
 * **Appendix-6d-primary_figure-SCRIPT.Rmd** (REQUIRED)
-  + code to create primary figure for paper 
-  + can be part of main analysis script
-  + *This file contain extensive examples*
+    + code to create primary figure for paper 
+    + can be part of main analysis script
+    + *This file contain extensive examples*
 * **Appendix-7-robustness_check-SCRIPT.Rmd** (REQUIRED if final model is a t-test)
-  + script to to carry out robustness check / sensitivity analysis
+    + script to to carry out robustness check / sensitivity analysis
   
 ### Manuscript (MS) files
 
 Manuscript file(s) is/are document files containing standard information found in a scientific paper.  The one somewhat unique elements it the model equation
 
 * **MS-1-Introduction.Rmd**
+    + 1/2 page providing brief context for the study
 * **MS-2-Methods.Rmd**
+    + <1/2 page methods, focused on statistics
 * **MS-3a-Results-written.Rmd**
+    + <1/2 page results
 * **MS-3b-Results-model_equation.Rmd**
-  + Written representation of the fitted model
-  + has general for of y = mx + b 
+    + Written representation of the fitted model
+    + has general for of y = mx + b 
 * **MS-3c-Results-key_figure.Rmd** (.pptx, .docx, etc)
-  + File containing image and caption
+    + File containing image and caption
+* **MSC-4-Discussion.Rmd**
+    + Brief discussion of interpretation of results 
+    + <1/2 page
 
 ### Other files of interest
 

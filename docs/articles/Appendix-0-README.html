@@ -76,13 +76,13 @@
       <a href="../articles/Appendix-5-study_diagram.html">Appendix 5) Study Diagrams (REQUIRED image/pptx)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6a-Analysis-script.html">Appendix 6a) Analysis script (script REQUIRED)</a>
+      <a href="../articles/Appendix-6a-Analysis-script.html">Appendix 6a) Analysis script (REQUIRED script)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b) Model diagnostics (script REQUIRED)</a>
+      <a href="../articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b) Model diagnostics (REQUIRED script)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6c-Primary_figure.html">Appendix 6c) Primary Figure code (REQURIED Image)</a>
+      <a href="../articles/Appendix-6c-Primary_figure.html">Appendix 6c) Primary Figure code (REQURIED Script &amp; Image)</a>
     </li>
     <li>
       <a href="../articles/Appendix-7-Robustness_check.html">Appendix 7) Robustness checks (REQUIRED for t-tests)</a>
@@ -199,32 +199,54 @@
 <p>Basic information about the file is contained in the sub-bullets. See the actual file for more information.</p>
 <ul>
 <li>
-<strong>Appendix-0-README.Rmd</strong> (optional document file)</li>
+<strong>Appendix-0-README.Rmd</strong> (optional document file)
+<ul>
 <li>The file your are currently reading, with background information on the entire directory and a list of files it contains.</li>
 <li>Optional in 2018; in a real analysis compendium it can be good to contain a master README which describes the while directory, as this file does.</li>
+</ul>
+</li>
 <li>
-<strong>Appendix-1-raw_data-README.Rmd</strong> (optional document file 2018)</li>
+<strong>Appendix-1-raw_data-README.Rmd</strong> (optional document file 2018)
+<ul>
 <li>Written description of raw data file</li>
+</ul>
+</li>
 <li>
-<strong>Appendix-1-raw_data-DAT</strong> (REQUIRED .xlsx, .csv, or other file type)</li>
+<strong>Appendix-1-raw_data-DAT</strong> (REQUIRED .xlsx, .csv, or other file type)
+<ul>
 <li>raw data or placeholder for raw data</li>
+</ul>
+</li>
 <li>
-<strong>Appendix-2-data_cleaning-SCRIPT.Rmd</strong>: (optional script 2018)</li>
+<strong>Appendix-2-data_cleaning-SCRIPT.Rmd</strong>: (optional script 2018)
+<ul>
 <li>Code and/or description of data cleaning process to produce analysis data</li>
+</ul>
+</li>
 <li>
-<strong>Appendix-3a-analyis_data-README.Rmd</strong> (background)</li>
+<strong>Appendix-3a-analyis_data-README.Rmd</strong> (background)
+<ul>
 <li>Background information on how your analysis data should be set up</li>
+</ul>
+</li>
 <li>
-<strong>Appendix-3b-analyis_data-DAT.csv</strong> (REQUIRED; .csv)</li>
+<strong>Appendix-3b-analyis_data-DAT.csv</strong> (REQUIRED; .csv)
+<ul>
 <li>cleaned data ready for analysis</li>
+</ul>
+</li>
 <li>
-<strong>Appendix-4-data_dictionary.Rmd</strong> (REQUIRED; .xlsx or .docx)</li>
+<strong>Appendix-4-data_dictionary.Rmd</strong> (REQUIRED; .xlsx or .docx)
+<ul>
 <li>spreadsheet containing descriptions of all columns found in analysis data.<br>
 </li>
 <li>See <strong>Broman &amp; Woo. 2018.</strong>
 </li>
+</ul>
+</li>
 <li>
-<strong>Appendix-4a-graphical_exploratory_analyses-SCRIPT.Rmd</strong> (REQUIRED)</li>
+<strong>Appendix-4a-graphical_exploratory_analyses-SCRIPT.Rmd</strong> (REQUIRED)
+<ul>
 <li>Script carrying out graphical exploration of the data using boxplots, histograms etc.</li>
 <li>follows general format of <strong>Zuur et al 2010</strong>.<br>
 </li>
@@ -232,37 +254,60 @@
 <em>This file contains extensive examples using the mammalsmilk data.</em><br>
 </li>
 <li>See also the <a href="https://brouwern.github.io/mammalsmilk/articles/d-data_exploration.html">“Data exploration for regression analysis”</a> vignette in the <a href="https://brouwern.github.io/mammalsmilk/index.html">mammalsmilk</a> package.</li>
+</ul>
+</li>
 <li>
-<strong>Appendix-4b-numeric_exploratory_analyses-SCRIPT.Rmd</strong> (REQUIRED)</li>
+<strong>Appendix-4b-numeric_exploratory_analyses-SCRIPT.Rmd</strong> (REQUIRED)
+<ul>
 <li>Numeric summaries of data, including group means and correlations.<br>
 </li>
 <li>Follows recommendations found in <strong>Zuur et al 2010</strong> (eg checking correlations to understand collinearity) &amp; <strong>Gerstner et al 2017</strong> (presenting summary info to facilitate meta-analysis.)</li>
 <li><em>This file contains extensive examples using the mammalsmilk data.</em></li>
+</ul>
+</li>
 <li>
-<strong>Appendix-5a-study_design-README.Rmd</strong> (Background)</li>
+<strong>Appendix-5a-study_design-README.Rmd</strong> (Background)
+<ul>
 <li>Description of study design and/or code to create study diagram.<br>
 </li>
 <li>Follows recommendations of <strong>Zuur &amp; Ieno 2016</strong> and <strong>Gerstner et al 2017</strong>
 </li>
+</ul>
+</li>
 <li>
-<strong>Appendix-5b-study_diagram</strong> (REQUIRED; .pptx, image, etc):</li>
+<strong>Appendix-5b-study_diagram</strong> (REQUIRED; .pptx, image, etc):
+<ul>
 <li>Diagram of study site, experimental design, visual protocol, etc.</li>
+</ul>
+</li>
 <li>
-<strong>Appendix-6a-analysis-SCRIPT.Rmd</strong> (REQUIRED)</li>
+<strong>Appendix-6a-analysis-SCRIPT.Rmd</strong> (REQUIRED)
+<ul>
 <li>Script to replicate all analyses</li>
 <li><em>This file contains a partially outlined example</em></li>
+</ul>
+</li>
 <li>
 <strong>Appendix-6c-model_diagnostics_and_outliers-SCRIPT.Rmd</strong> (REQUIRED)</li>
-<li>script to carry out relevant diagnostics for models</li>
+<li>script to carry out relevant diagnostics for models
+<ul>
 <li>Can be part of main analysis script</li>
+</ul>
+</li>
 <li>
-<strong>Appendix-6d-primary_figure-SCRIPT.Rmd</strong> (REQUIRED)</li>
+<strong>Appendix-6d-primary_figure-SCRIPT.Rmd</strong> (REQUIRED)
+<ul>
 <li>code to create primary figure for paper</li>
 <li>can be part of main analysis script</li>
 <li><em>This file contain extensive examples</em></li>
+</ul>
+</li>
 <li>
-<strong>Appendix-7-robustness_check-SCRIPT.Rmd</strong> (REQUIRED if final model is a t-test)</li>
+<strong>Appendix-7-robustness_check-SCRIPT.Rmd</strong> (REQUIRED if final model is a t-test)
+<ul>
 <li>script to to carry out robustness check / sensitivity analysis</li>
+</ul>
+</li>
 </ul>
 </div>
 <div id="manuscript-ms-files" class="section level3">
@@ -270,15 +315,44 @@
 <a href="#manuscript-ms-files" class="anchor"></a>Manuscript (MS) files</h3>
 <p>Manuscript file(s) is/are document files containing standard information found in a scientific paper. The one somewhat unique elements it the model equation</p>
 <ul>
-<li><strong>MS-1-Introduction.Rmd</strong></li>
-<li><strong>MS-2-Methods.Rmd</strong></li>
-<li><strong>MS-3a-Results-written.Rmd</strong></li>
-<li><strong>MS-3b-Results-model_equation.Rmd</strong></li>
+<li>
+<strong>MS-1-Introduction.Rmd</strong>
+<ul>
+<li>1/2 page providing brief context for the study</li>
+</ul>
+</li>
+<li>
+<strong>MS-2-Methods.Rmd</strong>
+<ul>
+<li>&lt;1/2 page methods, focused on statistics</li>
+</ul>
+</li>
+<li>
+<strong>MS-3a-Results-written.Rmd</strong>
+<ul>
+<li>&lt;1/2 page results</li>
+</ul>
+</li>
+<li>
+<strong>MS-3b-Results-model_equation.Rmd</strong>
+<ul>
 <li>Written representation of the fitted model</li>
 <li>has general for of y = mx + b</li>
+</ul>
+</li>
 <li>
-<strong>MS-3c-Results-key_figure.Rmd</strong> (.pptx, .docx, etc)</li>
+<strong>MS-3c-Results-key_figure.Rmd</strong> (.pptx, .docx, etc)
+<ul>
 <li>File containing image and caption</li>
+</ul>
+</li>
+<li>
+<strong>MSC-4-Discussion.Rmd</strong>
+<ul>
+<li>Brief discussion of interpretation of results</li>
+<li>&lt;1/2 page</li>
+</ul>
+</li>
 </ul>
 </div>
 <div id="other-files-of-interest" class="section level3">

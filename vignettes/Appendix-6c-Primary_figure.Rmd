@@ -1,5 +1,5 @@
 ---
-title: "Appendix 6c) Primary Figure code (REQURIED Image)"
+title: "Appendix 6c) Primary Figure code (REQURIED Script & Image)"
 output: rmarkdown::html_vignette
 author: "Vignette Author"
 date: "`r Sys.Date()`"

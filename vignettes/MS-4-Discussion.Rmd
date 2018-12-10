@@ -21,8 +21,21 @@ knitr::opts_chunk$set(
 ```
 
 
+
 The final paper will include a brief (probably less than 1/2 page DS) discussion of the scientific implications & significance. 
 
-If a study does not contain an experimental treatment, you should compare your study explicitly to the quantitative results of other similar studies & cite them appropriately. 
-For example, if you look at population trends for wood thrush in Pennsylvania, you should compare them to published information on trend in other places or over the entire country
-As part of the discussion you should discuss how the experimental or study design might impact the results or conclusion, particularly how randomization was or was not used, if there is pseudoreplication, etc.
+
+
+```{r, echo = F, eval = F}
+## Optional ##
+
+# The following issues are not required to be addressed in 2018
+# 
+# If a study does not contain an experimental treatment, you should compare your study explicitly to the quantitative results of other similar studies & cite them appropriately.
+# 
+# For example, if you look at population trends for wood thrush in Pennsylvania, you should compare them to published information on trend in other places or over the entire country
+# 
+# As part of the discussion you should discuss how the experimental or study design might impact the results or conclusion, particularly how randomization was or was not used, if there is pseudoreplication, etc.
+
+```
+

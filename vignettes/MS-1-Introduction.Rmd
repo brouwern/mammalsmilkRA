@@ -17,3 +17,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+The introduction should be brief and plainly state the scientific background or motivation for the project and question being asked, and any specific hypotheses being tested.
+
+This can be 1/2 page or less of double spaced text.

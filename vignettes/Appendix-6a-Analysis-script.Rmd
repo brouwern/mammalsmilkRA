@@ -1,5 +1,5 @@
 ---
-title: "Appendix 6a) Analysis script (script REQUIRED)"
+title: "Appendix 6a) Analysis script (REQUIRED script)"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

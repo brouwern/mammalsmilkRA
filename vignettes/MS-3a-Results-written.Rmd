@@ -37,3 +37,10 @@ http://my.ilstu.edu/~jhkahn/apastats.html
 Good information on how to write about results can be found in
 
 Savik, K.  2006.  Reporting P values.  JWOCN.
+
+
+Brief examples for reporting a t-test can be found in the wildlifeR package
+
+* [2-sample t-test](https://brouwern.github.io/wildlifeR/articles/reporting_t_test_results.html)
+* [paired t-test](https://brouwern.github.io/wildlifeR/articles/reporting_paired_t_test_results.html)
+
