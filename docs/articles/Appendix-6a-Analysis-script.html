@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Appendix 6a) Analysis script (.R) • mammalsmilkRA</title>
+<title>Appendix 6a) Analysis script (REQUIRED) • mammalsmilkRA</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Appendix 6a) Analysis script (.R)">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Appendix 6a) Analysis script (REQUIRED)">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -64,28 +64,28 @@
       <a href="../articles/Appendix-2-data_dictionary.html">Appendix 2) Data dictionary (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-3-Analysis_data-README.html">Appendix 3) Analysis data (.csv)</a>
+      <a href="../articles/Appendix-3-Analysis_data-README.html">Appendix 3) Analysis data (Data file REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-4b-Numeric_Exploratory_Analyses.html">Appendix 4b) Numeric Summaries &amp; Exploratory Analysis (.R)</a>
+      <a href="../articles/Appendix-4b-Numeric_Exploratory_Analyses.html">Appendix 4b) Numeric Summaries &amp; Exploratory Analysis (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-5-study_diagram.html">Appendix 5) Study Diagrams (.pptx)</a>
+      <a href="../articles/Appendix-5-study_diagram.html">Appendix 5) Study Diagrams (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6a-Analysis-script.html">Appendix 6a) Analysis script (.R)</a>
+      <a href="../articles/Appendix-6a-Analysis-script.html">Appendix 6a) Analysis script (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b) Model diagnostics (.R)</a>
+      <a href="../articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b) Model diagnostics (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6c-Primary_figure.html">Appendix 6c) Primary Figure code (.R)</a>
+      <a href="../articles/Appendix-6c-Primary_figure.html">Appendix 6c) Primary Figure code (REQURIED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-7-Robustness_check.html">Appendix 7) Robustness check (.R)</a>
+      <a href="../articles/Appendix-7-Robustness_check.html">Appendix 7) Robustness checks</a>
     </li>
     <li>
       <a href="../articles/MS-1-Introduction.html">MS Part 1) Introduction</a>
@@ -135,7 +135,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Appendix 6a) Analysis script (.R)</h1>
+      <h1>Appendix 6a) Analysis script (REQUIRED)</h1>
                         <h4 class="author">Vignette Author</h4>
             
             <h4 class="date">2018-12-10</h4>
@@ -173,66 +173,15 @@
 <h3 class="hasAnchor">
 <a href="#load-packages" class="anchor"></a>Load packages</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)  <span class="co"># for exploratory analyses</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw">library</span>(ggpubr) <span class="co"># plotting using ggplto2</span>
-<span class="co">#&gt; Loading required package: ggplot2</span>
-<span class="co">#&gt; Loading required package: magrittr</span>
 <span class="kw">library</span>(cowplot)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'cowplot'</span>
-<span class="co">#&gt; The following object is masked from 'package:ggpubr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     get_legend</span>
-<span class="co">#&gt; The following object is masked from 'package:ggplot2':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     ggsave</span>
 <span class="kw">library</span>(lme4)
-<span class="co">#&gt; Loading required package: Matrix</span>
 <span class="kw">library</span>(arm)
-<span class="co">#&gt; Loading required package: MASS</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'MASS'</span>
-<span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     select</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; arm (Version 1.10-1, built: 2018-4-12)</span>
-<span class="co">#&gt; Working directory is C:/Users/lisanjie/Documents/1_R/git/mammalsmilkRA/vignettes</span>
 <span class="kw">library</span>(stringr) 
 <span class="kw">library</span>(bbmle)
-<span class="co">#&gt; Loading required package: stats4</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'bbmle'</span>
-<span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     slice</span>
 <span class="kw">library</span>(plotrix) ##std.error function for SE
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'plotrix'</span>
-<span class="co">#&gt; The following object is masked from 'package:arm':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     rescale</span>
 <span class="kw">library</span>(psych)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'psych'</span>
-<span class="co">#&gt; The following object is masked from 'package:plotrix':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     rescale</span>
-<span class="co">#&gt; The following objects are masked from 'package:arm':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     logit, rescale, sim</span>
-<span class="co">#&gt; The following objects are masked from 'package:ggplot2':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     %+%, alpha</span>
-<span class="kw">library</span>(here)
-<span class="co">#&gt; here() starts at C:/Users/lisanjie/Documents/1_R/git/mammalsmilkRA</span></code></pre></div>
+<span class="kw">library</span>(here)</code></pre></div>
 </div>
 <div id="load-data-in-r" class="section level3">
 <h3 class="hasAnchor">

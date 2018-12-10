@@ -1,5 +1,5 @@
 ---
-title: "Appendix 6b) Model diagnostics (.R)"
+title: "Appendix 6b) Model diagnostics (REQUIRED)"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -15,7 +15,8 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  warnings = F
+  warnings = F,
+  message = F
 )
 ```
 

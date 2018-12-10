@@ -1,5 +1,5 @@
 ---
-title: "Appendix 4b) Numeric Summaries & Exploratory Analysis (.R)"
+title: "Appendix 4b) Numeric Summaries & Exploratory Analysis (REQUIRED)"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -14,7 +14,9 @@ editor_options:
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = F,
+  message = F
 )
 ```
 

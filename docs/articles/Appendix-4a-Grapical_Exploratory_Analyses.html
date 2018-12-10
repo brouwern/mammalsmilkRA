@@ -64,28 +64,28 @@
       <a href="../articles/Appendix-2-data_dictionary.html">Appendix 2) Data dictionary (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-3-Analysis_data-README.html">Appendix 3) Analysis data (.csv)</a>
+      <a href="../articles/Appendix-3-Analysis_data-README.html">Appendix 3) Analysis data (Data file REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-4b-Numeric_Exploratory_Analyses.html">Appendix 4b) Numeric Summaries &amp; Exploratory Analysis (.R)</a>
+      <a href="../articles/Appendix-4b-Numeric_Exploratory_Analyses.html">Appendix 4b) Numeric Summaries &amp; Exploratory Analysis (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-5-study_diagram.html">Appendix 5) Study Diagrams (.pptx)</a>
+      <a href="../articles/Appendix-5-study_diagram.html">Appendix 5) Study Diagrams (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6a-Analysis-script.html">Appendix 6a) Analysis script (.R)</a>
+      <a href="../articles/Appendix-6a-Analysis-script.html">Appendix 6a) Analysis script (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b) Model diagnostics (.R)</a>
+      <a href="../articles/Appendix-6b-Model-diagnostics-and-outliers.html">Appendix 6b) Model diagnostics (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-6c-Primary_figure.html">Appendix 6c) Primary Figure code (.R)</a>
+      <a href="../articles/Appendix-6c-Primary_figure.html">Appendix 6c) Primary Figure code (REQURIED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-7-Robustness_check.html">Appendix 7) Robustness check (.R)</a>
+      <a href="../articles/Appendix-7-Robustness_check.html">Appendix 7) Robustness checks</a>
     </li>
     <li>
       <a href="../articles/MS-1-Introduction.html">MS Part 1) Introduction</a>
@@ -168,66 +168,15 @@
 <h3 class="hasAnchor">
 <a href="#load-packages" class="anchor"></a>Load packages</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)  <span class="co"># for exploratory analyses</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'dplyr'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     filter, lag</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw">library</span>(ggpubr) <span class="co"># plotting using ggplto2</span>
-<span class="co">#&gt; Loading required package: ggplot2</span>
-<span class="co">#&gt; Loading required package: magrittr</span>
 <span class="kw">library</span>(cowplot)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'cowplot'</span>
-<span class="co">#&gt; The following object is masked from 'package:ggpubr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     get_legend</span>
-<span class="co">#&gt; The following object is masked from 'package:ggplot2':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     ggsave</span>
 <span class="kw">library</span>(lme4)
-<span class="co">#&gt; Loading required package: Matrix</span>
 <span class="kw">library</span>(arm)
-<span class="co">#&gt; Loading required package: MASS</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'MASS'</span>
-<span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     select</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; arm (Version 1.10-1, built: 2018-4-12)</span>
-<span class="co">#&gt; Working directory is C:/Users/lisanjie/Documents/1_R/git/mammalsmilkRA/vignettes</span>
 <span class="kw">library</span>(stringr) 
 <span class="kw">library</span>(bbmle)
-<span class="co">#&gt; Loading required package: stats4</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'bbmle'</span>
-<span class="co">#&gt; The following object is masked from 'package:dplyr':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     slice</span>
 <span class="kw">library</span>(plotrix) ##std.error function for SE
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'plotrix'</span>
-<span class="co">#&gt; The following object is masked from 'package:arm':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     rescale</span>
 <span class="kw">library</span>(psych)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'psych'</span>
-<span class="co">#&gt; The following object is masked from 'package:plotrix':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     rescale</span>
-<span class="co">#&gt; The following objects are masked from 'package:arm':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     logit, rescale, sim</span>
-<span class="co">#&gt; The following objects are masked from 'package:ggplot2':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     %+%, alpha</span>
-<span class="kw">library</span>(here)
-<span class="co">#&gt; here() starts at C:/Users/lisanjie/Documents/1_R/git/mammalsmilkRA</span></code></pre></div>
+<span class="kw">library</span>(here)</code></pre></div>
 </div>
 <div id="load-data" class="section level3">
 <h3 class="hasAnchor">
@@ -238,8 +187,7 @@
 <a href="#load-data-in-r" class="anchor"></a>Load data in R</h4>
 <p>If you have installed the mammalsmilkRA package the .csv “Appendix-2-Analysis-Data_mammalsmilkRA.csv” will be saved in the mammalsmilkRA directory R created to store package-related files. You can locate where this file is by searching for the file in your file system (eg “File explorer” in Windows) and then either setting its locations as your working dirctory or saving the file to a more convienent locations.</p>
 <p>Alternatively, you load it directly from the mammalsmilkRA package; most anlyses aren’t packaged into in a package, so this is a unique short cut I’ve set upt.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"milk"</span>)
-<span class="co">#&gt; Warning in data("milk"): data set 'milk' not found</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">"milk"</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(<span class="kw">here</span>(<span class="st">"/inst/extdata"</span>))
 <span class="co">#&gt; [1] "_original_files"                                       </span>
 <span class="co">#&gt; [2] "analysis_comendium"                                    </span>
@@ -540,9 +488,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
 <p>I will be doing regression and so I need to fit a model. However, I do have major categorical variables to consider, so I’ll make a histogram to see what it looks like.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gghistogram</span>(<span class="dt">data =</span> milk, 
             <span class="dt">x =</span> <span class="st">"mass.fem.log10"</span>,
-            <span class="dt">facet.by =</span> <span class="st">"diet"</span>)
-<span class="co">#&gt; Warning: Using `bins = 30` by default. Pick better value with the argument</span>
-<span class="co">#&gt; `bins`.</span></code></pre></div>
+            <span class="dt">facet.by =</span> <span class="st">"diet"</span>)</code></pre></div>
 <p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
 <p>Even after a log transformation the data aren’t super normal. However, further conditioning on biome could make this better; also, as I’ve already said, I need to actually fit my regression model and look at the residuals to really pass judgement. Moreover, I don’t get hung up on normality unless things are really really skewed.</p>
 <p>I could add biome in indirectly by making a combined variable I“ll call group”</p>
@@ -550,9 +496,7 @@ milk<span class="op">$</span>fat.logit &lt;-<span class="st"> </span>arm<span cl
 <span class="kw">gghistogram</span>(<span class="dt">data =</span> milk, 
             <span class="dt">x =</span> <span class="st">"mass.fem.log10"</span>,
             <span class="dt">facet.by =</span> <span class="st">"group"</span>,
-            <span class="dt">fill =</span> <span class="st">"diet"</span>)
-<span class="co">#&gt; Warning: Using `bins = 30` by default. Pick better value with the argument</span>
-<span class="co">#&gt; `bins`.</span></code></pre></div>
+            <span class="dt">fill =</span> <span class="st">"diet"</span>)</code></pre></div>
 <p><img src="Appendix-4a-Grapical_Exploratory_Analyses_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
 <p>This reveals that terrestrial carnivores are kinda skewed. However, with few data points its hard to tell. Overall these data are that normal, but see the caveats above as to why I am not in the least concerned at this stage.</p>
 </div>

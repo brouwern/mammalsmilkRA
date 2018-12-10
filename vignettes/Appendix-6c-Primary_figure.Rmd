@@ -1,5 +1,5 @@
 ---
-title: "Appendix 6c) Primary Figure code (.R)"
+title: "Appendix 6c) Primary Figure code (REQURIED)"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -15,7 +15,8 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  warning = F
+  warning = F,
+  message = F
 )
 ```
 
