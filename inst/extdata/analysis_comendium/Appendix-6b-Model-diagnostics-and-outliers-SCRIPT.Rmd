@@ -1,5 +1,5 @@
 ---
-title: "Appendix 6b: Model diagnostics"
+title: "Appendix 6b) Model diagnostics (REQUIRED script)"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -14,9 +14,24 @@ editor_options:
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warnings = F,
+  message = F
 )
 ```
+
+For your independent project you need to carry out relevant model diagnostics.  If your major analysis only requires t-tests, you should re-fit at least one of your t-tests a linear model using lm() and check for normality and homogeneity of variance using relevant techniques.
+
+The following script is just a place holder.  For full information on model diangostics see the the (diagnostics tutorial](https://brouwern.github.io/mammalsmilk/articles/g-linear_reg_diagnostics.html) in the [mammalsmilk](https://brouwern.github.io/mammalsmilk/index.html) package.
+
+
+In this the mammalsmilkRA repository I have split up the analysis into several subscripts:
+
+* analysis
+* diagnostics
+* figure
+
+These can be combined if you want.
 
 
 ## Preliminaries

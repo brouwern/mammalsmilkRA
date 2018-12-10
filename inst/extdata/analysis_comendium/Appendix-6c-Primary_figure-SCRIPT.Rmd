@@ -1,0 +1,228 @@
+---
+title: "Appendix 6c) Primary Figure code (REQURIED Script & Image)"
+output: rmarkdown::html_vignette
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = F,
+  message = F
+)
+```
+
+
+
+## The assignment
+
+For you final project you need to display a/the key result of your study as a figure using R. Additinally, write an appropriate and detailed caption for it.  Include the code for making the plot; you can include it in your main analysis script -- clearly labled -- or put it in a sperate file which loads the data and does what after data prep or modeling necessary for the pot.  Additional annotations can be made in PowerPoint or another program if necessary.  The final plot should be saved as a .ppt slide or image file (.jpeg).
+
+
+In this the mammalsmilkRA repository I have split up the analysis into several subscripts:
+
+* analysis
+* diagnostics
+* figure
+
+These can be combined if you want.
+
+## How do I make a polished plot?
+
+A final, publication-worth plot should have
+
+* x and y axes labled
+* units labled as appropriate
+* transformations of varibales indicated
+* raw-data or distributional information presented whenever possible (scatterplot, boxplot, violoin plot, boxplot with raw data, dotplot)
+* data coded with colors and shapes whenever possible
+* information about the statistical model or inference whenever possible (regression lines, p-values, etc)
+* Means and regression lines should have error bars/error bands
+* Nice additions are indications of sample size ("N = ..."), what error bars are ("Error bars = ..."), what the regression equation is, reference lines
+
+A good caption/legend should be a suscint but stand-alone summary of the data and model.  Ideally, if a person looked at just the plot and the caption they should have a pretty good idea of how to interpret it even if they don't have the rest of the paper.  
+
+
+Good information to include in a caption include
+
+* A one-sentence summary of what the plot is
+* Objects, organisms, entities that data were collected on.  For example, in ecological studies taxonomic information about the organisms studied.
+* Sample size (if not included within the plot)
+* What confidence intervals are (if not included within the plot)
+
+
+The ggpubr package has a large number of arguements and functions for making plots look cool. Information on ggpubr can be found [here.]
+(http://www.sthda.com/english/wiki/ggpubr-create-easily-publication-ready-plots)
+
+Below are examples of plots for 
+
+* regression analyses: scatter plot with regression line
+* 1-way ANOVA
+
+
+## Preliminaries
+
+### Load packages
+```{r}
+library(dplyr)  # for exploratory analyses
+library(ggpubr) # plotting using ggplto2
+library(cowplot)
+library(lme4)
+library(arm)
+library(stringr) 
+library(bbmle)
+library(plotrix) ##std.error function for SE
+library(psych)
+library(here)
+
+# Functions
+library(sjPlot)
+library(sjlabelled)
+library(sjmisc)
+```
+
+
+### Load data in R
+```{r}
+file. <- "Appendix-2-Analysis-Data_mammalsmilkRA.csv"
+path. <- here("/inst/extdata/",file.)
+
+milk <- read.csv(path., skip = 3)
+
+
+genus_spp_subspp_mat <- milk$spp %>% str_split_fixed(" ", n = 3)
+
+milk$genus <- genus_spp_subspp_mat[,1]
+```
+
+
+```{r}
+milk$fat.log <- log(milk$fat)
+milk$mass.fem.log <- log(milk$mass.fem)
+```
+
+
+
+## A polished plot for regression
+
+
+### The model
+```{r}
+summary(lm(fat.log ~ mass.fem.log,
+           data  = milk))
+```
+
+
+### The plot
+
+```{r}
+ggscatter(data = milk,
+          y = "fat.log",
+          x = "mass.fem.log",
+          xlab = "log(mass of mother)",
+          ylab = "log(% milk fat)",
+          add = "reg.line",
+          conf.int = T) +
+  stat_regline_equation()
+```
+
+Additionally annotations could include
+p-value for slope of regression line, R^2 value, sample size.  I have included these instead in teh caption.
+
+### A caption
+
+Relationship between maternal mass (grams) and percent milk fat for 130 mammals fit using linear regression with no phylogenetic correction.  Both axes are natural-log transformed.  P = 0.41, R^2 = 0.005.  Error bands is a 95% confidence interval.
+
+
+
+## A polished plot for 1-way ANOVA
+
+There are 3 diet categories.
+```{r}
+summary(milk$diet)
+```
+
+We could do a 1-way ANOVA to test for differences between these 3 categories, ignoring phylogency, size, and any other ccovarites.
+
+
+First a standard model of log-milk fat versus mammal diet.
+```{r}
+m.diet <- lm(fat.log ~ diet, 
+             data = milk)
+
+coef(summary(m.diet))
+```
+
+The above model gives us an intercept ("(Intercept)") term and 2 effect sizes.  R defaults to setting the intercept alphabetically, so carnivores are set as the intercept.  The effect size "dietherbivore" is the difference between the intercept and herbivores, that is, the difference between  carnviores and herbivores. The "dietomnivore" effect sizes is the diference between the intercept and ominivores.
+
+We can calcualte the means for all three groups directly like this using a "means model"
+
+
+```{r}
+m.diet.means <- lm(fat.log ~ - 1 + diet, 
+             data = milk)
+
+coef(summary(m.diet.means))
+```
+
+
+```{r}
+my_comparisons <- list(
+  c("carnivore", "herbivore"), 
+  c("herbivore", "omnivore"), 
+  c("carnivore", "omnivore") )
+
+ggboxplot(data = milk,
+                  y = "fat",
+                  x = "diet",
+                  desc_stat = "mean_ci",
+                  xlab = "Arid habitat",
+                  ylab = "Percent milk fat") +
+  stat_compare_means(method = "t.test",
+                     comparisons = my_comparisons)
+```
+
+
+We can get confidence intervals for each of these means like this:
+```{r}
+confint(m.diet.means)
+```
+
+```{r}
+#plot_model(m.diet)
+
+#visreg(m.diet)
+```
+
+## A polished plot for a t-test
+
+For information on ggpubr and adding p-values using stat_compare_means() see [here](http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/76-add-p-values-and-significance-levels-to-ggplots/).
+
+
+The t-test we are running
+```{r}
+t.test(fat ~ arid, data = milk)
+```
+
+Plot with p-values from t-test.
+```{r}
+ggerrorplot(data = milk,
+                  y = "fat",
+                  x = "arid",
+                  desc_stat = "mean_ci",
+                  xlab = "Arid habitat",
+                  ylab = "Percent milk fat") +
+  stat_compare_means(method = "t.test",
+                     label.y = 25,
+                     label.x = 0.6)
+```
+
+

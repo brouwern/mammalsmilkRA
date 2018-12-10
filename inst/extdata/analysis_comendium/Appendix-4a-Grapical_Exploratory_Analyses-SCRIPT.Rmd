@@ -1,5 +1,5 @@
 ---
-title: "Appendix 4a: Graphical Exploratory Analysis"
+title: "Appendix 4a) Graphical Exploratory Analysis (REQUIRED script)"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -14,9 +14,28 @@ editor_options:
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = F,
+  message = F
 )
 ```
+
+## Introduction to graphical data exploration
+
+Graphical exploration is necessary for quality control and to understand how to modle your data.  Increasinly authors are providing plots of the raw data in appendices in order for readers to gain a better understanding of the data.
+
+For your independent project (in 2018) you simply need to provide a script file that carries out relevant exploratory analyses.
+
+See **Zuur et al 2010** for more information.
+ 
+
+## This file
+
+This file contains a walkthrough of key data exploration tasks.  It is particularly oriented towards regression data but the principals apply generally to all data.
+
+See also the ["Data exploration for regression analysis"](https://brouwern.github.io/mammalsmilk/articles/d-data_exploration.html) vignette in the [mammalsmilk](https://brouwern.github.io/mammalsmilk/index.html) package.
+
+
 
 ## Preliminaries
 
@@ -39,16 +58,28 @@ library(here)
 
 ### Load data
 
-(Note: original files is called "skibiel_mammalsmilk.csv" within the mammalsmilk package.  The data has been duplicated here to make this a stand-alone analysis compendium)
+(Note: original files is called "skibiel_mammalsmilk.csv" within the mammalsmilk package.  The data has been duplicated here but given a new name ("Appendix-2-Analysis-Data_mammalsmilkRA.csv") to make this a stand-alone analysis compendium)
 
 
 #### Load data in R
+
+If you have installed the mammalsmilkRA package the .csv "Appendix-2-Analysis-Data_mammalsmilkRA.csv" will be saved in the mammalsmilkRA directory R created to store package-related files.  You can locate where this file is by searching for the file in your file system (eg "File explorer" in Windows) and then either setting its locations as your working dirctory or saving the file to a more convienent locations.
+
+Alternatively, you load it directly from the mammalsmilkRA package; most anlyses aren't packaged into in a package, so this is a unique short cut I've set upt. 
+```{r}
+data("milk")
+```
+
+```{r, echo = F, eval = F}
+#search whole file system using R
+Rfiles <- list.files("C:/", pattern = "\\.R$", recursive = TRUE, full.names = TRUE)
+```
 
 
 ```{r}
 list.files(here("/inst/extdata"))
 file. <- "Appendix-2-Analysis-Data_mammalsmilkRA.csv"
-path. <- here("/inst/extdata",file.)
+path. <- here::here("/inst/extdata",file.)
 
 milk <- read.csv(path., skip = 3)
 ```
@@ -60,6 +91,8 @@ milk <- read.csv(path., skip = 3)
 head(milk)
 tail(milk)
 summary(milk)
+with(milk,
+     table(diet,arid))
 ```
 
 

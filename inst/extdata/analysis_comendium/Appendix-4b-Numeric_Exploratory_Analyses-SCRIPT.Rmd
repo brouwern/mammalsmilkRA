@@ -1,5 +1,5 @@
 ---
-title: "Appendix 4b: Numeric Summaries & Exploratory Analysis"
+title: "Appendix 4b) Numeric Summaries & Exploratory Analysis (REQUIRED script)"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -14,10 +14,27 @@ editor_options:
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = F,
+  message = F
 )
 ```
 
+
+## Introduction to numeric data exploration
+
+Numeric exploration is necessary for quality control and to understand the structure of your data.  Some numeric summaries, such as correlation tables, also provide key insights into how to model the data (**Zuur et al 2010**).
+
+It is increasingly being recommended to include numeric summaries such as this to facilitate meta-analysis and help interested readers understand the structure of your data (**Gerstner et al 2017**).
+
+
+For you independent project (in 2018) you just need to submit a script file which carries our relevant numeric summaries.
+
+
+## Preliminaires
+
+
+### Loack packages
 
 ```{r}
 library(dplyr)  # for exploratory analyses
@@ -62,7 +79,7 @@ summary(milk)
 
 ## Numeric data summaries
 
-It can be very useful to generate numeric data summaries to help you and readers understand the data.  This can also allow readers to extract information that is of interest to them but no necesssarily to you.  For example modelers and meta-analysts might want or need a bit of information which was not highlighted in your original anlaysis.  Providing them the information upfront makes it more likely that they will cite you!  It also saves them the trouble of asking for it if they really need it, and you the trouble of project files up and working up what they want.
+It can be very useful to generate numeric data summaries to help you and readers understand the data.  This can also allow readers to extract information that is of interest to them but no necessarily to you.  For example modelers and meta-analysts might want or need a bit of information which was not highlighted in your original analysis.  Providing them the information upfront makes it more likely that they will cite you!  It also saves them the trouble of asking for it if they really need it, and you the trouble of project files up and working up what they want.
 
 This is not emphasized by Zuur et al, but is emphasized by Gerstner et al 2017.  
 
@@ -71,7 +88,7 @@ Gerstner et al 2017.  Will your paper be used in a meta-analysis?  Making the re
 
 ### Correlation table
 
-Correlation tables are excellent summaries of the response and predictor variables.  This was discussed previously with regrads to investigation of collinearity, along with scatter plot matrices.
+Correlation tables are excellent summaries of the response and predictor variables.  This was discussed previously with regards to investigation of collinearity, along with scatter plot matrices.
 
 
 ### Table of means & SDs
