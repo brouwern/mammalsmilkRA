@@ -1,5 +1,5 @@
 ---
-title: "Appendix 2) Data Preparation & Cleaning (.R or doc)"
+title: "Appendix 3) Analysis data (.csv)"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -19,9 +19,4 @@ knitr::opts_chunk$set(
 ```
 
 
-This file is optional in 2018.
-
-If you do include this file, please include the basic information requested here: https://brouwern.github.io/BIOSC_1120/indproj_04-orig_data.html for more information.
-
-and here:
-https://brouwern.github.io/BIOSC_1120/indproj_05-analysis_data.html
+Analysis data is the actual data used for analysis.  Usually it only contains the columns (variables) and rows (observations) used in for data exploration, visualization, and modeling.  That is, all columns or rows in the raw data that aren't part of your actual analysis can be removed to save space and make the data easier to dispaly.

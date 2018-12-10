@@ -52,19 +52,22 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Appendix-0-README.html">Appendix 0) README</a>
+      <a href="../articles/Appendix-0-README.html">Appendix 0) Final Project Analysis Compendium README</a>
     </li>
     <li>
-      <a href="../articles/Appendix-1-raw_data.html">Appendix 1) Raw data (.csv, .xlsx, or other)</a>
+      <a href="../articles/Appendix-1-raw_data_README.html">Appendix 1) Raw data (REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-2-data_cleaning.html">Appendix 2) Data Preparation &amp; Cleaning (.R or doc)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-3-Analysis_data.html">Appendix 3) Analysis data (.csv)</a>
+      <a href="../articles/Appendix-2-data_dictionary.html">Appendix 2) Data dictionary (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (.R)</a>
+      <a href="../articles/Appendix-3-Analysis_data-README.html">Appendix 3) Analysis data (.csv)</a>
+    </li>
+    <li>
+      <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-4b-Numeric_Exploratory_Analyses.html">Appendix 4b) Numeric Summaries &amp; Exploratory Analysis (.R)</a>
@@ -100,6 +103,9 @@
       <a href="../articles/MS-3c-Results-key_figure.html">MS Part 3c) Key figure (image, pptx)</a>
     </li>
     <li>
+      <a href="../articles/MS-4-Discussion.html">MC 4) Discussion</a>
+    </li>
+    <li>
       <a href="../articles/v-FAQ.html">f) Frequently asked questions</a>
     </li>
     <li>
@@ -132,7 +138,7 @@
       <h1>Appendix 6a) Analysis script (.R)</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2018-12-06</h4>
+            <h4 class="date">2018-12-10</h4>
       
       
       <div class="hidden name"><code>Appendix-6a-Analysis-script.Rmd</code></div>
@@ -141,10 +147,22 @@
 
     
     
+<div id="the-assignment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-assignment" class="anchor"></a>The assignment</h2>
+<p>“submit the script that carries out the analysis. Include comments about the analysis.”</p>
+<p>In this the mammalsmilkRA repository I have split up the analysis into several subscripts:</p>
+<ul>
+<li>analysis</li>
+<li>diagnostics</li>
+<li>figure</li>
+</ul>
+<p>These can be combined if you want.</p>
+</div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>This script implements my re-analysis of the Skibiel et al mammals’ milk dataset. Skibiel et al made the unconventional but well supported conclusion that there was not a relationship between body size and nutrional content of milk, including fat content. The note, however, that some groups might have a relationship, while others might not, but on the whole there was no relationship between body size and fat. Most variation in nutrional content was therefore due to differences in evolutionary history and not body size senu stricto.</p>
+<p>This script implements my re-analysis of the Skibiel et al mammals’ milk dataset. Skibiel et al made the unconventional but well supported conclusion that there was not a relationship between body size and nutritional content of milk, including fat content. The note, however, that some groups might have a relationship, while others might not, but on the whole there was no relationship between body size and fat. Most variation in nutritional content was therefore due to differences in evolutionary history and not body size senu stricto.</p>
 <p>I take a model comparison approach using AICc to compare models similar to what Skibiel concluded best fit the data (fat ~ diet) with one that allows the relationship between fat and body size to vary between groups of organisms.</p>
 <p>Like Skibiel I find a very strong phylogentic signal on fat content of milk. I use this phyolgeny-only model as my null model. Allowing fat content to vary differently with body size between different groups fits the data slightly better than the null model, but this difference is only a delta AICc (dAICc) of 1.4. Surprisingly, a model which includes diet doesn’t perform as well as null model, which contradicts Skibiel et al. This difference in results is likely due to my use of random effets to represent taxonomic structure (species nested within genera, genera within families, families within orders) rather than a precise phylogeny.</p>
 </div>
@@ -573,7 +591,8 @@ milk.working &lt;-<span class="st"> </span>milk2[i.use, ]</code></pre></div>
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#introduction">Introduction</a></li>
+<li><a href="#the-assignment">The assignment</a></li>
+      <li><a href="#introduction">Introduction</a></li>
       <li><a href="#preliminaries">Preliminaries</a></li>
       <li><a href="#build-model">Build model</a></li>
       <li><a href="#compare-models">Compare models</a></li>

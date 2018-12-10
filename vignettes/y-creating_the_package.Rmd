@@ -73,21 +73,35 @@ use_package("tidyr", "Imports")
 use_package("ggplot2", "Imports")
 use_package("nlme", "Imports")
 use_package("lme4", "Imports")
-use_package("bbmle", "Imports")
+use_package("bbmle", "Imports") #bbmle
 use_package("RCurl", "Imports")
 use_package("GGally", "Imports")
 use_package("broom", "Imports")
-devtools::use_package("ggpubr", "Imports")
-
 use_package("arm", "Imports")
 use_package("psych", "Imports")
+devtools::use_package("stringi", "Imports")
+devtools::use_package("stringr", "Imports")
+devtools::use_package("ggpubr", "Imports")
+devtools::use_package("plotrix", "Imports")
+devtools::use_package("here", "Imports")
 
-use_package("data.tree", "Imports")
-use_package("treemap", "Imports")
-use_package("igraph", "Imports")
+devtools::use_package("cowplot", "Imports")
 
-use_package("PRISMAstatement","Suggests")
 
+
+devtools::use_package("data.tree", "Imports")
+devtools::use_package("treemap", "Imports")
+#use_package("igraph", "Imports")
+
+devtools::use_package("PRISMAstatement",
+                      "Imports")
+
+
+devtools::use_package("sjPlot", "Imports")
+devtools::use_package("sjlabelled", "Imports")
+devtools::use_package("sjmisc", "Imports")
+
+devtools::use_package("visreg", "Imports")
 
 
 ```

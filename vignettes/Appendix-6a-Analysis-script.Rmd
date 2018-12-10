@@ -18,11 +18,22 @@ knitr::opts_chunk$set(
 )
 ```
 
+## The assignment
+
+"submit the script that carries out the analysis.  Include comments about the analysis."
+
+In this the mammalsmilkRA repository I have split up the analysis into several subscripts:
+
+* analysis
+* diagnostics
+* figure
+
+These can be combined if you want.
 
 
 ## Introduction
 
-This script implements my re-analysis of the Skibiel et al mammals' milk dataset.  Skibiel et al made the unconventional but well supported conclusion that there was not a relationship between body size and nutrional content of milk, including fat content.  The note, however, that some groups might have a relationship, while others might not, but on the whole there was no relationship between body size and fat.  Most variation in nutrional content was therefore due to differences in evolutionary history and not body size senu stricto.
+This script implements my re-analysis of the Skibiel et al mammals' milk dataset.  Skibiel et al made the unconventional but well supported conclusion that there was not a relationship between body size and nutritional content of milk, including fat content.  The note, however, that some groups might have a relationship, while others might not, but on the whole there was no relationship between body size and fat.  Most variation in nutritional content was therefore due to differences in evolutionary history and not body size senu stricto.
 
 I take a model comparison approach using AICc to compare models similar to what Skibiel concluded best fit the data (fat ~ diet) with one that allows the relationship between fat and body size to vary between groups of organisms.  
 

@@ -19,3 +19,11 @@ knitr::opts_chunk$set(
 ```
 
 
+
+"Display the key result of your study as a figure using R. Write a caption for it."
+
+The figure should be made in R but additional annotations can be made in another program (eg pptx); the final image can be in standard file format (pptx, docx, jpeg etc.)  pptx and docx are ideal for being able to include a caption.
+
+Information on ggpubr can be found at
+
+http://www.sthda.com/english/wiki/ggpubr-create-easily-publication-ready-plots

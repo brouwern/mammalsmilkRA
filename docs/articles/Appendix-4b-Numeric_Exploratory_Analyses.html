@@ -52,19 +52,22 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Appendix-0-README.html">Appendix 0) README</a>
+      <a href="../articles/Appendix-0-README.html">Appendix 0) Final Project Analysis Compendium README</a>
     </li>
     <li>
-      <a href="../articles/Appendix-1-raw_data.html">Appendix 1) Raw data (.csv, .xlsx, or other)</a>
+      <a href="../articles/Appendix-1-raw_data_README.html">Appendix 1) Raw data (REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-2-data_cleaning.html">Appendix 2) Data Preparation &amp; Cleaning (.R or doc)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-3-Analysis_data.html">Appendix 3) Analysis data (.csv)</a>
+      <a href="../articles/Appendix-2-data_dictionary.html">Appendix 2) Data dictionary (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (.R)</a>
+      <a href="../articles/Appendix-3-Analysis_data-README.html">Appendix 3) Analysis data (.csv)</a>
+    </li>
+    <li>
+      <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-4b-Numeric_Exploratory_Analyses.html">Appendix 4b) Numeric Summaries &amp; Exploratory Analysis (.R)</a>
@@ -100,6 +103,9 @@
       <a href="../articles/MS-3c-Results-key_figure.html">MS Part 3c) Key figure (image, pptx)</a>
     </li>
     <li>
+      <a href="../articles/MS-4-Discussion.html">MC 4) Discussion</a>
+    </li>
+    <li>
       <a href="../articles/v-FAQ.html">f) Frequently asked questions</a>
     </li>
     <li>
@@ -133,7 +139,7 @@
                         <h4 class="author">Nathan Brouwer | <a href="mailto:brouwern@gmail.com">brouwern@gmail.com</a> | <span class="citation">@lobrowR</span>
 </h4>
             
-            <h4 class="date">2018-12-06</h4>
+            <h4 class="date">2018-12-10</h4>
       
       
       <div class="hidden name"><code>Appendix-4b-Numeric_Exploratory_Analyses.Rmd</code></div>
@@ -142,6 +148,19 @@
 
     
     
+<div id="introduction-to-numeric-data-exploration" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction-to-numeric-data-exploration" class="anchor"></a>Introduction to numeric data exploration</h2>
+<p>Numeric exploration is necessary for quality control and to understand the structure of your data. Some numeric summaries, such as correlation tables, also provide key insights into how to model the data (<strong>Zuur et al 2010</strong>).</p>
+<p>It is increasingly being recommended to include numeric summaries such as this to facilitate meta-analysis and help interested readers understand the structure of your data (<strong>Gerstner et al 2017</strong>).</p>
+<p>For you independent project (in 2018) you just need to submit a script file which carries our relevant numeric summaries.</p>
+</div>
+<div id="preliminaires" class="section level2">
+<h2 class="hasAnchor">
+<a href="#preliminaires" class="anchor"></a>Preliminaires</h2>
+<div id="loack-packages" class="section level3">
+<h3 class="hasAnchor">
+<a href="#loack-packages" class="anchor"></a>Loack packages</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)  <span class="co"># for exploratory analyses</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
@@ -203,6 +222,8 @@
 <span class="co">#&gt;     %+%, alpha</span>
 <span class="kw">library</span>(here)
 <span class="co">#&gt; here() starts at C:/Users/lisanjie/Documents/1_R/git/mammalsmilkRA</span></code></pre></div>
+</div>
+</div>
 <div id="load-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#load-data" class="anchor"></a>Load data</h2>
@@ -308,13 +329,13 @@ milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span
 <div id="numeric-data-summaries" class="section level2">
 <h2 class="hasAnchor">
 <a href="#numeric-data-summaries" class="anchor"></a>Numeric data summaries</h2>
-<p>It can be very useful to generate numeric data summaries to help you and readers understand the data. This can also allow readers to extract information that is of interest to them but no necesssarily to you. For example modelers and meta-analysts might want or need a bit of information which was not highlighted in your original anlaysis. Providing them the information upfront makes it more likely that they will cite you! It also saves them the trouble of asking for it if they really need it, and you the trouble of project files up and working up what they want.</p>
+<p>It can be very useful to generate numeric data summaries to help you and readers understand the data. This can also allow readers to extract information that is of interest to them but no necessarily to you. For example modelers and meta-analysts might want or need a bit of information which was not highlighted in your original analysis. Providing them the information upfront makes it more likely that they will cite you! It also saves them the trouble of asking for it if they really need it, and you the trouble of project files up and working up what they want.</p>
 <p>This is not emphasized by Zuur et al, but is emphasized by Gerstner et al 2017.</p>
 <p>Gerstner et al 2017. Will your paper be used in a meta-analysis? Making the reach of your research broader and longer lasting. <a href="https://doi.org/10.1111/2041-210X.12758">Methods in Ecology &amp; Evolution.</a></p>
 <div id="correlation-table" class="section level3">
 <h3 class="hasAnchor">
 <a href="#correlation-table" class="anchor"></a>Correlation table</h3>
-<p>Correlation tables are excellent summaries of the response and predictor variables. This was discussed previously with regrads to investigation of collinearity, along with scatter plot matrices.</p>
+<p>Correlation tables are excellent summaries of the response and predictor variables. This was discussed previously with regards to investigation of collinearity, along with scatter plot matrices.</p>
 </div>
 <div id="table-of-means-sds" class="section level3">
 <h3 class="hasAnchor">
@@ -361,7 +382,9 @@ milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#load-data">Load data</a></li>
+<li><a href="#introduction-to-numeric-data-exploration">Introduction to numeric data exploration</a></li>
+      <li><a href="#preliminaires">Preliminaires</a></li>
+      <li><a href="#load-data">Load data</a></li>
       <li><a href="#numeric-data-summaries">Numeric data summaries</a></li>
       </ul>
 </div>

@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Appendix 0) README • mammalsmilkRA</title>
+<title>Appendix 0) Final Project Analysis Compendium README • mammalsmilkRA</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Appendix 0) README">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Appendix 0) Final Project Analysis Compendium README">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -52,19 +52,22 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Appendix-0-README.html">Appendix 0) README</a>
+      <a href="../articles/Appendix-0-README.html">Appendix 0) Final Project Analysis Compendium README</a>
     </li>
     <li>
-      <a href="../articles/Appendix-1-raw_data.html">Appendix 1) Raw data (.csv, .xlsx, or other)</a>
+      <a href="../articles/Appendix-1-raw_data_README.html">Appendix 1) Raw data (REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-2-data_cleaning.html">Appendix 2) Data Preparation &amp; Cleaning (.R or doc)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-3-Analysis_data.html">Appendix 3) Analysis data (.csv)</a>
+      <a href="../articles/Appendix-2-data_dictionary.html">Appendix 2) Data dictionary (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (.R)</a>
+      <a href="../articles/Appendix-3-Analysis_data-README.html">Appendix 3) Analysis data (.csv)</a>
+    </li>
+    <li>
+      <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-4b-Numeric_Exploratory_Analyses.html">Appendix 4b) Numeric Summaries &amp; Exploratory Analysis (.R)</a>
@@ -100,6 +103,9 @@
       <a href="../articles/MS-3c-Results-key_figure.html">MS Part 3c) Key figure (image, pptx)</a>
     </li>
     <li>
+      <a href="../articles/MS-4-Discussion.html">MC 4) Discussion</a>
+    </li>
+    <li>
       <a href="../articles/v-FAQ.html">f) Frequently asked questions</a>
     </li>
     <li>
@@ -129,11 +135,11 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Appendix 0) README</h1>
+      <h1>Appendix 0) Final Project Analysis Compendium README</h1>
                         <h4 class="author">Nathan Brouwer | <a href="mailto:brouwern@gmail.com">brouwern@gmail.com</a> | <span class="citation">@lobrowR</span>
 </h4>
             
-            <h4 class="date">2018-12-06</h4>
+            <h4 class="date">2018-12-10</h4>
       
       
       <div class="hidden name"><code>Appendix-0-README.Rmd</code></div>
@@ -142,36 +148,174 @@
 
     
     
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p>For you final independent project you need to assemble an <strong>analysis compendium</strong> that contains the materials and code to replicate the analysis of your dataset. This includes the types of files and the structure of the directory containing this. This format is influenced by the <strong>“analysis compendium”</strong> concept of Marwick et al (2018) (see also Kitzes et al 2018, <a href="https://www.practicereproducibleresearch.org/core-chapters/3-basic.html">chapter 3</a>). Your compendium should be contained in a single directory shared with me via GitHub, Dropbox, or Box. The directory should also contain file(s) with written introductory, methods and results information which would be included in a normal peer-reviewed manuscript.</p>
+<p>The main types of files that constitute an analysis compendium that you need to include in your final project submission are:</p>
+<ul>
+<li>Data files (flagged as “-DAT” in mammalsmilkRA): your raw data and analysis data</li>
+<li>Script files (“-SCRIPT”“): R code that carries out data exploration, analysis, diagnostics, etc</li>
+<li>Manuscript files (“MS-”): Document file(s) that contain the main parts of an actual manuscript</li>
+</ul>
+<p>Additionally you will have files for you data dictionary (spreadsheet or other document) and a main figure (.pptx, .jpeg etc.)</p>
+<p>An additional type of file which is included in the mammalsmilkRA repository but is not required is</p>
+<ul>
+<li>Background files (“-README”): Contextual information on non-text file, particularly data files.</li>
+</ul>
+<p>In the mammalsmilkRA repository these background files provide examples of a README file could contain, but principally present background information on what should be included in certain file types, particularly data files and other non-script files</p>
+<div id="the-mammalsmilkra-package" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-mammalsmilkra-package" class="anchor"></a>The mammalsmilkRA package</h3>
+<p>The mammalsmilkRA package is meant to lay out and describe the key components of your independent project. This directory is a mix of exact examples of the files that should constitute your project (eg a script which carries out a regression analysis), written descriptions of those files detailing what should be in them, tutorials, tutorials on how to carry out some key tasks and references. There is some overlap in content in the <em>mammalsmilkRA</em> package and the <em>mammalsmilk</em> package. <em>mammalsmilkRA</em> is meant to be a template for an actually analysis compendium, while <em>mammalsmilk</em> is meant to be an extended case study.</p>
+</div>
+<div id="this-readme-file" class="section level3">
+<h3 class="hasAnchor">
+<a href="#this-readme-file" class="anchor"></a>This README file</h3>
+<p>This README file outlines all the files contained in this example independent project directory as well as other files that can/should be concluded . It consists of</p>
+<p>Files that share the same number (but may have different letters, eg Appendix-6a-, Appendix-6b-, etc) signify either</p>
+<ul>
+<li>A set of related files that could be possibly be combined into a single file because they carry out a single primary task. For example, all of the Appendix-6x files relate to the analysis, examination, and presentation of your modeling efforts</li>
+<li>A pair of 2 files where one is an example of the type of file which is part of your project (Appendix-3-Analysis-data-DAT.csv) and the other provides background information or description of the file (Appendix-3-Analysis-data-README.Rmd). The descriptive README file is not required in 2018 and is simply here to provide context, though in practice it can be a good idea to have a README-type file associated with each major type to serve a similar purpose as a caption if the file was embedded in an actual document.</li>
+</ul>
+</div>
+<div id="appendix-files-vs-manuscript-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#appendix-files-vs-manuscript-files" class="anchor"></a>Appendix files vs. Manuscript files</h3>
+<p>There are 2 general classes of files: <strong>Appendices</strong> and <strong>Manuscript</strong> (“MS”) files.</p>
+<p><strong>Appendices</strong> are the foundation of the project, including data and code.</p>
+<p><strong>MS</strong> files are meant to serve as examples of the key sections in a manuscript which were required initially for this independent project. Some changes may have been made on an individual basis to better fit individual students’ projects.</p>
+</div>
+</div>
 <div id="files-in-this-directory" class="section level2">
 <h2 class="hasAnchor">
 <a href="#files-in-this-directory" class="anchor"></a>Files in this directory</h2>
-<ol style="list-style-type: decimal">
-<li>Appendix-0-README.Rmd</li>
-<li>Appendix-1a-raw_data.Rmd: Description of raw data file</li>
-<li>Appendix-1b-raw_data (.xlsx, .csv, other): raw data or placeholder for raw data</li>
-<li>Appendix-2-data_cleaning.Rmd: Code and/or description of data cleaning process to produce analysis data (optional in 2018)</li>
-<li>Appendix-3a-analyis_data.Rmd: Description of analysis data</li>
-<li>Appendix-3b-analyis_data.csv: cleaned data read for analysis</li>
-<li>Appendix-4a-graphical_exploratory_analyses.Rmd: graphical exploration of the data using boxplots, histograms etc.; follows general format of <strong>Zuur et al 2010</strong>
+<p>Below is a description of all of the files contained in the mammalsmilkRA package OR which should be in an analysis compendium. (Due to limitation on the structure of an R package not all files are contained in the same directory when I build the package).</p>
+<div id="appendix-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#appendix-files" class="anchor"></a>Appendix files</h3>
+<p>Files marked “Appendix-” are principally data, R script files, and README files. As noted above, README files are not required for the independent project in 2018.</p>
+<p>Each bullet point is a file. After the file name is indication of whether it is required or not and examples of the general type of file (document, image) pr specific file type (..xlsx, .csv)</p>
+<p>Basic information about the file is contained in the sub-bullets. See the actual file for more information.</p>
+<ul>
+<li>
+<strong>Appendix-0-README.Rmd</strong> (optional document file)</li>
+<li>The file your are currently reading, with background information on the entire directory and a list of files it contains.</li>
+<li>Optional in 2018; in a real analysis compendium it can be good to contain a master README which describes the while directory, as this file does.</li>
+<li>
+<strong>Appendix-1-raw_data-README.Rmd</strong> (optional document file 2018)</li>
+<li>Written description of raw data file</li>
+<li>
+<strong>Appendix-1-raw_data-DAT</strong> (REQUIRED .xlsx, .csv, or other file type)</li>
+<li>raw data or placeholder for raw data</li>
+<li>
+<strong>Appendix-2-data_cleaning-SCRIPT.Rmd</strong>: (optional script 2018)</li>
+<li>Code and/or description of data cleaning process to produce analysis data</li>
+<li>
+<strong>Appendix-3a-analyis_data-README.Rmd</strong> (background)</li>
+<li>Background information on how your analysis data should be set up</li>
+<li>
+<strong>Appendix-3b-analyis_data-DAT.csv</strong> (REQUIRED; .csv)</li>
+<li>cleaned data ready for analysis</li>
+<li>
+<strong>Appendix-4-data_dictionary.Rmd</strong> (REQUIRED; .xlsx or .docx)</li>
+<li>spreadsheet containing descriptions of all columns found in analysis data.<br>
 </li>
-<li>Appendix-4b-numeric_exploratory_analyses.Rmd: Numeric summaries of data, including group means and correlations. Follows recomendations found <strong>Zuur et al 2010</strong> (eg checking correlations to understand collinearity) and <strong>Gerstner et al 2017</strong> (presenting summary information to facilitate meta-analysis.)</li>
-<li>Appendix-5a-study_design.Rmd: Description of study design and/or code to create study diagram. Follows recommendations of <strong>Zuur &amp; Ieno 2016</strong> and <strong>Gerstner et al 2017</strong>
+<li>See <strong>Broman &amp; Woo. 2018.</strong>
 </li>
-<li>Appendix-5b-study_diagram (.pptx, image): Diagram of study site, experimental design, visual protocl, etc.</li>
-<li>Appendix-6a-analysis_script.Rmd: Script to replicate all analyses</li>
-<li>Appendix-6c-model_diagnostics_and_outliers.Rmd: Code to carry out relevant diagnostics for models (Can be part of main analysis script)</li>
-<li>Appendix-6d-primary_figure.Rmd:code to create primary figure for paper (can be part of main analysis script)</li>
-<li>Appendix-7-robustness_check.Rmd: to to carry out robustness check / sensitivity analysis on analysis.</li>
-<li>MS-1-Introduction.Rmd</li>
-<li>MS-2-Methods.Rmd</li>
-<li>MS-3a-Results-written.Rmd</li>
-<li>MS-3b-Results-model_equation.Rmd</li>
-<li>MS-3c-Results-key_figure.Rmd</li>
-<li>v-FAQ.Rmd: Frequently Asked Questions about finishing the independent .Rmd</li>
-<li>w-reference: misc. references related to tasks &amp; concepts discussed in the above files.Rmd</li>
-<li>y-creating_the_package: functions run to create basic packge infrastructure.Rmd</li>
-<li>z-build_and_rebuild_package: code run to update and (re)build the package.Rmd</li>
-</ol>
+<li>
+<strong>Appendix-4a-graphical_exploratory_analyses-SCRIPT.Rmd</strong> (REQUIRED)</li>
+<li>Script carrying out graphical exploration of the data using boxplots, histograms etc.</li>
+<li>follows general format of <strong>Zuur et al 2010</strong>.<br>
+</li>
+<li>
+<em>This file contains extensive examples using the mammalsmilk data.</em><br>
+</li>
+<li>See also the <a href="https://brouwern.github.io/mammalsmilk/articles/d-data_exploration.html">“Data exploration for regression analysis”</a> vignette in the <a href="https://brouwern.github.io/mammalsmilk/index.html">mammalsmilk</a> package.</li>
+<li>
+<strong>Appendix-4b-numeric_exploratory_analyses-SCRIPT.Rmd</strong> (REQUIRED)</li>
+<li>Numeric summaries of data, including group means and correlations.<br>
+</li>
+<li>Follows recommendations found in <strong>Zuur et al 2010</strong> (eg checking correlations to understand collinearity) &amp; <strong>Gerstner et al 2017</strong> (presenting summary info to facilitate meta-analysis.)</li>
+<li><em>This file contains extensive examples using the mammalsmilk data.</em></li>
+<li>
+<strong>Appendix-5a-study_design-README.Rmd</strong> (Background)</li>
+<li>Description of study design and/or code to create study diagram.<br>
+</li>
+<li>Follows recommendations of <strong>Zuur &amp; Ieno 2016</strong> and <strong>Gerstner et al 2017</strong>
+</li>
+<li>
+<strong>Appendix-5b-study_diagram</strong> (REQUIRED; .pptx, image, etc):</li>
+<li>Diagram of study site, experimental design, visual protocol, etc.</li>
+<li>
+<strong>Appendix-6a-analysis-SCRIPT.Rmd</strong> (REQUIRED)</li>
+<li>Script to replicate all analyses</li>
+<li><em>This file contains a partially outlined example</em></li>
+<li>
+<strong>Appendix-6c-model_diagnostics_and_outliers-SCRIPT.Rmd</strong> (REQUIRED)</li>
+<li>script to carry out relevant diagnostics for models</li>
+<li>Can be part of main analysis script</li>
+<li>
+<strong>Appendix-6d-primary_figure-SCRIPT.Rmd</strong> (REQUIRED)</li>
+<li>code to create primary figure for paper</li>
+<li>can be part of main analysis script</li>
+<li><em>This file contain extensive examples</em></li>
+<li>
+<strong>Appendix-7-robustness_check-SCRIPT.Rmd</strong> (REQUIRED if final model is a t-test)</li>
+<li>script to to carry out robustness check / sensitivity analysis</li>
+</ul>
+</div>
+<div id="manuscript-ms-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#manuscript-ms-files" class="anchor"></a>Manuscript (MS) files</h3>
+<p>Manuscript file(s) is/are document files containing standard information found in a scientific paper. The one somewhat unique elements it the model equation</p>
+<ul>
+<li><strong>MS-1-Introduction.Rmd</strong></li>
+<li><strong>MS-2-Methods.Rmd</strong></li>
+<li><strong>MS-3a-Results-written.Rmd</strong></li>
+<li><strong>MS-3b-Results-model_equation.Rmd</strong></li>
+<li>Written representation of the fitted model</li>
+<li>has general for of y = mx + b</li>
+<li>
+<strong>MS-3c-Results-key_figure.Rmd</strong> (.pptx, .docx, etc)</li>
+<li>File containing image and caption</li>
+</ul>
+</div>
+<div id="other-files-of-interest" class="section level3">
+<h3 class="hasAnchor">
+<a href="#other-files-of-interest" class="anchor"></a>Other files of interest</h3>
+<p>There are</p>
+<ul>
+<li><strong>v-FAQ.Rmd</strong></li>
+<li>Frequently Asked Questions about finishing the independent project</li>
+<li><strong>w-reference</strong></li>
+<li>misc. references related to tasks &amp; concepts discussed in the above files.</li>
+</ul>
+</div>
+<div id="other-files-not-interesting" class="section level3">
+<h3 class="hasAnchor">
+<a href="#other-files-not-interesting" class="anchor"></a>Other files, not interesting</h3>
+<p>These are files I use to build and maintain the package</p>
+<ul>
+<li>y-creating_the_package:</li>
+<li>functions run to create basic package infrastructure.Rmd</li>
+<li>z-build_and_rebuild_package:</li>
+<li>code run to update and (re)build the package.Rmd</li>
+</ul>
+</div>
+</div>
+<div id="glossary" class="section level2">
+<h2 class="hasAnchor">
+<a href="#glossary" class="anchor"></a>Glossary</h2>
+<ul>
+<li>Analysis data: the data actually used to fit your final model</li>
+<li>Analysis compendium</li>
+<li>Data dictionary</li>
+<li>Git / GitHub</li>
+<li>Raw data</li>
+<li>README file</li>
+<li>Script file</li>
+</ul>
 </div>
 <div id="refernces" class="section level2">
 <h2 class="hasAnchor">
@@ -185,7 +329,9 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#files-in-this-directory">Files in this directory</a></li>
+<li><a href="#introduction">Introduction</a></li>
+      <li><a href="#files-in-this-directory">Files in this directory</a></li>
+      <li><a href="#glossary">Glossary</a></li>
       <li><a href="#refernces">Refernces</a></li>
       </ul>
 </div>

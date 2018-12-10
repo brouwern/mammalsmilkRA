@@ -17,3 +17,23 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+In general when writing results in the *Results* section of manuscript you should state the numeric information which substantiates a statement.  For example, if you say "Shroom overexpressing wing discs increased in area by 20%" you should include all of the numeric information which substantiates this claim and any relevant figure, and/or where it can be found in tabular form.  For example:
+
+> "Shroom overexpressing wing discs increased in apical area 20% (Fig. 2; n = 10 discs per treatment, t = 4.5, p = 0.001)
+
+At a minimum you should include the test statistic (t, F, chi-square) and extact p-value (rounded to a relevant number of digits).  Include sample size or degrees of freedom (df) is an excellent idea.
+
+To be even more thorough, include aditional information such as the means of each group, the mean differene between groups, or the slope of the regression.  This is an especially good idea if the data are not represented in a graph.
+
+The most thorough guidelines I know of for reporting statistical results are from the APA (American Psychological Association).  Summaries can be found at
+
+http://staff.bath.ac.uk/pssiw/stats2/page2/page3/page3.html
+
+http://my.ilstu.edu/~jhkahn/apastats.html
+
+
+
+Good information on how to write about results can be found in
+
+Savik, K.  2006.  Reporting P values.  JWOCN.

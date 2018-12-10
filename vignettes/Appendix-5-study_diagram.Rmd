@@ -53,7 +53,7 @@ T Wagner, DB Hayes, MT Bremigan - Fisheries, 2006
 
 ### Dependency structure diagrams
 
-For complex experiments it can be useful to create a diagram that illustrate the hiearchical structure of the data, such as students in class rooms in schools in school districts in counties in states.
+For complex experiments it can be useful to create a diagram that illustrate the hierarchical structure of the data, such as students in class rooms in schools in school districts in counties in states.
 
 #### MCDB / Bio-medicine
 
@@ -80,12 +80,20 @@ Zuur & Ieno.  2016.  A protocol for conducting and presenting results of regress
 https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12577
 
 
+### Graphical abstracts
 
+Graphical abstracts are becoming increasingly common in some fields.
+
+https://www.elsevier.com/authors/journal-authors/graphical-abstract
+
+http://crosstalk.cell.com/blog/attract-readers-at-a-glance-with-your-graphical-abstract
+
+https://bitesizebio.com/31125/how-to-make-a-good-graphical-abstract/
 
 ### Flow charts
 
 
-#### Clinical trial
+#### Clinical trials
 
 Clinical trials often have a flow chart showing how an initial patient population was screen and then allocated to the experimental groups.
 
@@ -93,7 +101,7 @@ https://openi.nlm.nih.gov/detailedresult.php?img=PMC2945952_1471-2474-11-205-2&r
 
 #### Meta-analyses
 
-Meta-analyses often have flow charts showing how an initial pool of studies was screen for inclusion in the analysis.  The [PRISMA guidlines](http://prisma-statement.org/) (Preferred Reporting Items for Systematic Reviews & Meta-Analyses) recommend a 4-phase flow diagram be included in meta-analyses to describe the process of finding, screening, and extracting data from papers in a meta anlaysis.  See [Libarati et al 2009](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000100)
+Meta-analyses often have flow charts showing how an initial pool of studies was screen for inclusion in the analysis.  The [PRISMA guidlines](http://prisma-statement.org/) (Preferred Reporting Items for Systematic Reviews & Meta-Analyses) recommend a 4-phase flow diagram be included in meta-analyses to describe the process of finding, screening, and extracting data from papers in a meta analysis.  See [Libarati et al 2009](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000100)
 
 I've copied an example using You'll need to install the package if you want to make it yourself  eg run install.packages("PRISMAstatement").  See the [PRISMAstatement package](https://cran.r-project.org/web/packages/PRISMAstatement/vignettes/PRISMA.html for detaqils) for details
 
@@ -120,7 +128,7 @@ https://openi.nlm.nih.gov/detailedresult.php?img=PMC2559819_1471-2261-8-24-1&req
 
 ### Coordinated experiments across labs
 
-THe paper below has an interesting flow chart about how samples were shared accross three labs to test for biases in lab techniques.  The ends result was a retraction of a [Cell paper!](https://retractionwatch.com/2016/12/27/harvard-biologist-retracts-diabetes-breakthrough-cell/)
+The paper below has an interesting flow chart about how samples were shared across three labs to test for biases in lab techniques.  The ends result was a retraction of a [Cell paper!](https://retractionwatch.com/2016/12/27/harvard-biologist-retracts-diabetes-breakthrough-cell/)
 
 Resolving discrepant findings on ANGPTL8 in beta-cell proliferation: a collaborative approach to resolving the betatrophin controversy
 AR Cox, O Barrandon, EP Cai, JS Rios, J Chavez… - PloS one, 2016

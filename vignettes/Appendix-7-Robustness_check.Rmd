@@ -14,7 +14,8 @@ editor_options:
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = F
 )
 ```
 
@@ -34,9 +35,9 @@ In 2018 I would like students whose primary analysis is just a t-test to perform
 1. If you are doing multiple t-tests carry out an experiment-wise multiple comparisons correction using at least two different correction methods
 
 
-These differen approaches are demonstrated below.  For your project you just need to write functioning annotated code to carry out the tasks.
+These different approaches are demonstrated below.  For your project you just need to write functioning annotated code to carry out the tasks.
 
-
+(Aside: sensitivty analyses are common in x-ray crystalography (Googins, pesonal communication); I have seen them used in phylogenetic analysses)
 
 
 ## Preliminaries
@@ -47,6 +48,8 @@ library(cowplot)
 library(bbmle)
 library(nlme)
 library(here)
+library(stringi)
+library(stringr)
 ```
 
 
@@ -65,7 +68,7 @@ genus_spp_subspp_mat <- milk$spp %>% str_split_fixed(" ", n = 3)
 milk$genus <- genus_spp_subspp_mat[,1]
 ```
 
-Set lot
+Set log
 ```{r}
 milk$fat.log <- log(milk$fat)
 ```

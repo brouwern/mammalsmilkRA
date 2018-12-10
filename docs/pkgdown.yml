@@ -3,9 +3,10 @@ pkgdown: 1.1.0
 pkgdown_sha: ~
 articles:
   Appendix-0-README: Appendix-0-README.html
-  Appendix-1-raw_data: Appendix-1-raw_data.html
+  Appendix-1-raw_data_README: Appendix-1-raw_data_README.html
   Appendix-2-data_cleaning: Appendix-2-data_cleaning.html
-  Appendix-3-Analysis_data: Appendix-3-Analysis_data.html
+  Appendix-2-data_dictionary: Appendix-2-data_dictionary.html
+  Appendix-3-Analysis_data-README: Appendix-3-Analysis_data-README.html
   Appendix-4a-Grapical_Exploratory_Analyses: Appendix-4a-Grapical_Exploratory_Analyses.html
   Appendix-4b-Numeric_Exploratory_Analyses: Appendix-4b-Numeric_Exploratory_Analyses.html
   Appendix-5-study_diagram: Appendix-5-study_diagram.html
@@ -18,6 +19,7 @@ articles:
   MS-3a-Results-written: MS-3a-Results-written.html
   MS-3b-Results_model_equation: MS-3b-Results_model_equation.html
   MS-3c-Results-key_figure: MS-3c-Results-key_figure.html
+  MS-4-Discussion: MS-4-Discussion.html
   v-FAQ: v-FAQ.html
   w-references: w-references.html
   y-creating_the_package: y-creating_the_package.html

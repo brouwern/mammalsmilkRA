@@ -52,19 +52,22 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Appendix-0-README.html">Appendix 0) README</a>
+      <a href="../articles/Appendix-0-README.html">Appendix 0) Final Project Analysis Compendium README</a>
     </li>
     <li>
-      <a href="../articles/Appendix-1-raw_data.html">Appendix 1) Raw data (.csv, .xlsx, or other)</a>
+      <a href="../articles/Appendix-1-raw_data_README.html">Appendix 1) Raw data (REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-2-data_cleaning.html">Appendix 2) Data Preparation &amp; Cleaning (.R or doc)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-3-Analysis_data.html">Appendix 3) Analysis data (.csv)</a>
+      <a href="../articles/Appendix-2-data_dictionary.html">Appendix 2) Data dictionary (REQUIRED)</a>
     </li>
     <li>
-      <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (.R)</a>
+      <a href="../articles/Appendix-3-Analysis_data-README.html">Appendix 3) Analysis data (.csv)</a>
+    </li>
+    <li>
+      <a href="../articles/Appendix-4a-Grapical_Exploratory_Analyses.html">Appendix 4a) Graphical Exploratory Analysis (REQUIRED)</a>
     </li>
     <li>
       <a href="../articles/Appendix-4b-Numeric_Exploratory_Analyses.html">Appendix 4b) Numeric Summaries &amp; Exploratory Analysis (.R)</a>
@@ -100,6 +103,9 @@
       <a href="../articles/MS-3c-Results-key_figure.html">MS Part 3c) Key figure (image, pptx)</a>
     </li>
     <li>
+      <a href="../articles/MS-4-Discussion.html">MC 4) Discussion</a>
+    </li>
+    <li>
       <a href="../articles/v-FAQ.html">f) Frequently asked questions</a>
     </li>
     <li>
@@ -132,7 +138,7 @@
       <h1>Appendix 6c) Primary Figure code (.R)</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2018-12-06</h4>
+            <h4 class="date">2018-12-10</h4>
       
       
       <div class="hidden name"><code>Appendix-6c-Primary_figure.Rmd</code></div>
@@ -141,9 +147,53 @@
 
     
     
+<div id="the-assignment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-assignment" class="anchor"></a>The assignment</h2>
+<p>For you final project you need to display a/the key result of your study as a figure using R. Additinally, write an appropriate and detailed caption for it. Include the code for making the plot; you can include it in your main analysis script – clearly labled – or put it in a sperate file which loads the data and does what after data prep or modeling necessary for the pot. Additional annotations can be made in PowerPoint or another program if necessary. The final plot should be saved as a .ppt slide or image file (.jpeg).</p>
+<p>In this the mammalsmilkRA repository I have split up the analysis into several subscripts:</p>
+<ul>
+<li>analysis</li>
+<li>diagnostics</li>
+<li>figure</li>
+</ul>
+<p>These can be combined if you want.</p>
+</div>
+<div id="how-do-i-make-a-polished-plot" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-do-i-make-a-polished-plot" class="anchor"></a>How do I make a polished plot?</h2>
+<p>A final, publication-worth plot should have</p>
+<ul>
+<li>x and y axes labled</li>
+<li>units labled as appropriate</li>
+<li>transformations of varibales indicated</li>
+<li>raw-data or distributional information presented whenever possible (scatterplot, boxplot, violoin plot, boxplot with raw data, dotplot)</li>
+<li>data coded with colors and shapes whenever possible</li>
+<li>information about the statistical model or inference whenever possible (regression lines, p-values, etc)</li>
+<li>Means and regression lines should have error bars/error bands</li>
+<li>Nice additions are indications of sample size (“N = …”), what error bars are (“Error bars = …”), what the regression equation is, reference lines</li>
+</ul>
+<p>A good caption/legend should be a suscint but stand-alone summary of the data and model. Ideally, if a person looked at just the plot and the caption they should have a pretty good idea of how to interpret it even if they don’t have the rest of the paper.</p>
+<p>Good information to include in a caption include</p>
+<ul>
+<li>A one-sentence summary of what the plot is</li>
+<li>Objects, organisms, entities that data were collected on. For example, in ecological studies taxonomic information about the organisms studied.</li>
+<li>Sample size (if not included within the plot)</li>
+<li>What confidence intervals are (if not included within the plot)</li>
+</ul>
+<p>The ggpubr package has a large number of arguements and functions for making plots look cool. Information on ggpubr can be found [here.] (<a href="http://www.sthda.com/english/wiki/ggpubr-create-easily-publication-ready-plots" class="uri">http://www.sthda.com/english/wiki/ggpubr-create-easily-publication-ready-plots</a>)</p>
+<p>Below are examples of plots for</p>
+<ul>
+<li>regression analyses: scatter plot with regression line</li>
+<li>1-way ANOVA</li>
+</ul>
+</div>
 <div id="preliminaries" class="section level2">
 <h2 class="hasAnchor">
 <a href="#preliminaries" class="anchor"></a>Preliminaries</h2>
+<div id="load-packages" class="section level3">
+<h3 class="hasAnchor">
+<a href="#load-packages" class="anchor"></a>Load packages</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)  <span class="co"># for exploratory analyses</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
@@ -204,7 +254,19 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     %+%, alpha</span>
 <span class="kw">library</span>(here)
-<span class="co">#&gt; here() starts at C:/Users/lisanjie/Documents/1_R/git/mammalsmilkRA</span></code></pre></div>
+<span class="co">#&gt; here() starts at C:/Users/lisanjie/Documents/1_R/git/mammalsmilkRA</span>
+
+<span class="co"># Functions</span>
+<span class="kw">library</span>(sjPlot)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'sjPlot'</span>
+<span class="co">#&gt; The following objects are masked from 'package:cowplot':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     plot_grid, save_plot</span>
+<span class="kw">library</span>(sjlabelled)
+<span class="kw">library</span>(sjmisc)
+<span class="co">#&gt; Install package "strengejacke" from GitHub (`devtools::install_github("strengejacke/strengejacke")`) to load all sj-packages at once!</span></code></pre></div>
+</div>
 <div id="load-data-in-r" class="section level3">
 <h3 class="hasAnchor">
 <a href="#load-data-in-r" class="anchor"></a>Load data in R</h3>
@@ -217,104 +279,136 @@ milk &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path., <span
 genus_spp_subspp_mat &lt;-<span class="st"> </span>milk<span class="op">$</span>spp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_split_fixed</span>(<span class="st">" "</span>, <span class="dt">n =</span> <span class="dv">3</span>)
 
 milk<span class="op">$</span>genus &lt;-<span class="st"> </span>genus_spp_subspp_mat[,<span class="dv">1</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">milk<span class="op">$</span>fat.log &lt;-<span class="st"> </span><span class="kw">log</span>(milk<span class="op">$</span>fat)
+milk<span class="op">$</span>mass.fem.log &lt;-<span class="st"> </span><span class="kw">log</span>(milk<span class="op">$</span>mass.fem)</code></pre></div>
 </div>
-<div id="check-input" class="section level3">
+</div>
+<div id="a-polished-plot-for-regression" class="section level2">
+<h2 class="hasAnchor">
+<a href="#a-polished-plot-for-regression" class="anchor"></a>A polished plot for regression</h2>
+<div id="the-model" class="section level3">
 <h3 class="hasAnchor">
-<a href="#check-input" class="anchor"></a>Check input</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(milk)
-<span class="co">#&gt;            ord     fam                            spp mass.fem gest.mo</span>
-<span class="co">#&gt; 1 Artiodactyla Bovidae                  Bos frontalis   800000    9.02</span>
-<span class="co">#&gt; 2 Artiodactyla Bovidae                     Capra ibex    53000    5.60</span>
-<span class="co">#&gt; 3 Artiodactyla Bovidae Connocheates taurinus taurinus   170500    8.32</span>
-<span class="co">#&gt; 4 Artiodactyla Bovidae              Connocheates gnou   200000    8.50</span>
-<span class="co">#&gt; 5 Artiodactyla Bovidae  Damaliscus pygargus phillipsi    61000    8.00</span>
-<span class="co">#&gt; 6 Artiodactyla Bovidae                 Gazella dorcas    20600    4.74</span>
-<span class="co">#&gt;   lac.mo mass.litter repro.output dev.birth      diet arid       biome  N</span>
-<span class="co">#&gt; 1    4.5       26949         0.03         3 herbivore   no terrestrial 4+</span>
-<span class="co">#&gt; 2    7.5        3489         0.07         3 herbivore   no terrestrial 24</span>
-<span class="co">#&gt; 3    8.0       17717         0.10         3 herbivore  yes terrestrial  5</span>
-<span class="co">#&gt; 4    7.5       11110         0.06         3 herbivore  yes terrestrial  3</span>
-<span class="co">#&gt; 5    4.0        6500         0.11         3 herbivore  yes terrestrial  4</span>
-<span class="co">#&gt; 6    2.8        1771         0.09         3 herbivore  yes terrestrial 16</span>
-<span class="co">#&gt;    fat gest.month lacat.mo prot sugar energy        genus</span>
-<span class="co">#&gt; 1  7.0       9.02      4.5  6.3   5.2   1.21          Bos</span>
-<span class="co">#&gt; 2 12.4       5.60      7.5  5.7    NA     NA        Capra</span>
-<span class="co">#&gt; 3  7.5       8.32      8.0  4.1   5.3   1.13 Connocheates</span>
-<span class="co">#&gt; 4  5.5       8.50      7.5  4.3   4.1   0.91 Connocheates</span>
-<span class="co">#&gt; 5  8.6       8.00      4.0  5.6   4.9   1.31   Damaliscus</span>
-<span class="co">#&gt; 6  8.8       4.74      2.8  8.8    NA     NA      Gazella</span>
-<span class="kw">tail</span>(milk)
-<span class="co">#&gt;                ord          fam                     spp mass.fem gest.mo</span>
-<span class="co">#&gt; 125       Rodentia      Muridae     Pseudomys australis       65    1.02</span>
-<span class="co">#&gt; 126       Rodentia      Muridae       Rattus norvegicus      253    0.71</span>
-<span class="co">#&gt; 127       Rodentia Octodontidae           Octodon degus      235    2.96</span>
-<span class="co">#&gt; 128       Rodentia    Scuiridae          Tamias amoenus       53    0.98</span>
-<span class="co">#&gt; 129       Rodentia    Scuiridae Urocitellus columbianus      406    0.84</span>
-<span class="co">#&gt; 130 Soricomorpha11    Soricidae       Crocidura russula       14    0.97</span>
-<span class="co">#&gt;     lac.mo mass.litter repro.output dev.birth      diet arid       biome</span>
-<span class="co">#&gt; 125    0.9          13         0.20         0 herbivore  yes terrestrial</span>
-<span class="co">#&gt; 126    0.8          51         0.20         0  omnivore   no terrestrial</span>
-<span class="co">#&gt; 127    1.2          74         0.31         3 herbivore  yes terrestrial</span>
-<span class="co">#&gt; 128    1.5          14         0.26         0  omnivore   no terrestrial</span>
-<span class="co">#&gt; 129    1.0          32         0.08         0 herbivore   no terrestrial</span>
-<span class="co">#&gt; 130    0.8           4         0.29         0 carnivore   no terrestrial</span>
-<span class="co">#&gt;          N  fat gest.month lacat.mo prot sugar energy       genus</span>
-<span class="co">#&gt; 125  7-Jun 12.1       1.02      0.9  6.4   3.6   1.62   Pseudomys</span>
-<span class="co">#&gt; 126 18-Mar  8.8       0.71      0.8  8.1   3.8   1.43      Rattus</span>
-<span class="co">#&gt; 127      7 20.1       2.96      1.2  4.4   2.7   2.20     Octodon</span>
-<span class="co">#&gt; 128     11 21.7       0.98      1.5  8.1   4.3   2.62      Tamias</span>
-<span class="co">#&gt; 129     26  9.2       0.84      1.0 10.7   3.4   1.60 Urocitellus</span>
-<span class="co">#&gt; 130      3 30.0       0.97      0.8  9.4   3.0   3.40   Crocidura</span>
-<span class="kw">summary</span>(milk)
-<span class="co">#&gt;             ord                  fam                          spp     </span>
-<span class="co">#&gt;  Artiodactyla :23   Bovidae        :13   Acomys cahirinus       :  1  </span>
-<span class="co">#&gt;  Carnivora    :23   Cercopithecidae: 8   Alces alces            :  1  </span>
-<span class="co">#&gt;  Primates     :22   Cervidae       : 7   Aloutta palliata       :  1  </span>
-<span class="co">#&gt;  Rodentia     :17   Muridae        : 7   Aloutta seniculus      :  1  </span>
-<span class="co">#&gt;  Chiroptera   :10   Otariidae      : 7   Arctocephalus australis:  1  </span>
-<span class="co">#&gt;  Diprotodontia:10   Phocidae       : 7   Arctocephalus gazella  :  1  </span>
-<span class="co">#&gt;  (Other)      :25   (Other)        :81   (Other)                :124  </span>
-<span class="co">#&gt;     mass.fem            gest.mo           lac.mo        mass.litter       </span>
-<span class="co">#&gt;  Min.   :        8   Min.   : 0.400   Min.   : 0.300   Min.   :      0.3  </span>
-<span class="co">#&gt;  1st Qu.:      857   1st Qu.: 1.405   1st Qu.: 1.625   1st Qu.:     42.0  </span>
-<span class="co">#&gt;  Median :     5716   Median : 5.000   Median : 4.500   Median :    423.5  </span>
-<span class="co">#&gt;  Mean   :  2229475   Mean   : 5.624   Mean   : 6.092   Mean   :  52563.8  </span>
-<span class="co">#&gt;  3rd Qu.:   107500   3rd Qu.: 8.365   3rd Qu.: 8.225   3rd Qu.:   7038.2  </span>
-<span class="co">#&gt;  Max.   :170000000   Max.   :21.460   Max.   :42.000   Max.   :2272500.0  </span>
-<span class="co">#&gt;                                                                           </span>
-<span class="co">#&gt;   repro.output       dev.birth            diet     arid   </span>
-<span class="co">#&gt;  Min.   :0.00003   Min.   :0.000   carnivore:32   no :91  </span>
-<span class="co">#&gt;  1st Qu.:0.04000   1st Qu.:1.000   herbivore:61   yes:39  </span>
-<span class="co">#&gt;  Median :0.08000   Median :2.000   omnivore :37           </span>
-<span class="co">#&gt;  Mean   :0.10374   Mean   :1.831                          </span>
-<span class="co">#&gt;  3rd Qu.:0.13750   3rd Qu.:3.000                          </span>
-<span class="co">#&gt;  Max.   :0.50000   Max.   :4.000                          </span>
-<span class="co">#&gt;                                                           </span>
-<span class="co">#&gt;          biome           N           fat          gest.month    </span>
-<span class="co">#&gt;  aquatic    : 22   4      :13   Min.   : 0.20   Min.   : 0.400  </span>
-<span class="co">#&gt;  terrestrial:108   3      :11   1st Qu.: 4.65   1st Qu.: 1.405  </span>
-<span class="co">#&gt;                    6      :10   Median : 8.55   Median : 5.000  </span>
-<span class="co">#&gt;                    7      : 9   Mean   :13.99   Mean   : 5.624  </span>
-<span class="co">#&gt;                    5      : 8   3rd Qu.:16.82   3rd Qu.: 8.365  </span>
-<span class="co">#&gt;                    24     : 5   Max.   :61.10   Max.   :21.460  </span>
-<span class="co">#&gt;                    (Other):74                                   </span>
-<span class="co">#&gt;     lacat.mo           prot            sugar           energy     </span>
-<span class="co">#&gt;  Min.   : 0.300   Min.   : 1.100   Min.   : 0.02   Min.   :0.360  </span>
-<span class="co">#&gt;  1st Qu.: 1.625   1st Qu.: 4.125   1st Qu.: 3.00   1st Qu.:0.965  </span>
-<span class="co">#&gt;  Median : 4.500   Median : 6.750   Median : 4.70   Median :1.365  </span>
-<span class="co">#&gt;  Mean   : 6.092   Mean   : 6.673   Mean   : 4.94   Mean   :1.680  </span>
-<span class="co">#&gt;  3rd Qu.: 8.225   3rd Qu.: 9.200   3rd Qu.: 6.60   3rd Qu.:2.045  </span>
-<span class="co">#&gt;  Max.   :42.000   Max.   :15.800   Max.   :14.00   Max.   :5.890  </span>
-<span class="co">#&gt;                                    NA's   :16      NA's   :16     </span>
-<span class="co">#&gt;     genus          </span>
-<span class="co">#&gt;  Length:130        </span>
-<span class="co">#&gt;  Class :character  </span>
-<span class="co">#&gt;  Mode  :character  </span>
-<span class="co">#&gt;                    </span>
-<span class="co">#&gt;                    </span>
-<span class="co">#&gt;                    </span>
-<span class="co">#&gt; </span></code></pre></div>
+<a href="#the-model" class="anchor"></a>The model</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(fat.log <span class="op">~</span><span class="st"> </span>mass.fem.log,
+           <span class="dt">data  =</span> milk))
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = fat.log ~ mass.fem.log, data = milk)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;     Min      1Q  Median      3Q     Max </span>
+<span class="co">#&gt; -3.8711 -0.6374 -0.0243  0.7396  1.8717 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;              Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)   1.95288    0.26550   7.355 2.02e-11 ***</span>
+<span class="co">#&gt; mass.fem.log  0.02255    0.02734   0.825    0.411    </span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 1.053 on 128 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.005287,   Adjusted R-squared:  -0.002484 </span>
+<span class="co">#&gt; F-statistic: 0.6804 on 1 and 128 DF,  p-value: 0.411</span></code></pre></div>
 </div>
+<div id="the-plot" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-plot" class="anchor"></a>The plot</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggscatter</span>(<span class="dt">data =</span> milk,
+          <span class="dt">y =</span> <span class="st">"fat.log"</span>,
+          <span class="dt">x =</span> <span class="st">"mass.fem.log"</span>,
+          <span class="dt">xlab =</span> <span class="st">"log(mass of mother)"</span>,
+          <span class="dt">ylab =</span> <span class="st">"log(% milk fat)"</span>,
+          <span class="dt">add =</span> <span class="st">"reg.line"</span>,
+          <span class="dt">conf.int =</span> T) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_regline_equation</span>()</code></pre></div>
+<p><img src="Appendix-6c-Primary_figure_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p>Additionally annotations could include p-value for slope of regression line, R^2 value, sample size. I have included these instead in teh caption.</p>
+</div>
+<div id="a-caption" class="section level3">
+<h3 class="hasAnchor">
+<a href="#a-caption" class="anchor"></a>A caption</h3>
+<p>Relationship between maternal mass (grams) and percent milk fat for 130 mammals fit using linear regression with no phylogenetic correction. Both axes are natural-log transformed. P = 0.41, R^2 = 0.005. Error bands is a 95% confidence interval.</p>
+</div>
+</div>
+<div id="a-polished-plot-for-1-way-anova" class="section level2">
+<h2 class="hasAnchor">
+<a href="#a-polished-plot-for-1-way-anova" class="anchor"></a>A polished plot for 1-way ANOVA</h2>
+<p>There are 3 diet categories.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(milk<span class="op">$</span>diet)
+<span class="co">#&gt; carnivore herbivore  omnivore </span>
+<span class="co">#&gt;        32        61        37</span></code></pre></div>
+<p>We could do a 1-way ANOVA to test for differences between these 3 categories, ignoring phylogency, size, and any other ccovarites.</p>
+<p>First a standard model of log-milk fat versus mammal diet.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m.diet &lt;-<span class="st"> </span><span class="kw">lm</span>(fat.log <span class="op">~</span><span class="st"> </span>diet, 
+             <span class="dt">data =</span> milk)
+
+<span class="kw">coef</span>(<span class="kw">summary</span>(m.diet))
+<span class="co">#&gt;                Estimate Std. Error   t value     Pr(&gt;|t|)</span>
+<span class="co">#&gt; (Intercept)    3.299988  0.1464421 22.534421 3.318210e-46</span>
+<span class="co">#&gt; dietherbivore -1.483205  0.1808184 -8.202733 2.233413e-13</span>
+<span class="co">#&gt; dietomnivore  -1.566369  0.1999814 -7.832572 1.649622e-12</span></code></pre></div>
+<p>The above model gives us an intercept (“(Intercept)”) term and 2 effect sizes. R defaults to setting the intercept alphabetically, so carnivores are set as the intercept. The effect size “dietherbivore” is the difference between the intercept and herbivores, that is, the difference between carnviores and herbivores. The “dietomnivore” effect sizes is the diference between the intercept and ominivores.</p>
+<p>We can calcualte the means for all three groups directly like this using a “means model”</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m.diet.means &lt;-<span class="st"> </span><span class="kw">lm</span>(fat.log <span class="op">~</span><span class="st"> </span><span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>diet, 
+             <span class="dt">data =</span> milk)
+
+<span class="kw">coef</span>(<span class="kw">summary</span>(m.diet.means))
+<span class="co">#&gt;               Estimate Std. Error  t value     Pr(&gt;|t|)</span>
+<span class="co">#&gt; dietcarnivore 3.299988  0.1464421 22.53442 3.318210e-46</span>
+<span class="co">#&gt; dietherbivore 1.816783  0.1060660 17.12881 8.223522e-35</span>
+<span class="co">#&gt; dietomnivore  1.733619  0.1361884 12.72957 1.962367e-24</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_comparisons &lt;-<span class="st"> </span><span class="kw">list</span>(
+  <span class="kw">c</span>(<span class="st">"carnivore"</span>, <span class="st">"herbivore"</span>), 
+  <span class="kw">c</span>(<span class="st">"herbivore"</span>, <span class="st">"omnivore"</span>), 
+  <span class="kw">c</span>(<span class="st">"carnivore"</span>, <span class="st">"omnivore"</span>) )
+
+<span class="kw">ggboxplot</span>(<span class="dt">data =</span> milk,
+                  <span class="dt">y =</span> <span class="st">"fat"</span>,
+                  <span class="dt">x =</span> <span class="st">"diet"</span>,
+                  <span class="dt">desc_stat =</span> <span class="st">"mean_ci"</span>,
+                  <span class="dt">xlab =</span> <span class="st">"Arid habitat"</span>,
+                  <span class="dt">ylab =</span> <span class="st">"Percent milk fat"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_compare_means</span>(<span class="dt">method =</span> <span class="st">"t.test"</span>,
+                     <span class="dt">comparisons =</span> my_comparisons)</code></pre></div>
+<p><img src="Appendix-6c-Primary_figure_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<p>We can get confidence intervals for each of these means like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(m.diet.means)
+<span class="co">#&gt;                  2.5 %   97.5 %</span>
+<span class="co">#&gt; dietcarnivore 3.010206 3.589771</span>
+<span class="co">#&gt; dietherbivore 1.606898 2.026669</span>
+<span class="co">#&gt; dietomnivore  1.464127 2.003111</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#plot_model(m.diet)</span>
+
+<span class="co">#visreg(m.diet)</span></code></pre></div>
+</div>
+<div id="a-polished-plot-for-a-t-test" class="section level2">
+<h2 class="hasAnchor">
+<a href="#a-polished-plot-for-a-t-test" class="anchor"></a>A polished plot for a t-test</h2>
+<p>For information on ggpubr and adding p-values using stat_compare_means() see <a href="http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/76-add-p-values-and-significance-levels-to-ggplots/">here</a>.</p>
+<p>The t-test we are running</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(fat <span class="op">~</span><span class="st"> </span>arid, <span class="dt">data =</span> milk)
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Welch Two Sample t-test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  fat by arid</span>
+<span class="co">#&gt; t = 4.0816, df = 127.95, p-value = 7.826e-05</span>
+<span class="co">#&gt; alternative hypothesis: true difference in means is not equal to 0</span>
+<span class="co">#&gt; 95 percent confidence interval:</span>
+<span class="co">#&gt;   4.146069 11.948437</span>
+<span class="co">#&gt; sample estimates:</span>
+<span class="co">#&gt;  mean in group no mean in group yes </span>
+<span class="co">#&gt;         16.401099          8.353846</span></code></pre></div>
+<p>Plot with p-values from t-test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggerrorplot</span>(<span class="dt">data =</span> milk,
+                  <span class="dt">y =</span> <span class="st">"fat"</span>,
+                  <span class="dt">x =</span> <span class="st">"arid"</span>,
+                  <span class="dt">desc_stat =</span> <span class="st">"mean_ci"</span>,
+                  <span class="dt">xlab =</span> <span class="st">"Arid habitat"</span>,
+                  <span class="dt">ylab =</span> <span class="st">"Percent milk fat"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_compare_means</span>(<span class="dt">method =</span> <span class="st">"t.test"</span>,
+                     <span class="dt">label.y =</span> <span class="dv">25</span>,
+                     <span class="dt">label.x =</span> <span class="fl">0.6</span>)</code></pre></div>
+<p><img src="Appendix-6c-Primary_figure_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
   </div>
 
@@ -323,7 +417,12 @@ milk<span class="op">$</span>genus &lt;-<span class="st"> </span>genus_spp_subsp
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#preliminaries">Preliminaries</a></li>
+<li><a href="#the-assignment">The assignment</a></li>
+      <li><a href="#how-do-i-make-a-polished-plot">How do I make a polished plot?</a></li>
+      <li><a href="#preliminaries">Preliminaries</a></li>
+      <li><a href="#a-polished-plot-for-regression">A polished plot for regression</a></li>
+      <li><a href="#a-polished-plot-for-1-way-anova">A polished plot for 1-way ANOVA</a></li>
+      <li><a href="#a-polished-plot-for-a-t-test">A polished plot for a t-test</a></li>
       </ul>
 </div>
       </div>

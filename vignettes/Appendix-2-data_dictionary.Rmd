@@ -1,5 +1,5 @@
 ---
-title: "Appendix 3) Analysis data (.csv)"
+title: "Appendix 2) Data dictionary (REQUIRED)"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -19,3 +19,7 @@ knitr::opts_chunk$set(
 ```
 
 
+Please include the basic information request here: https://brouwern.github.io/BIOSC_1120/indproj_06-intro_meth.html
+
+
+See **Broman & Woo. 2018.** for more information.

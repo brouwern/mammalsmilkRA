@@ -27,6 +27,17 @@ Imports:
     broom,
     arm,
     psych,
-    ggpubr
+    ggpubr,
+    plotrix,
+    here,
+    stringi,
+    stringr,
+    cowplot,
+    data.tree,
+    treemap,
+    PRISMAstatement,
+    sjPlot,
+    sjlabelled,
+    sjmisc
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.0

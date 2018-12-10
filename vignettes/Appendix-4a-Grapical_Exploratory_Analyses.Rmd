@@ -1,5 +1,5 @@
 ---
-title: "Appendix 4a) Graphical Exploratory Analysis (.R)"
+title: "Appendix 4a) Graphical Exploratory Analysis (REQUIRED)"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -17,6 +17,23 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+## Introduction to graphical data exploration
+
+Graphical exploration is necessary for quality control and to understand how to modle your data.  Increasinly authors are providing plots of the raw data in appendices in order for readers to gain a better understanding of the data.
+
+For your independent project (in 2018) you simply need to provide a script file that carries out relevant exploratory analyses.
+
+See **Zuur et al 2010** for more information.
+ 
+
+## This file
+
+This file contains a walkthrough of key data exploration tasks.  It is particularly oriented towards regression data but the principals apply generally to all data.
+
+See also the ["Data exploration for regression analysis"](https://brouwern.github.io/mammalsmilk/articles/d-data_exploration.html) vignette in the [mammalsmilk](https://brouwern.github.io/mammalsmilk/index.html) package.
+
+
 
 ## Preliminaries
 

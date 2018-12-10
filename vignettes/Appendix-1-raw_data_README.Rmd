@@ -1,0 +1,27 @@
+---
+title: "Appendix 1) Raw data (REQUIRED)"
+author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+Your final project should contain the original, raw data before an pre-processing.  If the file is large or proprietary you can simply include an annotated screen shot in PowerPoint or a written description about the origin of the data in a README file.
+
+Though not required, it is often good pratice to include an accompanying README file with metadata in it that contains basic information about the Who, What, Where, When, Why and How of the data.
+
+> "At the same time that data are saved, a metadata file should also be created and saved with it. The purpose of the metadata file is to document the source of the data and any relevant information about it. While many disciplines have standards for metadata, a minimal metadata file consists of a simple text file that describes, in plain English, where the data came from and what it describes. Such a file, which we can save as README.txt alongside the data file, might contain information like the following." ([Kitzes et al 2018](https://www.practicereproducibleresearch.org/core-chapters/3-basic.html))
+

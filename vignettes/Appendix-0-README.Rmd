@@ -1,5 +1,5 @@
 ---
-title: "Appendix 0) README"
+title: "Appendix 0) Final Project Analysis Compendium README"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -18,33 +18,147 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Introduction 
+
+For you final independent project you need to assemble an **analysis compendium** that contains the materials and code to replicate the analysis of your dataset.  This includes the types of files and the structure of the directory containing this.  This format is influenced by the **"analysis compendium"** concept of Marwick et al (2018) (see also Kitzes et al 2018, [chapter 3](https://www.practicereproducibleresearch.org/core-chapters/3-basic.html)).  Your compendium should be contained in a single directory shared with me via GitHub, Dropbox, or Box.  The directory should also contain file(s) with written introductory, methods and results information which would be included in a normal peer-reviewed manuscript.
+
+
+The main types of files that constitute an analysis compendium that you need to include in your final project submission are:
+
+* Data files (flagged as "-DAT" in mammalsmilkRA): your raw data and analysis data
+* Script files ("-SCRIPT""): R code that carries out data exploration, analysis, diagnostics, etc
+* Manuscript files ("MS-"): Document file(s) that contain the main parts of an actual manuscript
+
+Additionally you will have files for you data dictionary (spreadsheet or other document) and a main figure (.pptx, .jpeg etc.)
+
+An additional type of file which is included in the mammalsmilkRA repository but is not required is
+
+* Background files ("-README"): Contextual information on non-text file, particularly data files.  
+
+In the mammalsmilkRA repository these background files provide examples of a README file could contain, but principally present background information on what should be included in certain file types, particularly data files and other non-script files
+
+
+### The mammalsmilkRA package
+
+The mammalsmilkRA package is meant to lay out and describe the key components of your independent project.  This directory is a mix of exact examples of the files that should constitute your project (eg a script which carries out a regression analysis), written descriptions of those files detailing what should be in them, tutorials, tutorials on how to carry out some key tasks and references.  There is some overlap in content in the *mammalsmilkRA* package and the *mammalsmilk* package.  *mammalsmilkRA* is meant to be a template for an actually analysis compendium, while *mammalsmilk* is meant to be an extended case study.
+
+
+### This README file 
+
+This README file outlines all the files contained in this example independent project directory as well as other files that can/should be concluded .  It consists of
+
+Files that share the same number (but may have different letters, eg Appendix-6a-, Appendix-6b-, etc) signify either
+
+* A set of related files that could be possibly be combined into a single file because they carry out a single primary task.  For example, all of the Appendix-6x files relate to the analysis, examination, and presentation of your modeling efforts
+* A pair of 2 files where one is an example of the type of file which is part of your project (Appendix-3-Analysis-data-DAT.csv) and the other provides background information or description of the file (Appendix-3-Analysis-data-README.Rmd).  The descriptive README file is not required in 2018 and is simply here to provide context, though in practice it can be a good idea to have a README-type file associated with each major type to serve a similar purpose as a caption if the file was embedded in an actual document.
+
+### Appendix files vs. Manuscript files
+
+There are 2 general classes of files: **Appendices** and **Manuscript** ("MS") files. 
+
+**Appendices** are the foundation of the project, including data and code.
+
+**MS** files are meant to serve as examples of the key sections in a manuscript which were required initially for this independent project.  Some changes may have been made on an individual basis to better fit individual students' projects.
 
 
 ## Files in this directory
 
-1. Appendix-0-README.Rmd
-1. Appendix-1a-raw_data.Rmd: Description of raw data file 
-1. Appendix-1b-raw_data (.xlsx, .csv, other): raw data or placeholder for raw data
-1. Appendix-2-data_cleaning.Rmd: Code and/or description of data cleaning process to produce analysis data (optional in 2018)
-1. Appendix-3a-analyis_data.Rmd: Description of analysis data
-1. Appendix-3b-analyis_data.csv: cleaned data read for analysis
-1. Appendix-4a-graphical_exploratory_analyses.Rmd: graphical exploration of the data using boxplots, histograms etc.; follows general format of **Zuur et al 2010**
-1. Appendix-4b-numeric_exploratory_analyses.Rmd: Numeric summaries of data, including group means and correlations.  Follows recomendations found **Zuur et al 2010** (eg checking correlations to understand collinearity) and **Gerstner et al 2017** (presenting summary information to facilitate meta-analysis.)
-1. Appendix-5a-study_design.Rmd: Description of study design and/or code to create study diagram.  Follows recommendations of **Zuur & Ieno 2016** and **Gerstner et al 2017**
-1. Appendix-5b-study_diagram (.pptx, image): Diagram of study site, experimental design, visual protocl, etc.
-1. Appendix-6a-analysis_script.Rmd: Script to replicate all analyses
-1. Appendix-6c-model_diagnostics_and_outliers.Rmd: Code to carry out relevant diagnostics for models (Can be part of main analysis script)
-1. Appendix-6d-primary_figure.Rmd:code to create primary figure for paper (can be part of main analysis script)
-1. Appendix-7-robustness_check.Rmd: to to carry out robustness check / sensitivity analysis on analysis.
-1. MS-1-Introduction.Rmd
-1. MS-2-Methods.Rmd
-1. MS-3a-Results-written.Rmd
-1. MS-3b-Results-model_equation.Rmd
-1. MS-3c-Results-key_figure.Rmd
-1. v-FAQ.Rmd: Frequently Asked Questions about finishing the independent .Rmd
-1. w-reference: misc. references related to tasks & concepts discussed in the above files.Rmd
-1. y-creating_the_package: functions run to create basic packge infrastructure.Rmd
-1. z-build_and_rebuild_package: code run to update and (re)build the package.Rmd
+Below is a description of all of the files contained in the mammalsmilkRA package OR which should be in an analysis compendium.  (Due to limitation on the structure of an R package not all files are contained in the same directory when I build the package).
+
+
+### Appendix files
+
+Files marked "Appendix-" are principally data, R script files, and README files.  As noted above, README files are not required for the independent project in 2018.
+
+Each bullet point is a file.  After the file name is indication of whether it is required or not and examples of the general type of file (document, image) pr specific file type (..xlsx, .csv)
+
+Basic information about the file is contained in the sub-bullets.  See the actual file for more information.
+
+* **Appendix-0-README.Rmd** (optional document file)
+  + The file your are currently reading, with background information on the entire directory and a list of files it contains.
+  + Optional in 2018; in a real analysis compendium it can be good to contain a master README which describes the while directory, as this file does.
+* **Appendix-1-raw_data-README.Rmd** (optional document file 2018)
+  + Written description of raw data file 
+* **Appendix-1-raw_data-DAT** (REQUIRED .xlsx, .csv, or other file type)
+  + raw data or placeholder for raw data
+* **Appendix-2-data_cleaning-SCRIPT.Rmd**: (optional script 2018)
+  + Code and/or description of data cleaning process to produce analysis data 
+* **Appendix-3a-analyis_data-README.Rmd** (background)
+  + Background information on how your analysis data should be set up 
+* **Appendix-3b-analyis_data-DAT.csv** (REQUIRED; .csv)
+  + cleaned data ready for analysis
+* **Appendix-4-data_dictionary.Rmd** (REQUIRED; .xlsx or .docx)
+  + spreadsheet containing descriptions of all columns found in analysis data.  
+  + See **Broman & Woo. 2018.**
+* **Appendix-4a-graphical_exploratory_analyses-SCRIPT.Rmd** (REQUIRED)
+  + Script carrying out graphical exploration of the data using boxplots, histograms etc.
+  + follows general format of **Zuur et al 2010**.  
+  + *This file contains extensive examples using the mammalsmilk data.*  
+  + See also the ["Data exploration for regression analysis"](https://brouwern.github.io/mammalsmilk/articles/d-data_exploration.html) vignette in the [mammalsmilk](https://brouwern.github.io/mammalsmilk/index.html) package.
+* **Appendix-4b-numeric_exploratory_analyses-SCRIPT.Rmd** (REQUIRED)
+  + Numeric summaries of data, including group means and correlations.  
+  + Follows recommendations found in **Zuur et al 2010** (eg checking correlations to understand collinearity) & **Gerstner et al 2017** (presenting summary info to facilitate meta-analysis.)
+  + *This file contains extensive examples using the mammalsmilk data.*
+* **Appendix-5a-study_design-README.Rmd** (Background)
+  + Description of study design and/or code to create study diagram.  
+  + Follows recommendations of **Zuur & Ieno 2016** and **Gerstner et al 2017**
+* **Appendix-5b-study_diagram** (REQUIRED; .pptx, image, etc): 
+  + Diagram of study site, experimental design, visual protocol, etc.
+* **Appendix-6a-analysis-SCRIPT.Rmd** (REQUIRED)
+  + Script to replicate all analyses
+  + *This file contains a partially outlined example*
+* **Appendix-6c-model_diagnostics_and_outliers-SCRIPT.Rmd** (REQUIRED)
+  + script to carry out relevant diagnostics for models 
+  + Can be part of main analysis script
+* **Appendix-6d-primary_figure-SCRIPT.Rmd** (REQUIRED)
+  + code to create primary figure for paper 
+  + can be part of main analysis script
+  + *This file contain extensive examples*
+* **Appendix-7-robustness_check-SCRIPT.Rmd** (REQUIRED if final model is a t-test)
+  + script to to carry out robustness check / sensitivity analysis
+  
+### Manuscript (MS) files
+
+Manuscript file(s) is/are document files containing standard information found in a scientific paper.  The one somewhat unique elements it the model equation
+
+* **MS-1-Introduction.Rmd**
+* **MS-2-Methods.Rmd**
+* **MS-3a-Results-written.Rmd**
+* **MS-3b-Results-model_equation.Rmd**
+  + Written representation of the fitted model
+  + has general for of y = mx + b 
+* **MS-3c-Results-key_figure.Rmd** (.pptx, .docx, etc)
+  + File containing image and caption
+
+### Other files of interest
+
+There are 
+
+
+* **v-FAQ.Rmd**
+  + Frequently Asked Questions about finishing the independent project
+* **w-reference**
+  + misc. references related to tasks & concepts discussed in the above files.
+
+
+### Other files, not interesting
+
+These are files I use to build and maintain the package
+
+* y-creating_the_package: 
+  + functions run to create basic package infrastructure.Rmd
+* z-build_and_rebuild_package: 
+  + code run to update and (re)build the package.Rmd
+  
+## Glossary
+
+* Analysis data:  the data actually used to fit your final model
+* Analysis compendium
+* Data dictionary
+* Git / GitHub
+* Raw data
+* README file
+* Script file
 
 
 ## Refernces
