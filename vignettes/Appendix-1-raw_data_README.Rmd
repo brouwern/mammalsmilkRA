@@ -1,5 +1,5 @@
 ---
-title: "Appendix 1) Raw data (REQUIRED)"
+title: "Appendix 1) Raw data (REQUIRED data file)"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

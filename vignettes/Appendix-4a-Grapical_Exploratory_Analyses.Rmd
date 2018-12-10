@@ -1,5 +1,5 @@
 ---
-title: "Appendix 4a) Graphical Exploratory Analysis (REQUIRED)"
+title: "Appendix 4a) Graphical Exploratory Analysis (REQUIRED script)"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

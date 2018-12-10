@@ -1,5 +1,5 @@
 ---
-title: "Appendix 6b) Model diagnostics (REQUIRED)"
+title: "Appendix 6b) Model diagnostics (script REQUIRED)"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

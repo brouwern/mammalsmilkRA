@@ -1,5 +1,5 @@
 ---
-title: "Appendix 7) Robustness checks"
+title: "Appendix 7) Robustness checks (REQUIRED for t-tests)"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

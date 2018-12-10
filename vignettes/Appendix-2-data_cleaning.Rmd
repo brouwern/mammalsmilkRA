@@ -1,5 +1,5 @@
 ---
-title: "Appendix 2) Data Preparation & Cleaning (.R or doc)"
+title: "Appendix 2) Data Preparation & Cleaning"
 author: "Nathan Brouwer | brouwern@gmail.com | @lobrowR"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
